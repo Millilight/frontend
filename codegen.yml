@@ -1,0 +1,41 @@
+overwrite: true
+schema: 'https://countries.trevorblades.com/'
+documents:
+  - 'src/common/**/*.graphql'
+  - 'src/modules/**/*.graphql'
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+      - add:
+          content: '// THIS FILE IS GENERATED; DO NOT EDIT'
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+  src/generated/schema.graphql:
+    plugins:
+      - 'schema-ast'
+      - add:
+          content: '# THIS FILE IS GENERATED; DO NOT EDIT'
+  src/generated/page.tsx:
+    plugins:
+      - 'graphql-codegen-apollo-next-ssr'
+      - add:
+          content: '// THIS FILE IS GENERATED; DO NOT EDIT'
+    config:
+      documentMode: external
+      importDocumentNodeExternallyFrom: ./graphql
+      reactApolloVersion: 3
+      withHooks: true
+      contextType: 'ApolloClientContext'
+      contextTypeRequired: true
+      apolloClientInstanceImport: '@/utils/withApollo'
+    preset: import-types
+    presetConfig:
+      typesPath: ./graphql
+
+hooks:
+  afterAllFileWrite:
+    - prettier --write
