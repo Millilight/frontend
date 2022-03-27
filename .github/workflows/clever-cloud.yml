@@ -1,3 +1,7 @@
+name: 'deploy on clever-cloud'
+only:
+  - /main/
+on: workflow_dispatch
 steps:
   # This action requires an unshallow working copy,
   # so the following prerequisites are necessary:
