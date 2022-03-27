@@ -2,15 +2,17 @@ name: 'deploy on clever-cloud'
 only:
   - /main/
 on: workflow_dispatch
-steps:
-  # This action requires an unshallow working copy,
-  # so the following prerequisites are necessary:
-  - uses: actions/checkout@v3
-    with:
-      fetch-depth: 0
+jobs:
+  deploy_on_clever-cloud:
+    steps:
+      # This action requires an unshallow working copy,
+      # so the following prerequisites are necessary:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-  # Deploy your application
-  - uses: 47ng/actions-clever-cloud@v1.1
-    env:
-      CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
-      CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+      # Deploy your application
+      - uses: 47ng/actions-clever-cloud@v1.1
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
