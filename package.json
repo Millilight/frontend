@@ -10,7 +10,7 @@
     "lint-all": "next lint",
     "format": "prettier -w .",
     "setup": "husky install",
-    "start": "next start",
+    "start": "next start -p 8080",
     "test:ci": "jest --ci",
     "test": "jest --watch --coverage"
   },
