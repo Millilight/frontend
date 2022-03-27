@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "app_id": "app_d3b2a175-fbac-4d7f-9856-5d80eb33e84d",
+      "org_id": "orga_ceb8f313-3681-4f58-ac13-d8a91bd7d744",
+      "deploy_url": "https://push-n2-par-clevercloud-customers.services.clever-cloud.com/app_d3b2a175-fbac-4d7f-9856-5d80eb33e84d.git",
+      "name": "FEE FRONTEND STAGING",
+      "alias": "FEE-FRONTEND-STAGING"
+    }
+  ]
+}
