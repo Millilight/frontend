@@ -1,6 +1,4 @@
 name: 'deploy on clever-cloud'
-only:
-  - /main/
 on: workflow_dispatch
 jobs:
   deploy_on_clever-cloud:
