@@ -80,6 +80,15 @@
   margin-top: 10px;
 }
 
+.connection-link {
+  text-decoration: underline;
+  margin-top: 30px;
+}
+.connection-link:hover {
+  color: #03546d;
+  cursor: pointer;
+}
+
 @media (max-width: 796px) {
   .visual-decoration-container {
     display: none;

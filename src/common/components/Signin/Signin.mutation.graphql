@@ -1,0 +1,6 @@
+# mutation CreateUser($name: String!, $email: String!, $age: Float!) {
+#   createUser(createUserDto: { name: $name, email: $email, age: $age }) {
+#     name
+#     email
+#   }
+# }

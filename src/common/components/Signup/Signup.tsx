@@ -107,7 +107,7 @@ export default function Signup() {
       <>
         <Button
           className={styles.inscription_button}
-          variant="outlined"
+          variant="contained"
           color="success"
           disabled={
             loading ||
@@ -119,7 +119,7 @@ export default function Signup() {
           }
           onClick={() => sendForm()}
         >
-          {loading ? 'Envoi en cours...' : "S'inscrire"}
+          {loading ? 'Envoi en cours...' : "M'inscrire"}
         </Button>
       </>
     );
