@@ -20,180 +20,201 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  _Any: any;
 };
 
-export type Continent = {
-  __typename?: 'Continent';
-  code: Scalars['ID'];
-  countries: Array<Country>;
+export type CreateUserDto = {
+  age: Scalars['Float'];
+  email: Scalars['String'];
   name: Scalars['String'];
 };
 
-export type ContinentFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
+export type Mutation = {
+  __typename?: 'Mutation';
+  createUser: User;
+  updateWishes: Wishes;
 };
 
-export type Country = {
-  __typename?: 'Country';
-  capital?: Maybe<Scalars['String']>;
-  code: Scalars['ID'];
-  continent: Continent;
-  currency?: Maybe<Scalars['String']>;
-  emoji: Scalars['String'];
-  emojiU: Scalars['String'];
-  languages: Array<Language>;
-  name: Scalars['String'];
-  native: Scalars['String'];
-  phone: Scalars['String'];
-  states: Array<State>;
+export type MutationCreateUserArgs = {
+  createUserDto: CreateUserDto;
 };
 
-export type CountryFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
-  continent?: InputMaybe<StringQueryOperatorInput>;
-  currency?: InputMaybe<StringQueryOperatorInput>;
-};
-
-export type Language = {
-  __typename?: 'Language';
-  code: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  native?: Maybe<Scalars['String']>;
-  rtl: Scalars['Boolean'];
-};
-
-export type LanguageFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
+export type MutationUpdateWishesArgs = {
+  updateWishesDto: UpdateWishesDto;
 };
 
 export type Query = {
   __typename?: 'Query';
-  _entities: Array<Maybe<_Entity>>;
-  _service: _Service;
-  continent?: Maybe<Continent>;
-  continents: Array<Continent>;
-  countries: Array<Country>;
-  country?: Maybe<Country>;
-  language?: Maybe<Language>;
-  languages: Array<Language>;
+  getWishesforUser: Wishes;
+  users: Array<User>;
+  wishes: Array<Wishes>;
 };
 
-export type Query_EntitiesArgs = {
-  representations: Array<Scalars['_Any']>;
+export type QueryGetWishesforUserArgs = {
+  UserId: Scalars['String'];
 };
 
-export type QueryContinentArgs = {
-  code: Scalars['ID'];
+export type UpdateWishesDto = {
+  burialCremation?: InputMaybe<Scalars['String']>;
+  burialCremationPlace?: InputMaybe<Scalars['String']>;
 };
 
-export type QueryContinentsArgs = {
-  filter?: InputMaybe<ContinentFilterInput>;
-};
-
-export type QueryCountriesArgs = {
-  filter?: InputMaybe<CountryFilterInput>;
-};
-
-export type QueryCountryArgs = {
-  code: Scalars['ID'];
-};
-
-export type QueryLanguageArgs = {
-  code: Scalars['ID'];
-};
-
-export type QueryLanguagesArgs = {
-  filter?: InputMaybe<LanguageFilterInput>;
-};
-
-export type State = {
-  __typename?: 'State';
-  code?: Maybe<Scalars['String']>;
-  country: Country;
+export type User = {
+  __typename?: 'User';
+  age: Scalars['Float'];
+  email: Scalars['String'];
   name: Scalars['String'];
 };
 
-export type StringQueryOperatorInput = {
-  eq?: InputMaybe<Scalars['String']>;
-  glob?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  ne?: InputMaybe<Scalars['String']>;
-  nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  regex?: InputMaybe<Scalars['String']>;
+export type Wishes = {
+  __typename?: 'Wishes';
+  burialCremation?: Maybe<Scalars['String']>;
+  burialCremationPlace?: Maybe<Scalars['String']>;
+  user: User;
 };
 
-export type _Entity = Continent | Country | Language;
+export type UpdateWishesMutationVariables = Exact<{
+  burialCremation?: InputMaybe<Scalars['String']>;
+  burialCremationPlace?: InputMaybe<Scalars['String']>;
+}>;
 
-export type _Service = {
-  __typename?: '_Service';
-  /** The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied */
-  sdl?: Maybe<Scalars['String']>;
+export type UpdateWishesMutation = {
+  __typename?: 'Mutation';
+  updateWishes: {
+    __typename?: 'Wishes';
+    burialCremation?: string | null;
+    burialCremationPlace?: string | null;
+  };
 };
 
-export type CountriesQueryVariables = Exact<{ [key: string]: never }>;
+export type GetWishesforUserQueryVariables = Exact<{
+  UserId: Scalars['String'];
+}>;
 
-export type CountriesQuery = {
+export type GetWishesforUserQuery = {
   __typename?: 'Query';
-  countries: Array<{
-    __typename?: 'Country';
-    code: string;
-    name: string;
-    emoji: string;
-  }>;
+  getWishesforUser: {
+    __typename?: 'Wishes';
+    burialCremation?: string | null;
+    burialCremationPlace?: string | null;
+  };
 };
 
-export const CountriesDocument = gql`
-  query Countries {
-    countries {
-      code
-      name
-      emoji
+export const UpdateWishesDocument = gql`
+  mutation updateWishes(
+    $burialCremation: String
+    $burialCremationPlace: String
+  ) {
+    updateWishes(
+      updateWishesDto: {
+        burialCremation: $burialCremation
+        burialCremationPlace: $burialCremationPlace
+      }
+    ) {
+      burialCremation
+      burialCremationPlace
+    }
+  }
+`;
+export type UpdateWishesMutationFn = Apollo.MutationFunction<
+  UpdateWishesMutation,
+  UpdateWishesMutationVariables
+>;
+
+/**
+ * __useUpdateWishesMutation__
+ *
+ * To run a mutation, you first call `useUpdateWishesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateWishesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateWishesMutation, { data, loading, error }] = useUpdateWishesMutation({
+ *   variables: {
+ *      burialCremation: // value for 'burialCremation'
+ *      burialCremationPlace: // value for 'burialCremationPlace'
+ *   },
+ * });
+ */
+export function useUpdateWishesMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateWishesMutation,
+    UpdateWishesMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateWishesMutation,
+    UpdateWishesMutationVariables
+  >(UpdateWishesDocument, options);
+}
+export type UpdateWishesMutationHookResult = ReturnType<
+  typeof useUpdateWishesMutation
+>;
+export type UpdateWishesMutationResult =
+  Apollo.MutationResult<UpdateWishesMutation>;
+export type UpdateWishesMutationOptions = Apollo.BaseMutationOptions<
+  UpdateWishesMutation,
+  UpdateWishesMutationVariables
+>;
+export const GetWishesforUserDocument = gql`
+  query getWishesforUser($UserId: String!) {
+    getWishesforUser(UserId: $UserId) {
+      burialCremation
+      burialCremationPlace
     }
   }
 `;
 
 /**
- * __useCountriesQuery__
+ * __useGetWishesforUserQuery__
  *
- * To run a query within a React component, call `useCountriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useCountriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetWishesforUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWishesforUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCountriesQuery({
+ * const { data, loading, error } = useGetWishesforUserQuery({
  *   variables: {
+ *      UserId: // value for 'UserId'
  *   },
  * });
  */
-export function useCountriesQuery(
-  baseOptions?: Apollo.QueryHookOptions<CountriesQuery, CountriesQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CountriesQuery, CountriesQueryVariables>(
-    CountriesDocument,
-    options
-  );
-}
-export function useCountriesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    CountriesQuery,
-    CountriesQueryVariables
+export function useGetWishesforUserQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetWishesforUserQuery,
+    GetWishesforUserQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CountriesQuery, CountriesQueryVariables>(
-    CountriesDocument,
+  return Apollo.useQuery<GetWishesforUserQuery, GetWishesforUserQueryVariables>(
+    GetWishesforUserDocument,
     options
   );
 }
-export type CountriesQueryHookResult = ReturnType<typeof useCountriesQuery>;
-export type CountriesLazyQueryHookResult = ReturnType<
-  typeof useCountriesLazyQuery
+export function useGetWishesforUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetWishesforUserQuery,
+    GetWishesforUserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetWishesforUserQuery,
+    GetWishesforUserQueryVariables
+  >(GetWishesforUserDocument, options);
+}
+export type GetWishesforUserQueryHookResult = ReturnType<
+  typeof useGetWishesforUserQuery
 >;
-export type CountriesQueryResult = Apollo.QueryResult<
-  CountriesQuery,
-  CountriesQueryVariables
+export type GetWishesforUserLazyQueryHookResult = ReturnType<
+  typeof useGetWishesforUserLazyQuery
+>;
+export type GetWishesforUserQueryResult = Apollo.QueryResult<
+  GetWishesforUserQuery,
+  GetWishesforUserQueryVariables
 >;

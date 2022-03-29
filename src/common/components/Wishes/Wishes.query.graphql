@@ -1,0 +1,6 @@
+query getWishesforUser($UserId: String!) {
+  getWishesforUser(UserId: $UserId) {
+    burialCremation
+    burialCremationPlace
+  }
+}

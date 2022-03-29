@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'https://countries.trevorblades.com/'
+schema: 'http://127.0.0.1:8080/graphql'
 documents:
   - 'src/common/**/*.graphql'
   - 'src/modules/**/*.graphql'

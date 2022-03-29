@@ -8,15 +8,19 @@ import { QueryHookOptions, useQuery } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 import type React from 'react';
 import { getApolloClient, ApolloClientContext } from '@/utils/withApollo';
-export async function getServerPageCountries(
-  options: Omit<Apollo.QueryOptions<Types.CountriesQueryVariables>, 'query'>,
+
+export async function getServerPageGetWishesforUser(
+  options: Omit<
+    Apollo.QueryOptions<Types.GetWishesforUserQueryVariables>,
+    'query'
+  >,
   ctx: ApolloClientContext
 ) {
   const apolloClient = getApolloClient(ctx);
 
-  const data = await apolloClient.query<Types.CountriesQuery>({
+  const data = await apolloClient.query<Types.GetWishesforUserQuery>({
     ...options,
-    query: Operations.CountriesDocument,
+    query: Operations.GetWishesforUserDocument,
   });
 
   const apolloState = apolloClient.cache.extract();
@@ -29,34 +33,44 @@ export async function getServerPageCountries(
     },
   };
 }
-export const useCountries = (
+export const useGetWishesforUser = (
   optionsFunc?: (
     router: NextRouter
-  ) => QueryHookOptions<Types.CountriesQuery, Types.CountriesQueryVariables>
+  ) => QueryHookOptions<
+    Types.GetWishesforUserQuery,
+    Types.GetWishesforUserQueryVariables
+  >
 ) => {
   const router = useRouter();
   const options = optionsFunc ? optionsFunc(router) : {};
-  return useQuery(Operations.CountriesDocument, options);
+  return useQuery(Operations.GetWishesforUserDocument, options);
 };
-export type PageCountriesComp = React.FC<{
-  data?: Types.CountriesQuery;
+export type PageGetWishesforUserComp = React.FC<{
+  data?: Types.GetWishesforUserQuery;
   error?: Apollo.ApolloError;
 }>;
-export const withPageCountries =
+export const withPageGetWishesforUser =
   (
     optionsFunc?: (
       router: NextRouter
-    ) => QueryHookOptions<Types.CountriesQuery, Types.CountriesQueryVariables>
+    ) => QueryHookOptions<
+      Types.GetWishesforUserQuery,
+      Types.GetWishesforUserQueryVariables
+    >
   ) =>
-  (WrappedComponent: PageCountriesComp): NextPage =>
+  (WrappedComponent: PageGetWishesforUserComp): NextPage =>
+  // eslint-disable-next-line react/display-name
   (props) => {
     const router = useRouter();
     const options = optionsFunc ? optionsFunc(router) : {};
-    const { data, error } = useQuery(Operations.CountriesDocument, options);
+    const { data, error } = useQuery(
+      Operations.GetWishesforUserDocument,
+      options
+    );
     return <WrappedComponent {...props} data={data} error={error} />;
   };
-export const ssrCountries = {
-  getServerPage: getServerPageCountries,
-  withPage: withPageCountries,
-  usePage: useCountries,
+export const ssrGetWishesforUser = {
+  getServerPage: getServerPageGetWishesforUser,
+  withPage: withPageGetWishesforUser,
+  usePage: useGetWishesforUser,
 };

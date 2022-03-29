@@ -1,0 +1,11 @@
+mutation updateWishes($burialCremation: String, $burialCremationPlace: String) {
+  updateWishes(
+    updateWishesDto: {
+      burialCremation: $burialCremation
+      burialCremationPlace: $burialCremationPlace
+    }
+  ) {
+    burialCremation
+    burialCremationPlace
+  }
+}
