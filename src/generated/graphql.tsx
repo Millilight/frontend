@@ -20,180 +20,96 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  _Any: any;
 };
 
-export type Continent = {
-  __typename?: 'Continent';
-  code: Scalars['ID'];
-  countries: Array<Country>;
+export type CreateUserDto = {
+  age: Scalars['Float'];
+  email: Scalars['String'];
   name: Scalars['String'];
 };
 
-export type ContinentFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
+export type Mutation = {
+  __typename?: 'Mutation';
+  createUser: User;
 };
 
-export type Country = {
-  __typename?: 'Country';
-  capital?: Maybe<Scalars['String']>;
-  code: Scalars['ID'];
-  continent: Continent;
-  currency?: Maybe<Scalars['String']>;
-  emoji: Scalars['String'];
-  emojiU: Scalars['String'];
-  languages: Array<Language>;
-  name: Scalars['String'];
-  native: Scalars['String'];
-  phone: Scalars['String'];
-  states: Array<State>;
-};
-
-export type CountryFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
-  continent?: InputMaybe<StringQueryOperatorInput>;
-  currency?: InputMaybe<StringQueryOperatorInput>;
-};
-
-export type Language = {
-  __typename?: 'Language';
-  code: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  native?: Maybe<Scalars['String']>;
-  rtl: Scalars['Boolean'];
-};
-
-export type LanguageFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
+export type MutationCreateUserArgs = {
+  createUserDto: CreateUserDto;
 };
 
 export type Query = {
   __typename?: 'Query';
-  _entities: Array<Maybe<_Entity>>;
-  _service: _Service;
-  continent?: Maybe<Continent>;
-  continents: Array<Continent>;
-  countries: Array<Country>;
-  country?: Maybe<Country>;
-  language?: Maybe<Language>;
-  languages: Array<Language>;
+  users: Array<User>;
 };
 
-export type Query_EntitiesArgs = {
-  representations: Array<Scalars['_Any']>;
-};
-
-export type QueryContinentArgs = {
-  code: Scalars['ID'];
-};
-
-export type QueryContinentsArgs = {
-  filter?: InputMaybe<ContinentFilterInput>;
-};
-
-export type QueryCountriesArgs = {
-  filter?: InputMaybe<CountryFilterInput>;
-};
-
-export type QueryCountryArgs = {
-  code: Scalars['ID'];
-};
-
-export type QueryLanguageArgs = {
-  code: Scalars['ID'];
-};
-
-export type QueryLanguagesArgs = {
-  filter?: InputMaybe<LanguageFilterInput>;
-};
-
-export type State = {
-  __typename?: 'State';
-  code?: Maybe<Scalars['String']>;
-  country: Country;
+export type User = {
+  __typename?: 'User';
+  age: Scalars['Float'];
+  email: Scalars['String'];
   name: Scalars['String'];
 };
 
-export type StringQueryOperatorInput = {
-  eq?: InputMaybe<Scalars['String']>;
-  glob?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  ne?: InputMaybe<Scalars['String']>;
-  nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  regex?: InputMaybe<Scalars['String']>;
+export type CreateUserMutationVariables = Exact<{
+  name: Scalars['String'];
+  email: Scalars['String'];
+  age: Scalars['Float'];
+}>;
+
+export type CreateUserMutation = {
+  __typename?: 'Mutation';
+  createUser: { __typename?: 'User'; name: string; email: string };
 };
 
-export type _Entity = Continent | Country | Language;
-
-export type _Service = {
-  __typename?: '_Service';
-  /** The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied */
-  sdl?: Maybe<Scalars['String']>;
-};
-
-export type CountriesQueryVariables = Exact<{ [key: string]: never }>;
-
-export type CountriesQuery = {
-  __typename?: 'Query';
-  countries: Array<{
-    __typename?: 'Country';
-    code: string;
-    name: string;
-    emoji: string;
-  }>;
-};
-
-export const CountriesDocument = gql`
-  query Countries {
-    countries {
-      code
+export const CreateUserDocument = gql`
+  mutation CreateUser($name: String!, $email: String!, $age: Float!) {
+    createUser(createUserDto: { name: $name, email: $email, age: $age }) {
       name
-      emoji
+      email
     }
   }
 `;
+export type CreateUserMutationFn = Apollo.MutationFunction<
+  CreateUserMutation,
+  CreateUserMutationVariables
+>;
 
 /**
- * __useCountriesQuery__
+ * __useCreateUserMutation__
  *
- * To run a query within a React component, call `useCountriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useCountriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const { data, loading, error } = useCountriesQuery({
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
  *   variables: {
+ *      name: // value for 'name'
+ *      email: // value for 'email'
+ *      age: // value for 'age'
  *   },
  * });
  */
-export function useCountriesQuery(
-  baseOptions?: Apollo.QueryHookOptions<CountriesQuery, CountriesQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CountriesQuery, CountriesQueryVariables>(
-    CountriesDocument,
-    options
-  );
-}
-export function useCountriesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    CountriesQuery,
-    CountriesQueryVariables
+export function useCreateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateUserMutation,
+    CreateUserMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CountriesQuery, CountriesQueryVariables>(
-    CountriesDocument,
+  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(
+    CreateUserDocument,
     options
   );
 }
-export type CountriesQueryHookResult = ReturnType<typeof useCountriesQuery>;
-export type CountriesLazyQueryHookResult = ReturnType<
-  typeof useCountriesLazyQuery
+export type CreateUserMutationHookResult = ReturnType<
+  typeof useCreateUserMutation
 >;
-export type CountriesQueryResult = Apollo.QueryResult<
-  CountriesQuery,
-  CountriesQueryVariables
+export type CreateUserMutationResult =
+  Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
+  CreateUserMutation,
+  CreateUserMutationVariables
 >;
