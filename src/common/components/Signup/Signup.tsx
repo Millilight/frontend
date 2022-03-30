@@ -5,6 +5,8 @@ import styles from './Signup.module.css';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
+import translate from '@/utils/translate';
+
 export default function Signup() {
   // Input Variables: updated by user input
   const [lastname, setLastName] = useState('');
@@ -72,7 +74,7 @@ export default function Signup() {
       });
     }
   }
-  
+
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {
@@ -83,7 +85,7 @@ export default function Signup() {
           variant="outlined"
           color="error"
         >
-          {'Erreur de connexion, veuillez réessayer plus tard.'}
+          {translate('signup.error')}
         </Button>
       );
     }
@@ -95,7 +97,7 @@ export default function Signup() {
           variant="outlined"
           color="success"
         >
-          {'Inscription réussie!'}
+          {translate('signup.success')}
         </Button>
       );
     }
@@ -116,7 +118,9 @@ export default function Signup() {
           }
           onClick={() => sendForm()}
         >
-          {loading ? 'Envoi en cours...' : "M'inscrire"}
+          {loading
+            ? translate('common.button.sending')
+            : translate('signup.button.signup')}
         </Button>
       </>
     );
@@ -126,7 +130,7 @@ export default function Signup() {
     <form className={styles.form}>
       <TextField
         id="firstname"
-        label="Prénom"
+        label={translate('signup.label.first_name')}
         variant="standard"
         value={firstname}
         onChange={(e) => setFirstName(e.target.value)}
@@ -135,12 +139,12 @@ export default function Signup() {
       />
       {!isFirstNameValid && (
         <span className={styles.invalid}>
-          {'Vous devez renseigner votre prénom'}
+          {translate('signup.missing_first_name')}
         </span>
       )}
       <TextField
         id="lastname"
-        label="Nom"
+        label={translate('signup.label.last_name')}
         variant="standard"
         value={lastname}
         onChange={(e) => setLastName(e.target.value)}
@@ -149,13 +153,13 @@ export default function Signup() {
       />
       {!isLastNameValid && (
         <span className={styles.invalid}>
-          {'Vous devez renseigner votre nom'}
+          {translate('signup.missing_last_name')}
         </span>
       )}
       <TextField
         id="email"
         type="email"
-        label="E-mail"
+        label={translate('common.label.email')}
         variant="standard"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -166,14 +170,14 @@ export default function Signup() {
 
       {!isEmailValid && (
         <span className={styles.invalid}>
-          {"L'adresse email n'est pas valide"}
+          {translate('common.invalid_email')}
         </span>
       )}
       <div className={styles.field_container}>
         <TextField
           type={showPassword ? 'text' : 'password'}
           id="password"
-          label="Mot de passe"
+          label={translate('common.label.password')}
           variant="standard"
           value={pwd}
           onClick={() => setIsWritingPwd(true)}
@@ -201,21 +205,21 @@ export default function Signup() {
       </div>
       {isWritingPwd || !isPasswordValid ? (
         <ul className={styles.password_checking}>
-          Votre mot de passe doit contenir :
+          {translate('signup.password_help')}
           <li className={hasPwdCorrectLength ? styles.valid : styles.invalid}>
-            Au moins 8 caractères
+            {translate('signup.password_help.length')}
           </li>
           <li className={hasPwdLowerLetter ? styles.valid : styles.invalid}>
-            Une minuscule
+            {translate('signup.password_help.min')}
           </li>
           <li className={hasPwdUpperLetter ? styles.valid : styles.invalid}>
-            Une majuscule
+            {translate('signup.password_help.maj')}
           </li>
           <li className={hasPwdDigit ? styles.valid : styles.invalid}>
-            Un chiffre
+            {translate('signup.password_help.digit')}
           </li>
           <li className={hasPwdSpecialChar ? styles.valid : styles.invalid}>
-            Un caractère spécial
+            {translate('signup.password_help.special_character')}
           </li>
         </ul>
       ) : (
@@ -226,7 +230,7 @@ export default function Signup() {
         <TextField
           type={showPassword ? 'text' : 'password'}
           id="confirm-password"
-          label="Confirmation de mot de passe"
+          label={translate('signup.label.password_confirmation')}
           variant="standard"
           value={confirmPwd}
           onChange={(e) => setConfirmPwd(e.target.value)}
@@ -253,7 +257,7 @@ export default function Signup() {
       </div>
       {!arePasswordsEquals && (
         <span className={styles.invalid}>
-          Les mots de passes ne sont pas équivalents
+          {translate('signup.password_help.not_identical')}
         </span>
       )}
       {displayButton()}

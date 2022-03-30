@@ -1,6 +1,6 @@
 declare interface Wish {
   wishId: string;
-  title: string;
+  title: JSX.Element;
   content?: string | null;
   help: JSX.Element;
   type: string;
