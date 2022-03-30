@@ -58,8 +58,7 @@ export const withPageGetWishesforUser =
       Types.GetWishesforUserQueryVariables
     >
   ) =>
-  (WrappedComponent: PageGetWishesforUserComp): NextPage =>
-  // eslint-disable-next-line react/display-name
+  (WrappedComponent: PageGetWishesforUserComp): NextPag
   (props) => {
     const router = useRouter();
     const options = optionsFunc ? optionsFunc(router) : {};
