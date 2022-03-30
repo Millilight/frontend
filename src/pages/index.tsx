@@ -5,8 +5,10 @@ import { useState } from 'react';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
+import useAuth from '@/utils/useAuth';
 
-const Inscription = () => {
+const Index = () => {
+  useAuth();
   const [showSignup, setShowSignup] = useState(true);
 
   function displayForm() {
@@ -61,4 +63,4 @@ const Inscription = () => {
   );
 };
 
-export default withApollo(Inscription);
+export default withApollo(Index);
