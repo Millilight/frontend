@@ -6,6 +6,7 @@ import Router from 'next/router';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { setCookies } from 'cookies-next';
+import translate from '@/utils/translate';
 
 function Authenticate(token: string) {
   localStorage.setItem('token', token);

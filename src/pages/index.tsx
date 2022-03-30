@@ -8,6 +8,8 @@ import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
 import translate from '@/utils/translate';
 
+import translate from '@/utils/translate';
+
 const Index = () => {
   const router = useRouter();
   const { action } = router.query;

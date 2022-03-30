@@ -5,6 +5,8 @@ import { withApollo } from '@/utils/withApollo';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
 import translate from '@/utils/translate';
 
+import translate from '@/utils/translate';
+
 const Verification = () => {
   return (
     <div>
