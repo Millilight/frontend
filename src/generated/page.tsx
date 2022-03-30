@@ -58,7 +58,7 @@ export const withPageGetWishesforUser =
       Types.GetWishesforUserQueryVariables
     >
   ) =>
-  (WrappedComponent: PageGetWishesforUserComp): NextPag
+  (WrappedComponent: PageGetWishesforUserComp): NextPage =>
   (props) => {
     const router = useRouter();
     const options = optionsFunc ? optionsFunc(router) : {};

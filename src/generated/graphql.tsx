@@ -23,19 +23,36 @@ export type Scalars = {
 };
 
 export type CreateUserDto = {
-  age: Scalars['Float'];
   email: Scalars['String'];
-  name: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  access_token: Scalars['String'];
+  user: User;
+};
+
+export type LoginUserDto = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: User;
+  login: LoginResponse;
   updateWishes: Wishes;
 };
 
 export type MutationCreateUserArgs = {
   createUserDto: CreateUserDto;
+};
+
+export type MutationLoginArgs = {
+  loginUserDto: LoginUserDto;
 };
 
 export type MutationUpdateWishesArgs = {
@@ -44,32 +61,27 @@ export type MutationUpdateWishesArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  getWishesforUser: Wishes;
-  users: Array<User>;
-  wishes: Array<Wishes>;
-};
-
-export type QueryGetWishesforUserArgs = {
-  UserId: Scalars['String'];
+  user: User;
 };
 
 export type UpdateWishesDto = {
-  burialCremation?: InputMaybe<Scalars['String']>;
-  burialCremationPlace?: InputMaybe<Scalars['String']>;
+  burial_cremation?: InputMaybe<Scalars['String']>;
+  burial_cremation_place?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
-  age: Scalars['Float'];
+  _id: Scalars['ID'];
   email: Scalars['String'];
-  name: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  wishes?: Maybe<Wishes>;
 };
 
 export type Wishes = {
   __typename?: 'Wishes';
-  burialCremation?: Maybe<Scalars['String']>;
-  burialCremationPlace?: Maybe<Scalars['String']>;
-  user: User;
+  burial_cremation?: Maybe<Scalars['String']>;
+  burial_cremation_place?: Maybe<Scalars['String']>;
 };
 
 export type UpdateWishesMutationVariables = Exact<{
@@ -81,21 +93,22 @@ export type UpdateWishesMutation = {
   __typename?: 'Mutation';
   updateWishes: {
     __typename?: 'Wishes';
-    burialCremation?: string | null;
-    burialCremationPlace?: string | null;
+    burial_cremation?: string | null;
+    burial_cremation_place?: string | null;
   };
 };
 
-export type GetWishesforUserQueryVariables = Exact<{
-  UserId: Scalars['String'];
-}>;
+export type GetWishesforUserQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetWishesforUserQuery = {
   __typename?: 'Query';
-  getWishesforUser: {
-    __typename?: 'Wishes';
-    burialCremation?: string | null;
-    burialCremationPlace?: string | null;
+  user: {
+    __typename?: 'User';
+    wishes?: {
+      __typename?: 'Wishes';
+      burial_cremation?: string | null;
+      burial_cremation_place?: string | null;
+    } | null;
   };
 };
 
@@ -106,12 +119,12 @@ export const UpdateWishesDocument = gql`
   ) {
     updateWishes(
       updateWishesDto: {
-        burialCremation: $burialCremation
-        burialCremationPlace: $burialCremationPlace
+        burial_cremation: $burialCremation
+        burial_cremation_place: $burialCremationPlace
       }
     ) {
-      burialCremation
-      burialCremationPlace
+      burial_cremation
+      burial_cremation_place
     }
   }
 `;
@@ -160,10 +173,12 @@ export type UpdateWishesMutationOptions = Apollo.BaseMutationOptions<
   UpdateWishesMutationVariables
 >;
 export const GetWishesforUserDocument = gql`
-  query getWishesforUser($UserId: String!) {
-    getWishesforUser(UserId: $UserId) {
-      burialCremation
-      burialCremationPlace
+  query getWishesforUser {
+    user {
+      wishes {
+        burial_cremation
+        burial_cremation_place
+      }
     }
   }
 `;
@@ -180,12 +195,11 @@ export const GetWishesforUserDocument = gql`
  * @example
  * const { data, loading, error } = useGetWishesforUserQuery({
  *   variables: {
- *      UserId: // value for 'UserId'
  *   },
  * });
  */
 export function useGetWishesforUserQuery(
-  baseOptions: Apollo.QueryHookOptions<
+  baseOptions?: Apollo.QueryHookOptions<
     GetWishesforUserQuery,
     GetWishesforUserQueryVariables
   >

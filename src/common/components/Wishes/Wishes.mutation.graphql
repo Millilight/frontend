@@ -1,11 +1,11 @@
 mutation updateWishes($burialCremation: String, $burialCremationPlace: String) {
   updateWishes(
     updateWishesDto: {
-      burialCremation: $burialCremation
-      burialCremationPlace: $burialCremationPlace
+      burial_cremation: $burialCremation
+      burial_cremation_place: $burialCremationPlace
     }
   ) {
-    burialCremation
-    burialCremationPlace
+    burial_cremation
+    burial_cremation_place
   }
 }

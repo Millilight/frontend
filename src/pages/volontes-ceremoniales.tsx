@@ -142,20 +142,20 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
 
   //Update the list of wishes with data (content) retreived from backend
   function updateWishesList(
-    savedWishes: GetWishesforUserQuery['getWishesforUser']
+    savedWishes: GetWishesforUserQuery['user']['wishes']
   ) {
-    for (const [key, value] of Object.entries(savedWishes)) {
-      const existingWish = ceremonialWishesList.find(
-        (item) => item.wishId === key
-      );
-      existingWish !== undefined ? (existingWish.content = value) : null;
+    if (savedWishes !== undefined && savedWishes !== null) {
+      for (const [key, value] of Object.entries(savedWishes)) {
+        const existingWish = ceremonialWishesList.find(
+          (item) => item.wishId === key
+        );
+        existingWish !== undefined ? (existingWish.content = value) : null;
+      }
     }
   }
 
   //Load ceremonial wishes
-  const { data, loading, error } = useGetWishesforUserQuery({
-    variables: { UserId: '6242f6c469f284aae44302e7' },
-  });
+  const { data, loading, error } = useGetWishesforUserQuery();
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -167,8 +167,8 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
     console.error(error);
     return null;
   }
-  const savedWishes: GetWishesforUserQuery['getWishesforUser'] | undefined =
-    data?.getWishesforUser;
+  const savedWishes: GetWishesforUserQuery['user']['wishes'] | undefined =
+    data?.user.wishes;
   if (!savedWishes) {
     console.error(savedWishes);
     return null;

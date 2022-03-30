@@ -2,35 +2,46 @@
 directive @upper on FIELD_DEFINITION
 
 input CreateUserDto {
-  age: Float!
   email: String!
-  name: String!
+  firstname: String!
+  lastname: String!
+  password: String!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+input LoginUserDto {
+  email: String!
+  password: String!
 }
 
 type Mutation {
   createUser(createUserDto: CreateUserDto!): User!
+  login(loginUserDto: LoginUserDto!): LoginResponse!
   updateWishes(updateWishesDto: UpdateWishesDto!): Wishes!
 }
 
 type Query {
-  getWishesforUser(UserId: String!): Wishes!
-  users: [User!]!
-  wishes: [Wishes!]!
+  user: User!
 }
 
 input UpdateWishesDto {
-  burialCremation: String
-  burialCremationPlace: String
+  burial_cremation: String
+  burial_cremation_place: String
 }
 
 type User {
-  age: Float!
+  _id: ID!
   email: String!
-  name: String!
+  firstname: String!
+  lastname: String!
+  wishes: Wishes
 }
 
 type Wishes {
-  burialCremation: String
-  burialCremationPlace: String
-  user: User!
+  burial_cremation: String
+  burial_cremation_place: String
 }
