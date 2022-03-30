@@ -19,7 +19,8 @@
       "@/components/*": ["common/components/*"],
       "@/pages/*": ["pages/*"],
       "@/styles/*": ["../styles/*"],
-      "@/utils/*": ["common/utils/*"]
+      "@/utils/*": ["common/utils/*"],
+      "@/lang/*": ["/lang/*"]
     }
   },
   "include": ["next-env.d.ts", "/**/*.ts", "/**/*.tsx", "types.d.ts"],

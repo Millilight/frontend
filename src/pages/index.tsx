@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
 
+import translate from '@/utils/translate';
+
 const Index = () => {
   const router = useRouter();
   const { action } = router.query;
@@ -15,9 +17,9 @@ const Index = () => {
     if (!action || action == 'signup') {
       return (
         <>
-          <Typography variant="h4">Inscription</Typography>
+          <Typography variant="h4">{translate('signup.title')}</Typography>
           <Typography variant="subtitle1" textAlign={'center'}>
-            Inscrivez vous pour créer votre coffre fort
+            {translate('signup.description')}
           </Typography>
           <Signup />
           <div
@@ -29,16 +31,16 @@ const Index = () => {
               })
             }
           >
-            Déjà inscrit(e) ? Connectez-vous ici
+            {translate('signup.go_to_signin')}
           </div>
         </>
       );
     } else {
       return (
         <>
-          <Typography variant="h4">Connexion</Typography>
+          <Typography variant="h4">{translate('signin.title')}</Typography>
           <Typography variant="subtitle1" textAlign={'center'}>
-            Connectez-vous pour accéder à vos informations
+            {translate('signin.description')}
           </Typography>
           <Signin />
           <div
@@ -50,7 +52,7 @@ const Index = () => {
               })
             }
           >
-            {'Pas encore de compte ? Inscrivez-vous ici'}
+            {translate('signin.go_to_signup')}
           </div>
         </>
       );
