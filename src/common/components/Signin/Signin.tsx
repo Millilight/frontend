@@ -1,9 +1,15 @@
-import { useCreateUserMutation } from 'generated/graphql';
+import { useLoginMutation } from 'generated/graphql';
 import { TextField, Button } from '@mui/material';
 import styles from '../Signup/Signup.module.css';
+import Router from 'next/router';
 
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+
+function Authenticate(token: string) {
+  localStorage.setItem('token', token);
+  Router.push('/volontes-ceremoniales');
+}
 
 export default function Signin() {
   // Input Variables: updated by user input
@@ -11,9 +17,9 @@ export default function Signin() {
   const [pwd, setPwd] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  //Mutation : use the codegen hook: which return a function (createUser),
+  //Mutation : use the codegen hook: which return a function (Login),
   //           and the lifecycle of the request
-  const [createUser, { data, loading, error }] = useCreateUserMutation();
+  const [Login, { data, loading, error }] = useLoginMutation();
 
   const [isDoneWritingEmail, setIsDoneWritingEmail] = useState(false);
   const isEmailValid = !isDoneWritingEmail || /.+@.+\..+/.test(email);
@@ -22,10 +28,15 @@ export default function Signin() {
   function sendForm() {
     //Set all forms to written, in order to display the error messages
 
-    createUser({
-      // variables: { email: email },
+    Login({
+      variables: { email: email, password: pwd },
     });
   }
+  if (data && !loading && !error) {
+    console.log(data);
+    Authenticate(data.login.access_token);
+  }
+
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {
