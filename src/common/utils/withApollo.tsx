@@ -19,6 +19,7 @@ import {
 } from 'next-server/server/api-utils';
 import { IncomingMessage } from 'http';
 import { config } from './config';
+import { setContext } from '@apollo/client/link/context';
 
 export type ApolloClientContext = {
   req?: IncomingMessage & {
@@ -28,6 +29,7 @@ export type ApolloClientContext = {
 
 export const withApollo =
   (Comp: NextPage) =>
+  // eslint-disable-next-line react/display-name
   ({ apolloState }: { apolloState: NormalizedCacheObject }) => {
     return (
       <ApolloProvider client={getApolloClient(undefined, apolloState)}>
@@ -50,9 +52,23 @@ export const getApolloClient = (
     uri: config.apiURL,
     fetch,
   });
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = localStorage.getItem('token');
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
   const cache = new InMemoryCache().restore(initialState || {});
-  return new ApolloClient({
-    link: httpLink,
+
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
     cache,
   });
+  return client;
 };
