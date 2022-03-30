@@ -72,10 +72,16 @@ export default function Signup() {
     ) {
       console.log('creating user');
       createUser({
-        variables: { email: email, name: lastname, age: 18 },
+        variables: {
+          email: email,
+          lastname: lastname,
+          firstname: firstname,
+          password: pwd,
+        },
       });
     }
   }
+  console.log(data);
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {

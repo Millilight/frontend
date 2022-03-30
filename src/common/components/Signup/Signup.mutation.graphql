@@ -1,6 +1,18 @@
-mutation CreateUser($name: String!, $email: String!, $age: Float!) {
-  createUser(createUserDto: { name: $name, email: $email, age: $age }) {
-    name
+mutation CreateUser(
+  $firstname: String!
+  $lastname: String!
+  $email: String!
+  $password: String!
+) {
+  createUser(
+    createUserDto: {
+      firstname: $firstname
+      lastname: $lastname
+      email: $email
+      password: $password
+    }
+  ) {
     email
+    _id
   }
 }

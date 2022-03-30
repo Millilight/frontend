@@ -23,48 +23,161 @@ export type Scalars = {
 };
 
 export type CreateUserDto = {
-  age: Scalars['Float'];
   email: Scalars['String'];
-  name: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  access_token: Scalars['String'];
+  user: User;
+};
+
+export type LoginUserDto = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: User;
+  login: LoginResponse;
+  updateWishes: Wishes;
 };
 
 export type MutationCreateUserArgs = {
   createUserDto: CreateUserDto;
 };
 
+export type MutationLoginArgs = {
+  loginUserDto: LoginUserDto;
+};
+
+export type MutationUpdateWishesArgs = {
+  updateWishesDto: UpdateWishesDto;
+};
+
 export type Query = {
   __typename?: 'Query';
-  users: Array<User>;
+  user: User;
+};
+
+export type UpdateWishesDto = {
+  burial_cremation?: InputMaybe<Scalars['String']>;
+  burial_cremation_place?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
-  age: Scalars['Float'];
+  _id: Scalars['ID'];
   email: Scalars['String'];
-  name: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  wishes?: Maybe<Wishes>;
+};
+
+export type Wishes = {
+  __typename?: 'Wishes';
+  burial_cremation?: Maybe<Scalars['String']>;
+  burial_cremation_place?: Maybe<Scalars['String']>;
+};
+
+export type LoginMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+export type LoginMutation = {
+  __typename?: 'Mutation';
+  login: {
+    __typename?: 'LoginResponse';
+    access_token: string;
+    user: { __typename?: 'User'; _id: string };
+  };
 };
 
 export type CreateUserMutationVariables = Exact<{
-  name: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
   email: Scalars['String'];
-  age: Scalars['Float'];
+  password: Scalars['String'];
 }>;
 
 export type CreateUserMutation = {
   __typename?: 'Mutation';
-  createUser: { __typename?: 'User'; name: string; email: string };
+  createUser: { __typename?: 'User'; email: string; _id: string };
 };
 
+export const LoginDocument = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(loginUserDto: { email: $email, password: $password }) {
+      user {
+        _id
+      }
+      access_token
+    }
+  }
+`;
+export type LoginMutationFn = Apollo.MutationFunction<
+  LoginMutation,
+  LoginMutationVariables
+>;
+
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useLoginMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    LoginMutation,
+    LoginMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(
+    LoginDocument,
+    options
+  );
+}
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<
+  LoginMutation,
+  LoginMutationVariables
+>;
 export const CreateUserDocument = gql`
-  mutation CreateUser($name: String!, $email: String!, $age: Float!) {
-    createUser(createUserDto: { name: $name, email: $email, age: $age }) {
-      name
+  mutation CreateUser(
+    $firstname: String!
+    $lastname: String!
+    $email: String!
+    $password: String!
+  ) {
+    createUser(
+      createUserDto: {
+        firstname: $firstname
+        lastname: $lastname
+        email: $email
+        password: $password
+      }
+    ) {
       email
+      _id
     }
   }
 `;
@@ -86,9 +199,10 @@ export type CreateUserMutationFn = Apollo.MutationFunction<
  * @example
  * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
  *   variables: {
- *      name: // value for 'name'
+ *      firstname: // value for 'firstname'
+ *      lastname: // value for 'lastname'
  *      email: // value for 'email'
- *      age: // value for 'age'
+ *      password: // value for 'password'
  *   },
  * });
  */
