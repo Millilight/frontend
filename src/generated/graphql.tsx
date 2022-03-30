@@ -84,39 +84,101 @@ export type Wishes = {
   burial_cremation_place?: Maybe<Scalars['String']>;
 };
 
-export type LoginMutationVariables = Exact<{
-  email: Scalars['String'];
-  password: Scalars['String'];
+export type UpdateWishesMutationVariables = Exact<{
+  burialCremation?: InputMaybe<Scalars['String']>;
+  burialCremationPlace?: InputMaybe<Scalars['String']>;
 }>;
 
-export type LoginMutation = {
+export type UpdateWishesMutation = {
   __typename?: 'Mutation';
-  login: {
-    __typename?: 'LoginResponse';
-    access_token: string;
-    user: { __typename?: 'User'; _id: string };
+  updateWishes: {
+    __typename?: 'Wishes';
+    burial_cremation?: string | null;
+    burial_cremation_place?: string | null;
   };
 };
 
-export type CreateUserMutationVariables = Exact<{
-  firstname: Scalars['String'];
-  lastname: Scalars['String'];
-  email: Scalars['String'];
-  password: Scalars['String'];
-}>;
+export type GetWishesforUserQueryVariables = Exact<{ [key: string]: never }>;
 
-export type CreateUserMutation = {
-  __typename?: 'Mutation';
-  createUser: { __typename?: 'User'; email: string; _id: string };
+export type GetWishesforUserQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    wishes?: {
+      __typename?: 'Wishes';
+      burial_cremation?: string | null;
+      burial_cremation_place?: string | null;
+    } | null;
+  };
 };
 
-export const LoginDocument = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(loginUserDto: { email: $email, password: $password }) {
-      user {
-        _id
+export const UpdateWishesDocument = gql`
+  mutation updateWishes(
+    $burialCremation: String
+    $burialCremationPlace: String
+  ) {
+    updateWishes(
+      updateWishesDto: {
+        burial_cremation: $burialCremation
+        burial_cremation_place: $burialCremationPlace
       }
-      access_token
+    ) {
+      burial_cremation
+      burial_cremation_place
+    }
+  }
+`;
+export type UpdateWishesMutationFn = Apollo.MutationFunction<
+  UpdateWishesMutation,
+  UpdateWishesMutationVariables
+>;
+
+/**
+ * __useUpdateWishesMutation__
+ *
+ * To run a mutation, you first call `useUpdateWishesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateWishesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateWishesMutation, { data, loading, error }] = useUpdateWishesMutation({
+ *   variables: {
+ *      burialCremation: // value for 'burialCremation'
+ *      burialCremationPlace: // value for 'burialCremationPlace'
+ *   },
+ * });
+ */
+export function useUpdateWishesMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateWishesMutation,
+    UpdateWishesMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateWishesMutation,
+    UpdateWishesMutationVariables
+  >(UpdateWishesDocument, options);
+}
+export type UpdateWishesMutationHookResult = ReturnType<
+  typeof useUpdateWishesMutation
+>;
+export type UpdateWishesMutationResult =
+  Apollo.MutationResult<UpdateWishesMutation>;
+export type UpdateWishesMutationOptions = Apollo.BaseMutationOptions<
+  UpdateWishesMutation,
+  UpdateWishesMutationVariables
+>;
+export const GetWishesforUserDocument = gql`
+  query getWishesforUser {
+    user {
+      wishes {
+        burial_cremation
+        burial_cremation_place
+      }
     }
   }
 `;
@@ -126,104 +188,53 @@ export type LoginMutationFn = Apollo.MutationFunction<
 >;
 
 /**
- * __useLoginMutation__
+ * __useGetWishesforUserQuery__
  *
- * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useLoginMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
+ * To run a query within a React component, call `useGetWishesforUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWishesforUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ * const { data, loading, error } = useGetWishesforUserQuery({
  *   variables: {
  *      email: // value for 'email'
  *      password: // value for 'password'
  *   },
  * });
  */
-export function useLoginMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    LoginMutation,
-    LoginMutationVariables
+export function useGetWishesforUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetWishesforUserQuery,
+    GetWishesforUserQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(
-    LoginDocument,
+  return Apollo.useQuery<GetWishesforUserQuery, GetWishesforUserQueryVariables>(
+    GetWishesforUserDocument,
     options
   );
 }
-export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<
-  LoginMutation,
-  LoginMutationVariables
->;
-export const CreateUserDocument = gql`
-  mutation CreateUser(
-    $firstname: String!
-    $lastname: String!
-    $email: String!
-    $password: String!
-  ) {
-    createUser(
-      createUserDto: {
-        firstname: $firstname
-        lastname: $lastname
-        email: $email
-        password: $password
-      }
-    ) {
-      email
-      _id
-    }
-  }
-`;
-export type CreateUserMutationFn = Apollo.MutationFunction<
-  CreateUserMutation,
-  CreateUserMutationVariables
->;
-
-/**
- * __useCreateUserMutation__
- *
- * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
- *   variables: {
- *      firstname: // value for 'firstname'
- *      lastname: // value for 'lastname'
- *      email: // value for 'email'
- *      password: // value for 'password'
- *   },
- * });
- */
-export function useCreateUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateUserMutation,
-    CreateUserMutationVariables
+export function useGetWishesforUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetWishesforUserQuery,
+    GetWishesforUserQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(
-    CreateUserDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    GetWishesforUserQuery,
+    GetWishesforUserQueryVariables
+  >(GetWishesforUserDocument, options);
 }
-export type CreateUserMutationHookResult = ReturnType<
-  typeof useCreateUserMutation
+export type GetWishesforUserQueryHookResult = ReturnType<
+  typeof useGetWishesforUserQuery
 >;
-export type CreateUserMutationResult =
-  Apollo.MutationResult<CreateUserMutation>;
-export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
-  CreateUserMutation,
-  CreateUserMutationVariables
+export type GetWishesforUserLazyQueryHookResult = ReturnType<
+  typeof useGetWishesforUserLazyQuery
+>;
+export type GetWishesforUserQueryResult = Apollo.QueryResult<
+  GetWishesforUserQuery,
+  GetWishesforUserQueryVariables
 >;
