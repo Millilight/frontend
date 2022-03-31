@@ -1,0 +1,18 @@
+mutation CreateUser(
+  $firstname: String!
+  $lastname: String!
+  $email: String!
+  $password: String!
+) {
+  createUser(
+    createUserDto: {
+      firstname: $firstname
+      lastname: $lastname
+      email: $email
+      password: $password
+    }
+  ) {
+    email
+    _id
+  }
+}

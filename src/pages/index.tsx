@@ -1,43 +1,66 @@
-import Head from 'next/head';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
-import { ssrCountries, PageCountriesComp } from '../generated/page';
-import { GetServerSideProps } from 'next';
+import { Typography } from '@mui/material';
+// import { PageCountriesComp } from 'generated/page';
 import { withApollo } from '@/utils/withApollo';
+import { useState } from 'react';
+// import { Visibility, VisibilityOff } from '@mui/icons-material';
+import Signup from '@/components/Signup/Signup';
+import Signin from '@/components/Signin/Signin';
+import useAuth from '@/utils/useAuth';
 
-const HomePage: PageCountriesComp = (props) => {
+const Index = () => {
+  useAuth();
+  const [showSignup, setShowSignup] = useState(true);
+
+  function displayForm() {
+    if (showSignup) {
+      return (
+        <>
+          <Typography variant="h4">Inscription</Typography>
+          <Typography variant="subtitle1" textAlign={'center'}>
+            Inscrivez vous pour créer votre coffre fort
+          </Typography>
+          <Signup />
+          <div
+            className="connection-link"
+            onClick={() => setShowSignup(!showSignup)}
+          >
+            Déjà inscrit(e) ? Connectez-vous ici
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Typography variant="h4">Connexion</Typography>
+          <Typography variant="subtitle1" textAlign={'center'}>
+            Connectez-vous pour accéder à vos informations
+          </Typography>
+          <Signin />
+          <div
+            className="connection-link"
+            onClick={() => setShowSignup(!showSignup)}
+          >
+            {'Pas encore de compte ? Inscrivez-vous ici'}
+          </div>
+        </>
+      );
+    }
+  }
+
   return (
     <div>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Typography variant="h3">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </Typography>
-
-        <Grid container spacing={2}>
-          {props?.data?.countries?.map((country: Country) => (
-            <Grid item xs={2} key={country.code}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5">{country.name}</Typography>
-                  <Typography>
-                    {country.code} - {country.emoji}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </main>
+      <div className="visual-decoration-container">
+        <div className="visual-deco-1"></div>
+        <div className="visual-deco-2"></div>
+        <div className="visual-deco-3"></div>
+        <div className="visual-deco-4"></div>
+        <div className="visual-deco-5"></div>
+      </div>
+      <div className="container-column-center">
+        <div className="inscription-white-container">{displayForm()}</div>
+      </div>
     </div>
   );
 };
 
-export const getStaticProps: GetServerSideProps = async (ctx) => {
-  return await ssrCountries.getServerPage({}, ctx);
-};
-
-export default withApollo(ssrCountries.withPage(() => ({}))(HomePage));
+export default withApollo(Index);

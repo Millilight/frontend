@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import '@/styles/inscription.css';
 import { AppProps } from 'next/app';
 
 import '@fontsource/roboto/300.css';

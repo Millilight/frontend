@@ -8,7 +8,8 @@
 
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"], // TypeScript files extension
+      //"files": ["*.ts", "*.tsx"], // TypeScript files extension
+      "files": ["src/{common,pages,modules}/**/*.{ts,tsx}"],
 
       "extends": [
         "next/core-web-vitals",
