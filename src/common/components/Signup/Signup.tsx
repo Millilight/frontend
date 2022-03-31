@@ -41,14 +41,6 @@ export default function Signup() {
   //Mutation : use the codegen hook: which return a function (createUser),
   //           and the lifecycle of the request
   const [createUser, { data, loading, error }] = useCreateUserMutation();
-  console.log(
-    loading,
-    !isPasswordValid,
-    !isFirstNameValid,
-    !isLastNameValid,
-    !isEmailValid,
-    !arePasswordsEquals
-  );
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
@@ -70,7 +62,6 @@ export default function Signup() {
       arePasswordsEquals &&
       isDoneWritingConfirmPwd
     ) {
-      console.log('creating user');
       createUser({
         variables: {
           email: email,
@@ -81,7 +72,7 @@ export default function Signup() {
       });
     }
   }
-  console.log(data);
+  
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {

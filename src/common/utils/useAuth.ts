@@ -18,12 +18,10 @@ export default function useAuth() {
         decodedToken.payload.exp &&
         decodedToken.payload.exp >= dateNow.getTime() / 1000
       ) {
-        console.log(Router.pathname);
         isExpired = false;
       }
     }
     if (isExpired === true && Router.pathname != '/') {
-      console.log('expired');
       Router.push(`/`); // redirection vers la page login
     }
     if (isExpired === false && Router.pathname == '/') {

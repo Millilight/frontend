@@ -57,7 +57,7 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
   //List of ceremonial wishes with help texts
   const ceremonialWishesList: Wish[] = [
     {
-      wishId: 'burialCremation',
+      wishId: 'burial_cremation',
       title: 'Souhaitez-vous une crémation ou une inhumation ?',
       content: '',
       help: (
@@ -87,7 +87,7 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
       possibleValues: ['Inhumation', 'Crémation'],
     },
     {
-      wishId: 'burialCremationPlace',
+      wishId: 'burial_cremation_place',
       title:
         'Où souhaitez-vous être inhumé, ou que vos cendres soient placées ?',
       content: '',

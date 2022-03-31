@@ -33,7 +33,6 @@ export default function Signin() {
     });
   }
   if (data && !loading && !error) {
-    console.log(data);
     Authenticate(data.login.access_token);
   }
 
