@@ -75,7 +75,7 @@ export type User = {
   email: Scalars['String'];
   firstname: Scalars['String'];
   lastname: Scalars['String'];
-  wishes?: Maybe<Wishes>;
+  wishes: Wishes;
 };
 
 export type Wishes = {
@@ -111,8 +111,8 @@ export type CreateUserMutation = {
 };
 
 export type UpdateWishesMutationVariables = Exact<{
-  burialCremation?: InputMaybe<Scalars['String']>;
-  burialCremationPlace?: InputMaybe<Scalars['String']>;
+  burial_cremation?: InputMaybe<Scalars['String']>;
+  burial_cremation_place?: InputMaybe<Scalars['String']>;
 }>;
 
 export type UpdateWishesMutation = {
@@ -130,11 +130,11 @@ export type GetWishesforUserQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
-    wishes?: {
+    wishes: {
       __typename?: 'Wishes';
       burial_cremation?: string | null;
       burial_cremation_place?: string | null;
-    } | null;
+    };
   };
 };
 
@@ -257,13 +257,13 @@ export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const UpdateWishesDocument = gql`
   mutation updateWishes(
-    $burialCremation: String
-    $burialCremationPlace: String
+    $burial_cremation: String
+    $burial_cremation_place: String
   ) {
     updateWishes(
       updateWishesDto: {
-        burial_cremation: $burialCremation
-        burial_cremation_place: $burialCremationPlace
+        burial_cremation: $burial_cremation
+        burial_cremation_place: $burial_cremation_place
       }
     ) {
       burial_cremation
@@ -289,8 +289,8 @@ export type UpdateWishesMutationFn = Apollo.MutationFunction<
  * @example
  * const [updateWishesMutation, { data, loading, error }] = useUpdateWishesMutation({
  *   variables: {
- *      burialCremation: // value for 'burialCremation'
- *      burialCremationPlace: // value for 'burialCremationPlace'
+ *      burial_cremation: // value for 'burial_cremation'
+ *      burial_cremation_place: // value for 'burial_cremation_place'
  *   },
  * });
  */
