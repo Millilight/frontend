@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-
 // Translations are in lang/fr.json (Has to be a flat json, no nesting!)
 // id: the key of the translation in the json
 // Example of usage with parameter values :
