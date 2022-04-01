@@ -1,13 +1,10 @@
 import { Typography } from '@mui/material';
 // import { PageCountriesComp } from 'generated/page';
 import { withApollo } from '@/utils/withApollo';
-
 import { useRouter } from 'next/router';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
-import translate from '@/utils/translate';
-
 import translate from '@/utils/translate';
 
 const Index = () => {
