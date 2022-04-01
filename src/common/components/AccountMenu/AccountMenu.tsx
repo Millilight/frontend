@@ -15,6 +15,7 @@ import Logout from '@mui/icons-material/Logout';
 import Link from 'next/link';
 import Router from 'next/router';
 import { removeCookies } from 'cookies-next';
+import translate from '@/utils/translate';
 
 function Disconnect() {
   localStorage.removeItem('token');
@@ -95,7 +96,8 @@ export default function AccountMenu() {
       >
         <Link href={profil_url} passHref>
           <MenuItem>
-            <Avatar /> Mon Compte
+            <Avatar />
+            {translate('common.label.account')}
           </MenuItem>
         </Link>
 
@@ -105,7 +107,7 @@ export default function AccountMenu() {
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Déconnexion
+          {translate('common.label.disconnect')}
         </MenuItem>
       </Menu>
     </React.Fragment>
