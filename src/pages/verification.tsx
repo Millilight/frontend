@@ -3,7 +3,6 @@ import VerifyEmail from '@/components/VerifyEmail/VerifyEmail';
 import { withApollo } from '@/utils/withApollo';
 import { useState } from 'react';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
-import useAuth from '@/utils/useAuth';
 
 const Verification = () => {
   return (
