@@ -80,6 +80,7 @@ export default function Signin() {
           className={styles.inscription_button}
           variant="contained"
           color="success"
+          style={{ marginTop: '20px' }}
           disabled={loading}
           onClick={() => {
             sendForm();

@@ -1,4 +1,3 @@
-// import { PageCountriesComp } from 'generated/page';
 import { withApollo } from '@/utils/withApollo';
 import React from 'react';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
