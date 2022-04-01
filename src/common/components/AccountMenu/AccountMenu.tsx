@@ -1,4 +1,3 @@
-import { TextField, Button } from '@mui/material';
 import styles from '../AccountMenu/AccountMenu.module.css';
 import { profil_url } from '@/utils/config';
 import { login_url } from '@/utils/config';
@@ -11,16 +10,16 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Link from 'next/link';
 import Router from 'next/router';
+import { removeCookies } from 'cookies-next';
 
 function Disconnect() {
   localStorage.removeItem('token');
+  removeCookies('jwtoken');
   Router.push(login_url);
 }
 
