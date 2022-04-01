@@ -1,141 +1,90 @@
-import { TextField, Button } from '@mui/material';
-import styles from '../VerifyEmail/VerifyEmail.module.css';
-import Router from 'next/router';
-
-import { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useVerifyEmailMutation } from 'generated/graphql';
+import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import { login_url, register_url } from '@/utils/config';
+import Link from 'next/link';
+import DoneIcon from '@mui/icons-material/Done';
 
 export default function VerifyEmail() {
-  // Input Variables: updated by user input
-  const [code1, setCode1] = useState('');
-  const [code2, setCode2] = useState('');
-  const [code3, setCode3] = useState('');
-  const [code4, setCode4] = useState('');
-  const [code5, setCode5] = useState('');
-  const [code6, setCode6] = useState('');
-  const ref1 = useRef<any>();
-  const ref2 = useRef<any>();
-  const ref3 = useRef<any>();
-  const ref4 = useRef<any>();
-  const ref5 = useRef<any>();
-  const ref6 = useRef<any>();
+  const router = useRouter();
+  let { token, user_id } = router.query;
+  if (token && typeof token != 'string') {
+    token = token[0];
+  }
+  if (user_id && typeof user_id != 'string') {
+    user_id = user_id[0];
+  }
+  const [isRequestSent, setIsRequestSent] = useState(false);
+
   //Mutation : use the codegen hook: which return a function (Login),
   //           and the lifecycle of the request
-  //   const [Login, { data, loading, error }] = useLoginMutation();
+  const [VerifyEmail, { data, loading, error }] = useVerifyEmailMutation();
 
   // Check if all fields are correct, and send the form to create User
+  if (token && user_id && !isRequestSent) {
+    setIsRequestSent(true);
+    VerifyEmail({ variables: { token: token, user_id: user_id } });
+  }
+
+  if (loading) {
+    return <div style={{ textAlign: 'center' }}>{'Vérification en cours'}</div>;
+  }
+
+  if (error) {
+    if (error.message == 'This mail has already been verified') {
+      return (
+        <div style={{ textAlign: 'center', fontSize: '22px' }}>
+          <DoneIcon color={'success'} style={{ fontSize: '60px' }} />
+          <div>{'Votre email a déjà été vérifié !'}</div>
+          <br />
+          <Link href={login_url} passHref>
+            <Button color={'success'} variant={'outlined'}>
+              Me connecter
+            </Button>
+          </Link>
+        </div>
+      );
+    }
+    return (
+      <div style={{ textAlign: 'center', fontSize: '22px' }}>
+        <div>{"Votre compte n'existe plus, merci d'en créer un nouveau"}</div>
+        <Link href={register_url} passHref>
+          <Button color={'success'} variant={'outlined'}>
+            Créer mon compte
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+  if (data) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <DoneIcon color={'success'} style={{ fontSize: '60px' }} />
+        <div>{'Vérification réussie !'}</div>
+        <br />
+        <Link href={login_url} passHref>
+          <Button color={'success'} variant={'outlined'}>
+            Me connecter
+          </Button>
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <form className={styles.form}>
-      <input
-        type="text"
-        className={styles.codeInput}
-        value={code1}
-        maxLength={1}
-        ref={ref1}
-        onChange={(e) => {
-          setCode1(e.target.value);
-          if (ref2 && ref2.current && e.target.value != '') {
-            ref2.current.focus();
-          }
-        }}
-      />
-      <input
-        type="text"
-        className={styles.codeInput}
-        maxLength={1}
-        value={code2}
-        onChange={(e) => {
-          setCode2(e.target.value);
-          if (ref3 && ref3.current) {
-            ref3.current.focus();
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key == 'Backspace') {
-            e.preventDefault();
-            setCode2('');
-            ref1.current.focus();
-          }
-        }}
-        ref={ref2}
-      />
-      <input
-        type="text"
-        className={styles.codeInput}
-        maxLength={1}
-        value={code3}
-        onChange={(e) => {
-          setCode3(e.target.value);
-          if (ref4 && ref4.current) {
-            ref4.current.focus();
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key == 'Backspace') {
-            e.preventDefault();
-            setCode3('');
-            ref2.current.focus();
-          }
-        }}
-        ref={ref3}
-      />
-      <input
-        type="text"
-        className={styles.codeInput}
-        maxLength={1}
-        value={code4}
-        onChange={(e) => {
-          setCode4(e.target.value);
-          if (ref5 && ref5.current) {
-            ref5.current.focus();
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key == 'Backspace') {
-            e.preventDefault();
-            setCode4('');
-            ref3.current.focus();
-          }
-        }}
-        ref={ref4}
-      />
-      <input
-        type="text"
-        className={styles.codeInput}
-        maxLength={1}
-        value={code5}
-        onChange={(e) => {
-          setCode5(e.target.value);
-          if (ref6 && ref6.current) {
-            ref6.current.focus();
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key == 'Backspace') {
-            e.preventDefault();
-            setCode5('');
-            ref4.current.focus();
-          }
-        }}
-        ref={ref5}
-      />
-      <input
-        type="text"
-        className={styles.codeInput}
-        maxLength={1}
-        value={code6}
-        onChange={(e) => {
-          setCode6(e.target.value);
-        }}
-        onKeyDown={(e) => {
-          if (e.key == 'Backspace') {
-            e.preventDefault();
-            setCode6('');
-            ref5.current.focus();
-          }
-        }}
-        ref={ref6}
-      />
-    </form>
+    <div style={{ textAlign: 'center', fontSize: '18px' }}>
+      <div>
+        {
+          'Cliquez sur le lien que vous avez reçu par email pour confirmer votre inscription (pensez à vérifier vos spams)'
+        }
+      </div>
+      <br />
+      <Link href={login_url} passHref>
+        <Button color={'success'} variant={'outlined'}>
+          {"Retourner à l'écran de connexion"}
+        </Button>
+      </Link>
+    </div>
   );
 }
