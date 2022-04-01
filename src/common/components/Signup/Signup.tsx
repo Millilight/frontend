@@ -78,12 +78,6 @@ export default function Signup() {
   // corectness of the fields
   function displayButton() {
     if (error) {
-      console.log(error.networkError);
-      console.log(error.name);
-      console.log(error.message);
-      console.log(error.clientErrors);
-      console.log(error.extraInfo);
-      console.log(error.graphQLErrors);
       if (
         error.graphQLErrors[0].extensions.code == '409' ||
         error.message == 'This email is already registered'
