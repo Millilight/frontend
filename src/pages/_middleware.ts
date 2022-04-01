@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import { Token } from 'graphql';
 import { public_only_urls, login_url, protected_urls } from '@/utils/config';
 
 export function middleware(req: NextRequest) {
