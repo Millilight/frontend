@@ -1,6 +1,5 @@
 import { TextField, Button } from '@mui/material';
 import styles from '../Signup/Signup.module.css';
-
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useResetPasswordMutation } from 'generated/graphql';
