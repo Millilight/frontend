@@ -23,11 +23,13 @@ export default function Signin() {
 
   const [isDoneWritingEmail, setIsDoneWritingEmail] = useState(false);
   const isEmailValid = !isDoneWritingEmail || /.+@.+\..+/.test(email);
+  const [hasUpdatedAfterError, sethasUpdatedAfterError] = useState(false);
 
+  console.log(error);
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
     //Set all forms to written, in order to display the error messages
-
+    sethasUpdatedAfterError(false);
     Login({
       variables: { email: email, password: pwd },
     });
@@ -39,14 +41,22 @@ export default function Signin() {
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {
-    if (error) {
+    if (error && !hasUpdatedAfterError) {
+      let message = 'Erreur de connexion, veuillez réessayer plus tard.';
+      if (
+        error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED' ||
+        error.message == 'Unauthorized' ||
+        error.message == "Cannot read properties of null (reading 'password')"
+      ) {
+        message = 'Adresse mail ou mot de passe incorrect, veuillez réessayer';
+      }
       return (
         <Button
           className={styles.inscription_button}
           variant="outlined"
           color="error"
         >
-          {'Erreur de connexion, veuillez réessayer plus tard.'}
+          {message}
         </Button>
       );
     }
@@ -70,7 +80,9 @@ export default function Signin() {
           variant="contained"
           color="success"
           disabled={loading}
-          onClick={() => sendForm()}
+          onClick={() => {
+            sendForm();
+          }}
         >
           {loading ? 'Envoi en cours...' : 'Me connecter'}
         </Button>
@@ -86,7 +98,9 @@ export default function Signin() {
         label="E-mail"
         variant="standard"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => {
+          setEmail(e.target.value), sethasUpdatedAfterError(true);
+        }}
         onBlur={() => setIsDoneWritingEmail(true)}
         fullWidth
       />
@@ -103,7 +117,9 @@ export default function Signin() {
           label="Mot de passe"
           variant="standard"
           value={pwd}
-          onChange={(e) => setPwd(e.target.value)}
+          onChange={(e) => {
+            setPwd(e.target.value), sethasUpdatedAfterError(true);
+          }}
           fullWidth
         />
         <div
