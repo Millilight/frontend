@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 // import { PageCountriesComp } from 'generated/page';
 import { withApollo } from '@/utils/withApollo';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
@@ -10,9 +11,11 @@ import useAuth from '@/utils/useAuth';
 const Index = () => {
   useAuth();
   const [showSignup, setShowSignup] = useState(true);
+  const router = useRouter();
+  const { action } = router.query;
 
   function displayForm() {
-    if (showSignup) {
+    if (!action || action == 'signup') {
       return (
         <>
           <Typography variant="h4">Inscription</Typography>
@@ -22,7 +25,12 @@ const Index = () => {
           <Signup />
           <div
             className="connection-link"
-            onClick={() => setShowSignup(!showSignup)}
+            onClick={() =>
+              router.push({
+                pathname: '/',
+                query: { action: 'signin' },
+              })
+            }
           >
             Déjà inscrit(e) ? Connectez-vous ici
           </div>
@@ -38,7 +46,12 @@ const Index = () => {
           <Signin />
           <div
             className="connection-link"
-            onClick={() => setShowSignup(!showSignup)}
+            onClick={() =>
+              router.push({
+                pathname: '/',
+                query: { action: 'signup' },
+              })
+            }
           >
             {'Pas encore de compte ? Inscrivez-vous ici'}
           </div>

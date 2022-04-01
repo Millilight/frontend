@@ -18,3 +18,10 @@ export const config = {
     process.env.NEXT_PUBLIC_API_URL
   ),
 };
+
+/* List of URLS */
+export const profil_url = '/profil';
+export const register_url = '/';
+export const login_url = '/?action=signin';
+export const email_verification_url = '/verification';
+export const burrial_wishes_url = '/volontes-ceremoniales';
