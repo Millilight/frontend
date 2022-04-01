@@ -4,6 +4,7 @@ import styles from '../Signup/Signup.module.css';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useCreateUserMutation } from 'generated/graphql';
+import translate from '@/utils/translate';
 
 export default function ResetPassword() {
   // Input Variables: updated by user input
@@ -66,7 +67,7 @@ export default function ResetPassword() {
           variant="outlined"
           color="error"
         >
-          {'Erreur de connexion, veuillez réessayer plus tard.'}
+          {translate('signup.error')}
         </Button>
       );
     }
@@ -79,7 +80,7 @@ export default function ResetPassword() {
           variant="outlined"
           color="success"
         >
-          {'Votre nouveau mot de passe a bien été pris en compte!'}
+          {translate('reset.validation')}
         </Button>
       );
     }

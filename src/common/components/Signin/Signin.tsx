@@ -44,13 +44,13 @@ export default function Signin() {
   // corectness of the fields
   function displayButton() {
     if (error && !hasUpdatedAfterError) {
-      let message = 'Erreur de connexion, veuillez réessayer plus tard.';
+      let message = translate('signin.error');
       if (
         error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED' ||
         error.message == 'Unauthorized' ||
         error.message == "Cannot read properties of null (reading 'password')"
       ) {
-        message = 'Adresse mail ou mot de passe incorrect, veuillez réessayer';
+        message = translate('signin.wrong_password');
       }
       return (
         <Button
