@@ -30,7 +30,6 @@ export default function Signin() {
   const isEmailValid = !isDoneWritingEmail || /.+@.+\..+/.test(email);
   const [hasUpdatedAfterError, sethasUpdatedAfterError] = useState(false);
 
-  console.log(error);
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
     //Set all forms to written, in order to display the error messages
