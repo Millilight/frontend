@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useUpdateWishesMutation } from 'generated/graphql';
+import translate from '@/utils/translate';
 
 export default function WishContent(props: { wish: Wish }) {
   // Mutation : update using codegen hook
@@ -38,7 +39,7 @@ export default function WishContent(props: { wish: Wish }) {
       );
     }
     if (error) {
-      alert('Une erreur est survenue, l’enregistrement n’a pas été effectué.');
+      alert(translate('wish.error'));
       return null;
     }
   }
@@ -54,8 +55,8 @@ export default function WishContent(props: { wish: Wish }) {
             }}
           >
             <TextField
-              id={props.wish.title + '_field'}
-              placeholder="Entrez vos volontés ici..."
+              id={props.wish.wishId + '_field'}
+              label={translate('wish.label')}
               defaultValue={props.wish.content}
               disabled={!editionMode}
               fullWidth
@@ -74,7 +75,7 @@ export default function WishContent(props: { wish: Wish }) {
                   variant="contained"
                   type="submit"
                 >
-                  Enregistrer
+                  {translate('common.button.save')}
                 </Button>
                 <Button
                   sx={{
@@ -88,7 +89,7 @@ export default function WishContent(props: { wish: Wish }) {
                   variant="outlined"
                   onClick={() => setEditionMode(!editionMode)}
                 >
-                  Annuler
+                  {translate('common.button.cancel')}
                 </Button>
               </div>
             ) : (
@@ -103,7 +104,7 @@ export default function WishContent(props: { wish: Wish }) {
                 variant="outlined"
                 onClick={() => setEditionMode(!editionMode)}
               >
-                Modifier
+                {translate('common.button.edit')}
               </Button>
             )}
           </Stack>
@@ -119,7 +120,7 @@ export default function WishContent(props: { wish: Wish }) {
           >
             <FormControl required>
               <RadioGroup
-                id={props.wish.title + '_field'}
+                id={props.wish.wishId + '_field'}
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue={props.wish.content}
                 name="content"
@@ -148,7 +149,7 @@ export default function WishContent(props: { wish: Wish }) {
                   variant="contained"
                   type="submit"
                 >
-                  Enregistrer
+                  {translate('common.button.save')}
                 </Button>
                 <Button
                   sx={{
@@ -162,7 +163,7 @@ export default function WishContent(props: { wish: Wish }) {
                   variant="outlined"
                   onClick={() => setEditionMode(!editionMode)}
                 >
-                  Annuler
+                  {translate('common.button.cancel')}
                 </Button>
               </div>
             ) : (
@@ -177,7 +178,7 @@ export default function WishContent(props: { wish: Wish }) {
                 variant="outlined"
                 onClick={() => setEditionMode(!editionMode)}
               >
-                Modifier
+                {translate('common.button.edit')}
               </Button>
             )}
           </Stack>
