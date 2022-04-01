@@ -5,6 +5,7 @@ import Router from 'next/router';
 
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import translate from '@/utils/translate';
 
 function Authenticate(token: string) {
   localStorage.setItem('token', token);
@@ -46,7 +47,7 @@ export default function Signin() {
           variant="outlined"
           color="error"
         >
-          {'Erreur de connexion, veuillez réessayer plus tard.'}
+          {translate('signin.error')}
         </Button>
       );
     }
@@ -58,7 +59,7 @@ export default function Signin() {
           variant="outlined"
           color="success"
         >
-          {'Connexion réussie!'}
+          {translate('signin.success')}
         </Button>
       );
     }
@@ -72,7 +73,9 @@ export default function Signin() {
           disabled={loading}
           onClick={() => sendForm()}
         >
-          {loading ? 'Envoi en cours...' : 'Me connecter'}
+          {loading
+            ? translate('common.button.sending')
+            : translate('signin.button.signin')}
         </Button>
       </>
     );
@@ -83,7 +86,7 @@ export default function Signin() {
       <TextField
         id="email"
         type="email"
-        label="E-mail"
+        label={translate('common.label.email')}
         variant="standard"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -93,14 +96,14 @@ export default function Signin() {
 
       {!isEmailValid && (
         <span className={styles.invalid}>
-          {"L'adresse email n'est pas valide"}
+          {translate('common.invalid_email')}
         </span>
       )}
       <div className={styles.field_container}>
         <TextField
           type={showPassword ? 'text' : 'password'}
           id="password"
-          label="Mot de passe"
+          label={translate('common.label.password')}
           variant="standard"
           value={pwd}
           onChange={(e) => setPwd(e.target.value)}

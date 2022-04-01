@@ -19,7 +19,7 @@ export default function Wishes(props: {
       {props.wishes
         ? props.wishes.map((wish: Wish) => (
             <Box
-              key={wish.title}
+              key={wish.wishId}
               onClick={() => props.helpCallback(wish.help)}
               sx={{
                 width: '80%',

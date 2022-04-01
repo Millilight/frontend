@@ -8,10 +8,11 @@ import {
   useGetWishesforUserQuery,
   GetWishesforUserQuery,
 } from 'generated/graphql';
+import translate from '@/utils/translate';
 
 const CeremonialWishes: PageGetWishesforUserComp = () => {
   // Help on the right hand side  pannel
-  const [help, setHelp] = useState(
+  const initial_help = (
     <div>
       <Box
         component="img"
@@ -22,19 +23,10 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
         alt="..."
         src="/yoga_woman.png"
       />
-      <p>
-        Dans cet espace, vous allez pouvoir renseigner vos volontés concernant
-        la cérémonie funéraire. Ces informations peuvent permettre à votre
-        famille de s’accorder simplement sur la démarche à suivre, sans avoir à
-        prendre de décision dans un moment difficile.
-      </p>
-      <p>
-        Une fois que vous aurez transmis l’accès à vos proches de confiance, ils
-        pourront accéder à ces informations s’ils le jugent nécessaire. Vous
-        serez également notifié du dévérouillage de vos données de leur part.{' '}
-      </p>
+      <p>{translate('ceremonial.default_help')}</p>
     </div>
   );
+  const [help, setHelp] = useState(initial_help);
 
   function changeHelp(newHelp: JSX.Element) {
     const newHelpTransformed = (
@@ -58,29 +50,12 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
   const ceremonialWishesList: Wish[] = [
     {
       wishId: 'burial_cremation',
-      title: 'Souhaitez-vous une crémation ou une inhumation ?',
+      title: translate('ceremonial.burial_cremation.title'),
       content: '',
       help: (
         <div>
-          <h3>Inhumation ou crémation ?</h3>
-          <p>
-            Ce sont les deux procédés possibles après un décès, qui ont chacun
-            leurs avantages et inconvénients.
-          </p>
-          <p>
-            La crémation, de plus en plus utilisée, consiste à brûler le corps
-            dans un crématorium pour en récupérer les cendres. Elle peut êter
-            plus simple à organiser et moins chère qu’une inhumation, mais peut
-            sembler un peu impersonnelle pour les proches.
-          </p>
-          <p>
-            Pur une inhumation, ou enterrement, le corps du défunt est placé
-            dans un cerceuil. Cela peut rendre le deuil plus facile. Dans le cas
-            d’un caveau familial, les membres d’une famille peuvent reposer
-            ensemble. Son organisation demande certaines démarches
-            adminiistrative (acte de décès, autorisation de la mairie) qui
-            peuvent être un peu lourdes au moment du deuil pour les proches.
-          </p>
+          <h3>{translate('ceremonial.burial_cremation.help.1')}</h3>
+          <p>{translate('ceremonial.burial_cremation.help.2')}</p>
         </div>
       ),
       type: 'radio',
@@ -88,52 +63,27 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
     },
     {
       wishId: 'burial_cremation_place',
-      title:
-        'Où souhaitez-vous être inhumé, ou que vos cendres soient placées ?',
+      title: translate('ceremonial.burial_cremation_place.title'),
       content: '',
       help: (
         <div>
-          <h3>Où peut-on être inhumé ?</h3>
-          <p>
-            Le lieu d’inhumation le plus commun est le cimetière communal. Il
-            peut s’agir d’un cimetière de la commune où :
-          </p>
+          <h3>{translate('ceremonial.burial_cremation_place.help.1')}</h3>
+          <p>{translate('ceremonial.burial_cremation_place.help.2')}</p>
           <ul>
-            <li>Le défunt est décédé.</li>
-            <li>Le défunt était domicilié.</li>
-            <li>
-              Se trouve une sépulture de famille (caveau familial) à laquelle a
-              droit le défunt.
-            </li>
-            <li>
-              Dans le cas particulier où il résidait hors de France, la commune
-              où le défunt était inscrit sur la liste électorale.
-            </li>
+            <li>{translate('ceremonial.burial_cremation_place.help.3')}</li>
+            <li>{translate('ceremonial.burial_cremation_place.help.4')}</li>
+            <li>{translate('ceremonial.burial_cremation_place.help.5')}</li>
+            <li>{translate('ceremonial.burial_cremation_place.help.6')}</li>
           </ul>
-          <p>
-            Il est également possible sur un terrain privé, mais des conditions
-            précises doivent être respectées.
-          </p>
-          <h3>Quid des cendres après une crémation ?</h3>
-          <p>
-            Pour conserver les cendres après une crémation, elles sont mises
-            dans une urne qui peut être
-          </p>
+          <p>{translate('ceremonial.burial_cremation_place.help.7')}</p>
+          <h3>{translate('ceremonial.burial_cremation_place.help.8')}</h3>
+          <p>{translate('ceremonial.burial_cremation_place.help.9')}</p>
           <ul>
-            <li>Inhumée dans une sépulture existante.</li>
-            <li>Déposée dans un columbarium.</li>
-            <li>Placée dans un monument funéraire dans un cimetière.</li>
+            <li>{translate('ceremonial.burial_cremation_place.help.10')}</li>
+            <li>{translate('ceremonial.burial_cremation_place.help.11')}</li>
+            <li>{translate('ceremonial.burial_cremation_place.help.12')}</li>
           </ul>
-          <p>
-            Deuxième possibilité: Les cendres peuvent être dispersées, mais cela
-            ne peut pas être fait de partout! Légalement cela peut être dans les
-            espaces aménagés dans les cimetières communaux, en pleine nature, ou
-            en mer, à un minimum de 300 mètres des côtes.
-          </p>
-          <p>
-            Attention ! Depuis 2008, il n’est plus possible de conserver les
-            cendres d’un proche dans un logement.
-          </p>
+          <p>{translate('ceremonial.burial_cremation_place.help.13')}</p>
         </div>
       ),
       type: 'textfield',
@@ -179,7 +129,7 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
   return (
     <div>
       <Head>
-        <title>Volontés cérémoniales</title>
+        <title>{translate('ceremonial.header')}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -201,7 +151,8 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
                 alt="..."
                 src="/candle.png"
               />
-              {'   '} Renseigner mes volontés cérémoniales
+              {'   '}
+              {translate('ceremonial.title')}
             </Typography>
             <Wishes wishes={ceremonialWishesList} helpCallback={changeHelp} />
           </Grid>

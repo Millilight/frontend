@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
 import useAuth from '@/utils/useAuth';
+import translate from '@/utils/translate';
 
 const Index = () => {
   useAuth();
@@ -15,32 +16,32 @@ const Index = () => {
     if (showSignup) {
       return (
         <>
-          <Typography variant="h4">Inscription</Typography>
+          <Typography variant="h4">{translate('signup.title')}</Typography>
           <Typography variant="subtitle1" textAlign={'center'}>
-            Inscrivez vous pour créer votre coffre fort
+            {translate('signup.description')}
           </Typography>
           <Signup />
           <div
             className="connection-link"
             onClick={() => setShowSignup(!showSignup)}
           >
-            Déjà inscrit(e) ? Connectez-vous ici
+            {translate('signup.go_to_signin')}
           </div>
         </>
       );
     } else {
       return (
         <>
-          <Typography variant="h4">Connexion</Typography>
+          <Typography variant="h4">{translate('signin.title')}</Typography>
           <Typography variant="subtitle1" textAlign={'center'}>
-            Connectez-vous pour accéder à vos informations
+            {translate('signin.description')}
           </Typography>
           <Signin />
           <div
             className="connection-link"
             onClick={() => setShowSignup(!showSignup)}
           >
-            {'Pas encore de compte ? Inscrivez-vous ici'}
+            {translate('signin.go_to_signup')}
           </div>
         </>
       );

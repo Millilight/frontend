@@ -4,13 +4,13 @@ import { withApollo } from '@/utils/withApollo';
 import { useState } from 'react';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
 import useAuth from '@/utils/useAuth';
+import translate from '@/utils/translate';
 
 const Verification = () => {
   return (
     <div>
       <h4 style={{ textAlign: 'center', width: '100%', marginTop: '40vh' }}>
-        Pour finaliser votre inscription, merci de renseigner le code reçu par
-        email
+        {translate('signup.enter_code')}
       </h4>
       <div className="container-column-center verification-container">
         <VerifyEmail />
