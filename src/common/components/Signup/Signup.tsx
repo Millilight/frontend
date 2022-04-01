@@ -1,9 +1,10 @@
 import { useCreateUserMutation } from 'generated/graphql';
 import { TextField, Button } from '@mui/material';
 import styles from './Signup.module.css';
-
+import { login_url } from '@/utils/config';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import Link from 'next/link';
 
 import translate from '@/utils/translate';
 
@@ -79,15 +80,32 @@ export default function Signup() {
   // corectness of the fields
   function displayButton() {
     if (error) {
-      return (
-        <Button
-          className={styles.inscription_button}
-          variant="outlined"
-          color="error"
-        >
-          {translate('signup.error')}
-        </Button>
-      );
+      if (
+        error.graphQLErrors[0].extensions.code == '409' ||
+        error.message == 'This email is already registered'
+      ) {
+        return (
+          <Link href={login_url} passHref>
+            <Button
+              className={styles.inscription_button}
+              variant="outlined"
+              color="error"
+            >
+              {'Vous avez déjà un compte : essayez de vous connecter'}
+            </Button>
+          </Link>
+        );
+      } else {
+        return (
+          <Button
+            className={styles.inscription_button}
+            variant="outlined"
+            color="error"
+          >
+            {'Erreur de connexion, veuillez réessayer plus tard.'}
+          </Button>
+        );
+      }
     }
     if (data) {
       // TODO : redirect user to his homepage
