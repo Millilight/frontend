@@ -1,4 +1,3 @@
-import styles from '../AccountMenu/AccountMenu.module.css';
 import { profil_url } from '@/utils/config';
 import { login_url } from '@/utils/config';
 
@@ -94,7 +93,7 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link href={profil_url}>
+        <Link href={profil_url} passHref>
           <MenuItem>
             <Avatar /> Mon Compte
           </MenuItem>
