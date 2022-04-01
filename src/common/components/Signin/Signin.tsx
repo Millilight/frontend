@@ -9,7 +9,7 @@ import translate from '@/utils/translate';
 
 function Authenticate(token: string) {
   localStorage.setItem('token', token);
-  Router.push('/volontes-ceremoniales');
+  Router.push('/espace-personnel');
 }
 
 export default function Signin() {
