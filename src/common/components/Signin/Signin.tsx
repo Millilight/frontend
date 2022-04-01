@@ -5,11 +5,12 @@ import Router from 'next/router';
 
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import translate from '@/utils/translate';
+import { setCookies } from 'cookies-next';
 
 function Authenticate(token: string) {
   localStorage.setItem('token', token);
-  Router.push('/espace-personnel');
+  setCookies('jwtoken', token);
+  Router.push('/volontes-ceremoniales');
 }
 
 export default function Signin() {
@@ -26,7 +27,6 @@ export default function Signin() {
   const isEmailValid = !isDoneWritingEmail || /.+@.+\..+/.test(email);
   const [hasUpdatedAfterError, sethasUpdatedAfterError] = useState(false);
 
-  console.log(error);
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
     //Set all forms to written, in order to display the error messages

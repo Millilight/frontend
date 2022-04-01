@@ -6,11 +6,9 @@ import { useRouter } from 'next/router';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
-import useAuth from '@/utils/useAuth';
 import translate from '@/utils/translate';
 
 const Index = () => {
-  useAuth();
   const [showSignup, setShowSignup] = useState(true);
   const router = useRouter();
   const { action } = router.query;
