@@ -44,7 +44,9 @@ export type Mutation = {
   __typename?: 'Mutation';
   createUser: User;
   login: LoginResponse;
+  updateUser: User;
   updateWishes: Wishes;
+  verifyEmail: VerifyEmailResponse;
 };
 
 export type MutationCreateUserArgs = {
@@ -55,13 +57,27 @@ export type MutationLoginArgs = {
   loginUserDto: LoginUserDto;
 };
 
+export type MutationUpdateUserArgs = {
+  updateUserDto: UpdateUserDto;
+};
+
 export type MutationUpdateWishesArgs = {
   updateWishesDto: UpdateWishesDto;
+};
+
+export type MutationVerifyEmailArgs = {
+  verifyEmailDto: VerifyEmailDto;
 };
 
 export type Query = {
   __typename?: 'Query';
   user: User;
+};
+
+export type UpdateUserDto = {
+  firstname?: InputMaybe<Scalars['String']>;
+  lastname?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateWishesDto = {
@@ -76,6 +92,16 @@ export type User = {
   firstname: Scalars['String'];
   lastname: Scalars['String'];
   wishes: Wishes;
+};
+
+export type VerifyEmailDto = {
+  token: Scalars['String'];
+  user_id: Scalars['String'];
+};
+
+export type VerifyEmailResponse = {
+  __typename?: 'VerifyEmailResponse';
+  success: Scalars['Boolean'];
 };
 
 export type Wishes = {
@@ -108,6 +134,16 @@ export type CreateUserMutationVariables = Exact<{
 export type CreateUserMutation = {
   __typename?: 'Mutation';
   createUser: { __typename?: 'User'; email: string; _id: string };
+};
+
+export type VerifyEmailMutationVariables = Exact<{
+  token: Scalars['String'];
+  user_id: Scalars['String'];
+}>;
+
+export type VerifyEmailMutation = {
+  __typename?: 'Mutation';
+  verifyEmail: { __typename?: 'VerifyEmailResponse'; success: boolean };
 };
 
 export type UpdateWishesMutationVariables = Exact<{
@@ -254,6 +290,57 @@ export type CreateUserMutationResult =
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
   CreateUserMutation,
   CreateUserMutationVariables
+>;
+export const VerifyEmailDocument = gql`
+  mutation VerifyEmail($token: String!, $user_id: String!) {
+    verifyEmail(verifyEmailDto: { token: $token, user_id: $user_id }) {
+      success
+    }
+  }
+`;
+export type VerifyEmailMutationFn = Apollo.MutationFunction<
+  VerifyEmailMutation,
+  VerifyEmailMutationVariables
+>;
+
+/**
+ * __useVerifyEmailMutation__
+ *
+ * To run a mutation, you first call `useVerifyEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVerifyEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [verifyEmailMutation, { data, loading, error }] = useVerifyEmailMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *      user_id: // value for 'user_id'
+ *   },
+ * });
+ */
+export function useVerifyEmailMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    VerifyEmailMutation,
+    VerifyEmailMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(
+    VerifyEmailDocument,
+    options
+  );
+}
+export type VerifyEmailMutationHookResult = ReturnType<
+  typeof useVerifyEmailMutation
+>;
+export type VerifyEmailMutationResult =
+  Apollo.MutationResult<VerifyEmailMutation>;
+export type VerifyEmailMutationOptions = Apollo.BaseMutationOptions<
+  VerifyEmailMutation,
+  VerifyEmailMutationVariables
 >;
 export const UpdateWishesDocument = gql`
   mutation updateWishes(
