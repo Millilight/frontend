@@ -8,6 +8,7 @@ import {
   useGetWishesforUserQuery,
   GetWishesforUserQuery,
 } from 'generated/graphql';
+import AccountMenu from '@/components/AccountMenu/AccountMenu';
 
 const CeremonialWishes: PageGetWishesforUserComp = () => {
   // Help on the right hand side  pannel
@@ -182,7 +183,7 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
         <title>Volontés cérémoniales</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <AccountMenu />
       <main>
         <Grid container spacing={2}>
           <Grid item xs={6}>
