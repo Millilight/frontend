@@ -1,9 +1,7 @@
 import VerifyEmail from '@/components/VerifyEmail/VerifyEmail';
 // import { PageCountriesComp } from 'generated/page';
 import { withApollo } from '@/utils/withApollo';
-import { useState } from 'react';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
-import useAuth from '@/utils/useAuth';
 import translate from '@/utils/translate';
 
 const Verification = () => {
