@@ -1,13 +1,5 @@
 /********* INSCRIPTION Page ********/
 
-.container-column-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  height: 100vh;
-}
-
 .inscription-white-container {
   padding: 50px;
   background-color: white;
@@ -22,60 +14,6 @@
   min-width: 300px;
   margin-top: 10vh;
 }
-.visual-decoration-container {
-  position: absolute;
-  bottom: 0px;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-.visual-deco-1 {
-  width: 50vw;
-  height: 50vw;
-  background-color: #03546d;
-  border-radius: 50vw;
-  position: absolute;
-  bottom: -45vw;
-  left: -10vw;
-}
-
-.visual-deco-2 {
-  width: 70vw;
-  height: 70vw;
-  background-color: #03546d;
-  border-radius: 70vw;
-  position: absolute;
-  bottom: -50vw;
-  left: 20vw;
-}
-.visual-deco-3 {
-  width: 80vw;
-  height: 80vw;
-  background-color: #03546d;
-  border-radius: 80vw;
-  position: absolute;
-  bottom: -40vw;
-  left: 70vw;
-}
-.visual-deco-4 {
-  width: 150px;
-  height: 150px;
-  background-color: #03546d;
-  border-radius: 80vw;
-  position: absolute;
-  bottom: 55vh;
-  left: 80px;
-}
-.visual-deco-5 {
-  width: 200px;
-  height: 200px;
-  background-color: #03546d;
-  border-radius: 80vw;
-  position: absolute;
-  bottom: 60vh;
-  left: -50px;
-}
-
 .MuiTextField-root {
   margin-top: 10px;
 }
