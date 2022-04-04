@@ -3,8 +3,11 @@ import styles from '../Signup/Signup.module.css';
 
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useCreateUserMutation } from 'generated/graphql';
+import { useResetPasswordMutation } from 'generated/graphql';
 import translate from '@/utils/translate';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { login_url } from '@/utils/config';
 
 export default function ResetPassword() {
   // Input Variables: updated by user input
@@ -31,9 +34,13 @@ export default function ResetPassword() {
   const hasPwdSpecialChar = /(?=.*[#?~!@$%^&*-])/.test(pwd);
   const arePasswordsEquals = !isDoneWritingConfirmPwd || pwd == confirmPwd;
 
+  const router = useRouter();
+  let { token, user_id } = router.query;
+
   //Mutation : use the codegen hook: which return a function (createUser),
   //           and the lifecycle of the request
-  const [createUser, { data, loading, error }] = useCreateUserMutation();
+  const [resetPassword, { data, loading, error }] = useResetPasswordMutation();
+  console.log(data, loading, error);
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
@@ -44,16 +51,23 @@ export default function ResetPassword() {
       isPasswordValid &&
       isDoneWritingPwd &&
       arePasswordsEquals &&
-      isDoneWritingConfirmPwd
+      isDoneWritingConfirmPwd &&
+      token &&
+      user_id
     ) {
-      //   createUser({
-      //     variables: {
-      //       email: email,
-      //       lastname: lastname,
-      //       firstname: firstname,
-      //       password: pwd,
-      //     },
-      //   });
+      if (token && typeof token != 'string') {
+        token = token[0];
+      }
+      if (user_id && typeof user_id != 'string') {
+        user_id = user_id[0];
+      }
+      resetPassword({
+        variables: {
+          new_password: pwd,
+          token: token,
+          user_id: user_id,
+        },
+      });
     }
   }
 
@@ -71,17 +85,31 @@ export default function ResetPassword() {
         </Button>
       );
     }
-
-    if (data) {
-      // TODO : redirect user to his homepage
+    if (!user_id || !token) {
       return (
         <Button
           className={styles.inscription_button}
           variant="outlined"
-          color="success"
+          color="error"
+          disabled
         >
-          {translate('reset.validation')}
+          {translate('reset.invalid')}
         </Button>
+      );
+    }
+
+    if (data) {
+      // TODO : redirect user to his homepage
+      return (
+        <Link href={login_url} passHref>
+          <Button
+            className={styles.inscription_button}
+            variant="outlined"
+            color="success"
+          >
+            {translate('reset.validation')}
+          </Button>
+        </Link>
       );
     }
 

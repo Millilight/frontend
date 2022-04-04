@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import { login_url, register_url } from '@/utils/config';
 import Link from 'next/link';
 import DoneIcon from '@mui/icons-material/Done';
+import translate from '@/utils/translate';
 
 export default function VerifyEmail() {
   const router = useRouter();
@@ -28,7 +29,11 @@ export default function VerifyEmail() {
   }
 
   if (loading) {
-    return <div style={{ textAlign: 'center' }}>{'Vérification en cours'}</div>;
+    return (
+      <div style={{ textAlign: 'center' }}>
+        {translate('verification.ongoing')}
+      </div>
+    );
   }
 
   if (error) {
@@ -48,10 +53,10 @@ export default function VerifyEmail() {
     }
     return (
       <div style={{ textAlign: 'center', fontSize: '22px' }}>
-        <div>{"Votre compte n'existe plus, merci d'en créer un nouveau"}</div>
+        <div>{translate('verification.outdated')}</div>
         <Link href={register_url} passHref>
           <Button color={'success'} variant={'outlined'}>
-            Créer mon compte
+            {translate('common.button.create_account')}
           </Button>
         </Link>
       </div>
@@ -61,11 +66,11 @@ export default function VerifyEmail() {
     return (
       <div style={{ textAlign: 'center' }}>
         <DoneIcon color={'success'} style={{ fontSize: '60px' }} />
-        <div>{'Vérification réussie !'}</div>
+        <div>{translate('verification.success')}</div>
         <br />
         <Link href={login_url} passHref>
           <Button color={'success'} variant={'outlined'}>
-            Me connecter
+            {translate('common.button.connect')}
           </Button>
         </Link>
       </div>
@@ -74,15 +79,11 @@ export default function VerifyEmail() {
 
   return (
     <div style={{ textAlign: 'center', fontSize: '18px' }}>
-      <div>
-        {
-          'Cliquez sur le lien que vous avez reçu par email pour confirmer votre inscription (pensez à vérifier vos spams)'
-        }
-      </div>
+      <div>{translate('verification.message_sent')}</div>
       <br />
       <Link href={login_url} passHref>
         <Button color={'success'} variant={'outlined'}>
-          {"Retourner à l'écran de connexion"}
+          {translate('verification.back_to_login')}
         </Button>
       </Link>
     </div>
