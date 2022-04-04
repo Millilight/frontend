@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import translate from '@/utils/translate';
 
 export default function ComingSoon(): JSX.Element {
   return (
@@ -9,7 +10,7 @@ export default function ComingSoon(): JSX.Element {
         }}
         variant="h4"
       >
-        Coming Soon...
+        {translate('common.coming_soon')}
       </Typography>
     </div>
   );

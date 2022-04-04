@@ -6,6 +6,7 @@
   "common.invalid_email": "L'adresse email n'est pas valide",
   "common.label.email": "E-mail",
   "common.label.password": "Mot de passe",
+  "common.coming_soon": "Bientôt disponible...",
   "signup.title": "Inscription",
   "signup.description": "Inscrivez-vous pour créer votre coffre fort",
   "signup.go_to_signin": "Déjà inscrit·e ? Connectez-vous ici",

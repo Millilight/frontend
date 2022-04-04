@@ -15,6 +15,7 @@ import HomeIcon from '@mui/icons-material/Home';
 
 import styles from './MenuDrawer.module.css';
 import translate from '@/utils/translate';
+import { useRouter } from 'next/router';
 
 const drawerWidth = 350;
 
@@ -48,14 +49,12 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MenuDrawer(props: {
-  selectedPage: string;
-  setSelectedPage: (newSelectedPage: string) => void;
-}) {
+export default function MenuDrawer(props: { selectedPage: string }) {
+  //To handle redirections
+  const router = useRouter();
+
   // Whether the menu is opened (icons + text) or shrunk on the left hand side (icons only)
   const [open, setOpen] = React.useState(false);
-
-  // To know which icon (page) to select on the menu
 
   return (
     <Drawer
@@ -67,7 +66,7 @@ export default function MenuDrawer(props: {
       <div className={styles.drawer_header}>
         <IconButton
           onClick={() => {
-            props.setSelectedPage('home');
+            router.push('/espace-personnel');
           }}
         >
           <HomeIcon sx={{ color: 'white' }} />
@@ -114,7 +113,7 @@ export default function MenuDrawer(props: {
                 props.selectedPage === 'ceremonial' ? '#000000' : 'null',
             }}
             onClick={() => {
-              props.setSelectedPage('ceremonial');
+              router.push('/espace-personnel/volontes-ceremoniales');
             }}
           >
             <ListItemIcon
@@ -140,7 +139,7 @@ export default function MenuDrawer(props: {
           </ListItemButton>
           <ListItemButton
             onClick={() => {
-              props.setSelectedPage('medical');
+              router.push('/espace-personnel/volontes-medicales');
             }}
             sx={{
               minHeight: 48,
@@ -174,7 +173,7 @@ export default function MenuDrawer(props: {
           </ListItemButton>
           <ListItemButton
             onClick={() => {
-              props.setSelectedPage('paperwork');
+              router.push('/espace-personnel/demarches-administratives');
             }}
             sx={{
               minHeight: 48,
@@ -212,7 +211,7 @@ export default function MenuDrawer(props: {
           </ListItemButton>
           <ListItemButton
             onClick={() => {
-              props.setSelectedPage('free_space');
+              router.push('/espace-personnel/espace-libre');
             }}
             sx={{
               minHeight: 48,
@@ -247,7 +246,7 @@ export default function MenuDrawer(props: {
         </div>
         <ListItemButton
           onClick={() => {
-            props.setSelectedPage('trusted_persons');
+            router.push('/espace-personnel/personnes-de-confiance');
           }}
           sx={{
             minHeight: 48,

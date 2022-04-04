@@ -1,9 +1,11 @@
 import { Typography, Grid, Box, Button } from '@mui/material';
 import translate from '@/utils/translate';
+import { useRouter } from 'next/router';
 
-export default function PersonalSpaceHome(props: {
-  setSelectedPage: (newSelectedPage: string) => void;
-}) {
+export default function PersonalSpaceHome() {
+  //To handle redirections
+  const router = useRouter();
+
   return (
     <div>
       <div className="invisible-container">
@@ -60,7 +62,7 @@ export default function PersonalSpaceHome(props: {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                props.setSelectedPage('ceremonial');
+                router.push('/espace-personnel/volontes-ceremoniales');
               }}
             >
               {' '}
@@ -81,7 +83,7 @@ export default function PersonalSpaceHome(props: {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                props.setSelectedPage('medical');
+                router.push('/espace-personnel/volontes-medicales');
               }}
             >
               {' '}
@@ -102,7 +104,7 @@ export default function PersonalSpaceHome(props: {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                props.setSelectedPage('paperwork');
+                router.push('/espace-personnel/demarches-administratives');
               }}
             >
               {' '}
@@ -123,7 +125,7 @@ export default function PersonalSpaceHome(props: {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                props.setSelectedPage('free_space');
+                router.push('/espace-personnel/espace-libre');
               }}
             >
               {' '}
@@ -144,7 +146,7 @@ export default function PersonalSpaceHome(props: {
       <div
         className="rounded-container emphasis-on-hover"
         onClick={() => {
-          props.setSelectedPage('trusted_persons');
+          router.push('/espace-personnel/personnes-de-confiance');
         }}
       >
         <Grid container spacing={2}>
