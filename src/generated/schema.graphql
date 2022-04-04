@@ -1,6 +1,14 @@
 # THIS FILE IS GENERATED; DO NOT EDIT
 directive @upper on FIELD_DEFINITION
 
+input AskResetPasswordUserDto {
+  email: String!
+}
+
+type AskResetPasswordUserResponse {
+  success: Boolean!
+}
+
 input CreateUserDto {
   email: String!
   firstname: String!
@@ -19,8 +27,13 @@ input LoginUserDto {
 }
 
 type Mutation {
+  askResetPasswordUser(
+    askResetPasswordUserDto: AskResetPasswordUserDto!
+  ): AskResetPasswordUserResponse!
   createUser(createUserDto: CreateUserDto!): User!
   login(loginUserDto: LoginUserDto!): LoginResponse!
+  resetPasswordUser(resetPasswordUserDto: ResetPasswordUserDto!): User!
+  updateEmailUser(updateEmailUserDto: UpdateEmailUserDto!): User!
   updateUser(updateUserDto: UpdateUserDto!): User!
   updateWishes(updateWishesDto: UpdateWishesDto!): Wishes!
   verifyEmail(verifyEmailDto: VerifyEmailDto!): VerifyEmailResponse!
@@ -30,15 +43,28 @@ type Query {
   user: User!
 }
 
+input ResetPasswordUserDto {
+  new_password: String!
+  token: String!
+  user_id: String!
+}
+
+input UpdateEmailUserDto {
+  token: String!
+  user_id: String!
+}
+
 input UpdateUserDto {
   firstname: String
   lastname: String
+  new_email: String
   password: String
 }
 
 input UpdateWishesDto {
   burial_cremation: String
   burial_cremation_place: String
+  music: String
 }
 
 type User {
@@ -61,4 +87,5 @@ type VerifyEmailResponse {
 type Wishes {
   burial_cremation: String
   burial_cremation_place: String
+  music: String
 }
