@@ -20,6 +20,11 @@ export default function WishContent(props: { wish: Wish }) {
   // To display fields in read only or editing
   const [editionMode, setEditionMode] = useState(false);
 
+  // Content modified by the user
+  const [content, setContent] = useState(
+    props.wish.content ? props.wish.content : ''
+  );
+
   // Send the submitted wish
   function handleSubmit(
     event: React.FormEvent<HTMLFormElement>,
@@ -27,9 +32,8 @@ export default function WishContent(props: { wish: Wish }) {
   ) {
     event.preventDefault();
     setEditionMode(false);
-    const target = new FormData(event.currentTarget);
     updateWishesMutation({
-      variables: { [wishId]: target.get('content') },
+      variables: { [wishId]: content },
     });
     if (loading) {
       return (
@@ -43,6 +47,13 @@ export default function WishContent(props: { wish: Wish }) {
       return null;
     }
   }
+
+  // Cancel : reset to previous content
+  function handleCancel() {
+    setEditionMode(false);
+    setContent(props.wish.content ? props.wish.content : '');
+  }
+
   return (() => {
     switch (props.wish.type) {
       case 'textfield':
@@ -57,7 +68,8 @@ export default function WishContent(props: { wish: Wish }) {
             <TextField
               id={props.wish.wishId + '_field'}
               label={translate('wish.label')}
-              defaultValue={props.wish.content}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
               disabled={!editionMode}
               fullWidth
               required
@@ -87,7 +99,7 @@ export default function WishContent(props: { wish: Wish }) {
                     ml: '10px',
                   }}
                   variant="outlined"
-                  onClick={() => setEditionMode(!editionMode)}
+                  onClick={handleCancel}
                 >
                   {translate('common.button.cancel')}
                 </Button>
@@ -102,7 +114,7 @@ export default function WishContent(props: { wish: Wish }) {
                   color: '#03546D',
                 }}
                 variant="outlined"
-                onClick={() => setEditionMode(!editionMode)}
+                onClick={() => setEditionMode(true)}
               >
                 {translate('common.button.edit')}
               </Button>
@@ -122,7 +134,8 @@ export default function WishContent(props: { wish: Wish }) {
               <RadioGroup
                 id={props.wish.wishId + '_field'}
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue={props.wish.content}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
                 name="content"
               >
                 {props.wish.possibleValues
@@ -161,7 +174,7 @@ export default function WishContent(props: { wish: Wish }) {
                     ml: '10px',
                   }}
                   variant="outlined"
-                  onClick={() => setEditionMode(!editionMode)}
+                  onClick={handleCancel}
                 >
                   {translate('common.button.cancel')}
                 </Button>
@@ -176,7 +189,7 @@ export default function WishContent(props: { wish: Wish }) {
                   color: '#03546D',
                 }}
                 variant="outlined"
-                onClick={() => setEditionMode(!editionMode)}
+                onClick={() => setEditionMode(true)}
               >
                 {translate('common.button.edit')}
               </Button>

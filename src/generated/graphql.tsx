@@ -22,6 +22,15 @@ export type Scalars = {
   Float: number;
 };
 
+export type AskResetPasswordUserDto = {
+  email: Scalars['String'];
+};
+
+export type AskResetPasswordUserResponse = {
+  __typename?: 'AskResetPasswordUserResponse';
+  success: Scalars['Boolean'];
+};
+
 export type CreateUserDto = {
   email: Scalars['String'];
   firstname: Scalars['String'];
@@ -42,9 +51,18 @@ export type LoginUserDto = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  askResetPasswordUser: AskResetPasswordUserResponse;
   createUser: User;
   login: LoginResponse;
+  resetPasswordUser: User;
+  updateEmailUser: User;
+  updateUser: User;
   updateWishes: Wishes;
+  verifyEmail: VerifyEmailResponse;
+};
+
+export type MutationAskResetPasswordUserArgs = {
+  askResetPasswordUserDto: AskResetPasswordUserDto;
 };
 
 export type MutationCreateUserArgs = {
@@ -55,8 +73,24 @@ export type MutationLoginArgs = {
   loginUserDto: LoginUserDto;
 };
 
+export type MutationResetPasswordUserArgs = {
+  resetPasswordUserDto: ResetPasswordUserDto;
+};
+
+export type MutationUpdateEmailUserArgs = {
+  updateEmailUserDto: UpdateEmailUserDto;
+};
+
+export type MutationUpdateUserArgs = {
+  updateUserDto: UpdateUserDto;
+};
+
 export type MutationUpdateWishesArgs = {
   updateWishesDto: UpdateWishesDto;
+};
+
+export type MutationVerifyEmailArgs = {
+  verifyEmailDto: VerifyEmailDto;
 };
 
 export type Query = {
@@ -64,9 +98,28 @@ export type Query = {
   user: User;
 };
 
+export type ResetPasswordUserDto = {
+  new_password: Scalars['String'];
+  token: Scalars['String'];
+  user_id: Scalars['String'];
+};
+
+export type UpdateEmailUserDto = {
+  token: Scalars['String'];
+  user_id: Scalars['String'];
+};
+
+export type UpdateUserDto = {
+  firstname?: InputMaybe<Scalars['String']>;
+  lastname?: InputMaybe<Scalars['String']>;
+  new_email?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+};
+
 export type UpdateWishesDto = {
   burial_cremation?: InputMaybe<Scalars['String']>;
   burial_cremation_place?: InputMaybe<Scalars['String']>;
+  music?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
@@ -78,10 +131,21 @@ export type User = {
   wishes: Wishes;
 };
 
+export type VerifyEmailDto = {
+  token: Scalars['String'];
+  user_id: Scalars['String'];
+};
+
+export type VerifyEmailResponse = {
+  __typename?: 'VerifyEmailResponse';
+  success: Scalars['Boolean'];
+};
+
 export type Wishes = {
   __typename?: 'Wishes';
   burial_cremation?: Maybe<Scalars['String']>;
   burial_cremation_place?: Maybe<Scalars['String']>;
+  music?: Maybe<Scalars['String']>;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -113,6 +177,7 @@ export type CreateUserMutation = {
 export type UpdateWishesMutationVariables = Exact<{
   burial_cremation?: InputMaybe<Scalars['String']>;
   burial_cremation_place?: InputMaybe<Scalars['String']>;
+  music?: InputMaybe<Scalars['String']>;
 }>;
 
 export type UpdateWishesMutation = {
@@ -121,6 +186,7 @@ export type UpdateWishesMutation = {
     __typename?: 'Wishes';
     burial_cremation?: string | null;
     burial_cremation_place?: string | null;
+    music?: string | null;
   };
 };
 
@@ -134,6 +200,7 @@ export type GetWishesforUserQuery = {
       __typename?: 'Wishes';
       burial_cremation?: string | null;
       burial_cremation_place?: string | null;
+      music?: string | null;
     };
   };
 };
@@ -259,15 +326,18 @@ export const UpdateWishesDocument = gql`
   mutation updateWishes(
     $burial_cremation: String
     $burial_cremation_place: String
+    $music: String
   ) {
     updateWishes(
       updateWishesDto: {
         burial_cremation: $burial_cremation
         burial_cremation_place: $burial_cremation_place
+        music: $music
       }
     ) {
       burial_cremation
       burial_cremation_place
+      music
     }
   }
 `;
@@ -291,6 +361,7 @@ export type UpdateWishesMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      burial_cremation: // value for 'burial_cremation'
  *      burial_cremation_place: // value for 'burial_cremation_place'
+ *      music: // value for 'music'
  *   },
  * });
  */
@@ -321,6 +392,7 @@ export const GetWishesforUserDocument = gql`
       wishes {
         burial_cremation
         burial_cremation_place
+        music
       }
     }
   }

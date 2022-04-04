@@ -69,5 +69,10 @@
   "ceremonial.burial_cremation_place.help.10": "Inhumée dans une sépulture existante.",
   "ceremonial.burial_cremation_place.help.11": "Déposée dans un columbarium.",
   "ceremonial.burial_cremation_place.help.12": "Placée dans un monument funéraire dans un cimetière.",
-  "ceremonial.burial_cremation_place.help.13": "Deuxième possibilité: Les cendres peuvent être dispersées, mais cela ne peut pas être fait de partout! Légalement cela peut être dans les espaces aménagés dans les cimetières communaux, en pleine nature, ou en mer, à un minimum de 300 mètres des côtes. {br} {br} Attention ! Depuis 2008, il n’est plus possible de conserver les cendres d’un proche dans un logement."
+  "ceremonial.burial_cremation_place.help.13": "Deuxième possibilité: Les cendres peuvent être dispersées, mais cela ne peut pas être fait de partout! Légalement cela peut être dans les espaces aménagés dans les cimetières communaux, en pleine nature, ou en mer, à un minimum de 300 mètres des côtes. {br} {br} Attention ! Depuis 2008, il n’est plus possible de conserver les cendres d’un proche dans un logement.",
+  "ceremonial.music.title": "Quelle(s) musique(s) souhaitez-vous pour vos funérailles ?",
+  "ceremonial.music.help.1": "Pourquoi indiquer cela ?",
+  "ceremonial.music.help.2": "Lors de la préparation des funérailles, les proches décident de musiques à jouer lors de la cérémonie. Aidez vos proches dans ce choix en renseignant ici un ou des morceaux que vous voudriez qu'ils utilisent.{br}{br}A noter que s'il est commun que de la musique soit jouée pour les funérailles laïques ou chrétiennes, ce n'est normalement pas le cas pour certaines cérémonies religeuses (musulmanes et juives notamment).",
+  "ceremonial.music.help.3": "Y a-t-il des règles ?",
+  "ceremonial.music.help.4": "Pas proprement parler, mais généralement 3 ou 4 musiques suffisent. Il est  courant que la dernière soit plus dynamique et positive, puique c'est celle qui conclura la cérémonie. {br}{br} En termes de contenu, libre vous de choisir le style qui vous convient.. Il peut s'agir de morceaux qui vous sont chers, qui rappeleront à vos proches des moments passés ensemble, ou simplement qui contribueront à embellir la cérémonie."
 }
