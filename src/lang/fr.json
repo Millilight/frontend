@@ -40,7 +40,6 @@
   "signin.go_to_signup": "Pas encore de compte ? Inscrivez-vous ici",
   "signin.error": "Erreur de connexion, veuillez réessayer plus tard.",
   "signin.success": "Connexion réussie!",
-
   "signin.button.signin": "Me connecter",
   "personal_space.title": "Mon espace sécurisé",
   "personal_space.description": "Bonjour ! Bienvenue dans votre espace personnel. {br}C’est ici que vous allez pouvoir renseigner vos informations et prévoir leur transmission à vos proches.",

@@ -1,6 +1,13 @@
 import { Typography, Grid, Box, Button } from '@mui/material';
 import translate from '@/utils/translate';
 import { useRouter } from 'next/router';
+import {
+  administrative_url,
+  burrial_wishes_url,
+  free_space_url,
+  medical_url,
+  trust_people_url,
+} from '@/utils/config';
 
 export default function PersonalSpaceHome() {
   //To handle redirections
@@ -62,7 +69,7 @@ export default function PersonalSpaceHome() {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                router.push('/espace-personnel/volontes-ceremoniales');
+                router.push(burrial_wishes_url);
               }}
             >
               {' '}
@@ -83,7 +90,7 @@ export default function PersonalSpaceHome() {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                router.push('/espace-personnel/volontes-medicales');
+                router.push(medical_url);
               }}
             >
               {' '}
@@ -104,7 +111,7 @@ export default function PersonalSpaceHome() {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                router.push('/espace-personnel/demarches-administratives');
+                router.push(administrative_url);
               }}
             >
               {' '}
@@ -125,7 +132,7 @@ export default function PersonalSpaceHome() {
               variant="outlined"
               className="category-button"
               onClick={() => {
-                router.push('/espace-personnel/espace-libre');
+                router.push(free_space_url);
               }}
             >
               {' '}
@@ -146,7 +153,7 @@ export default function PersonalSpaceHome() {
       <div
         className="rounded-container emphasis-on-hover"
         onClick={() => {
-          router.push('/espace-personnel/personnes-de-confiance');
+          router.push(trust_people_url);
         }}
       >
         <Grid container spacing={2}>

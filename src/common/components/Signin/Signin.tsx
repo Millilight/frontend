@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { setCookies } from 'cookies-next';
 import translate from '@/utils/translate';
-import { ask_reset_password_url } from '@/utils/config';
+import { ask_reset_password_url, home_url } from '@/utils/config';
 import Link from 'next/link';
 
 function Authenticate(token: string) {
   localStorage.setItem('token', token);
   setCookies('jwtoken', token);
-  Router.push('/volontes-ceremoniales');
+  Router.push(home_url);
 }
 
 export default function Signin() {
