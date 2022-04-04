@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import Wishes from '@/components/Wishes/Wishes';
 import { Typography, Grid, Box, Paper, CircularProgress } from '@mui/material';
-import { PageGetWishesforUserComp } from 'generated/page';
-import { withApollo } from '@/utils/withApollo';
 import { useState } from 'react';
 import {
   useGetWishesforUserQuery,
@@ -10,7 +7,7 @@ import {
 } from 'generated/graphql';
 import translate from '@/utils/translate';
 
-const CeremonialWishes: PageGetWishesforUserComp = () => {
+export default function Ceremonial() {
   // Help on the right hand side  pannel
   const initial_help = (
     <div>
@@ -127,15 +124,10 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
   updateWishesList(savedWishes);
 
   return (
-    <div>
-      <Head>
-        <title>{translate('ceremonial.header')}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
+    <main>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <div onClick={() => setHelp(initial_help)}>
             <Typography
               variant="h3"
               sx={{
@@ -154,29 +146,27 @@ const CeremonialWishes: PageGetWishesforUserComp = () => {
               {'   '}
               {translate('ceremonial.title')}
             </Typography>
-            <Wishes wishes={ceremonialWishesList} helpCallback={changeHelp} />
-          </Grid>
-          <Grid item xs={6}>
-            <Paper
-              sx={{
-                m: 10,
-                p: 10,
-                bgcolor: '#03546D',
-                color: 'white',
-                textAlign: 'justify',
-                borderRadius: '40px',
-                position: 'fixed',
-                maxHeight: '80%',
-                overflow: 'auto',
-              }}
-            >
-              {help}
-            </Paper>
-          </Grid>
+          </div>
+          <Wishes wishes={ceremonialWishesList} helpCallback={changeHelp} />
         </Grid>
-      </main>
-    </div>
+        <Grid item xs={6}>
+          <Paper
+            sx={{
+              m: 10,
+              p: 10,
+              bgcolor: '#03546D',
+              color: 'white',
+              textAlign: 'justify',
+              borderRadius: '40px',
+              position: 'fixed',
+              maxHeight: '80%',
+              overflow: 'auto',
+            }}
+          >
+            {help}
+          </Paper>
+        </Grid>
+      </Grid>
+    </main>
   );
-};
-
-export default withApollo(CeremonialWishes);
+}

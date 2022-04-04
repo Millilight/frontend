@@ -6,3 +6,8 @@ declare interface Wish {
   type: string;
   possibleValues?: string[];
 }
+
+declare interface User {
+  first_name: string;
+  last_name: string;
+}
