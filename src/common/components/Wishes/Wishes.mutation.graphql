@@ -1,14 +1,17 @@
 mutation updateWishes(
   $burial_cremation: String
   $burial_cremation_place: String
+  $music: String
 ) {
   updateWishes(
     updateWishesDto: {
       burial_cremation: $burial_cremation
       burial_cremation_place: $burial_cremation_place
+      music: $music
     }
   ) {
     burial_cremation
     burial_cremation_place
+    music
   }
 }

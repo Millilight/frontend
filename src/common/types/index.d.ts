@@ -5,6 +5,7 @@ declare interface Wish {
   help: JSX.Element;
   type: string;
   possibleValues?: string[];
+  image: string;
 }
 
 declare interface User {

@@ -25,18 +25,20 @@ export default function Ceremonial() {
   );
   const [help, setHelp] = useState(initial_help);
 
-  function changeHelp(newHelp: JSX.Element) {
+  function changeHelp(title: JSX.Element, image: string, newHelp: JSX.Element) {
     const newHelpTransformed = (
       <div>
         <Box
           component="img"
           sx={{
-            width: '20%',
-            marginX: '40%',
+            width: '12%',
+            marginX: '45%',
+            marginBottom: '20px',
           }}
           alt="..."
-          src="/question.png"
+          src={image}
         />
+        <h2>{title}</h2>
         {newHelp}
       </div>
     );
@@ -57,6 +59,7 @@ export default function Ceremonial() {
       ),
       type: 'radio',
       possibleValues: ['Inhumation', 'Crémation'],
+      image: '/bird.png',
     },
     {
       wishId: 'burial_cremation_place',
@@ -84,6 +87,22 @@ export default function Ceremonial() {
         </div>
       ),
       type: 'textfield',
+      image: '/place.png',
+    },
+    {
+      wishId: 'music',
+      title: translate('ceremonial.music.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.music.help.1')}</h3>
+          <p>{translate('ceremonial.music.help.2')}</p>
+          <h3>{translate('ceremonial.music.help.3')}</h3>
+          <p>{translate('ceremonial.music.help.4')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/music.png',
     },
   ];
 

@@ -3,6 +3,7 @@ query getWishesforUser {
     wishes {
       burial_cremation
       burial_cremation_place
+      music
     }
   }
 }

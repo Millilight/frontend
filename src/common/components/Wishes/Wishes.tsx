@@ -12,7 +12,11 @@ import WishContent from '@/components/WishContent/WishContent';
 
 export default function Wishes(props: {
   wishes: Wish[];
-  helpCallback: (newHelp: JSX.Element) => void;
+  helpCallback: (
+    title: JSX.Element,
+    image: string,
+    newHelp: JSX.Element
+  ) => void;
 }) {
   return (
     <Stack spacing={2} justifyContent="center" alignItems="center">
@@ -20,7 +24,9 @@ export default function Wishes(props: {
         ? props.wishes.map((wish: Wish) => (
             <Box
               key={wish.wishId}
-              onClick={() => props.helpCallback(wish.help)}
+              onClick={() =>
+                props.helpCallback(wish.title, wish.image, wish.help)
+              }
               sx={{
                 width: '80%',
                 boxShadow: 2,
