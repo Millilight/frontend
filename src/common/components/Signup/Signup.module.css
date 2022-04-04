@@ -64,3 +64,9 @@
   height: 30px;
   background-color: white;
 }
+
+.forgot_password {
+  margin-top: 10 px;
+  text-align: right;
+  cursor: pointer;
+}

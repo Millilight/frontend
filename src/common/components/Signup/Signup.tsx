@@ -91,7 +91,7 @@ export default function Signup() {
               variant="outlined"
               color="error"
             >
-              {'Vous avez déjà un compte : essayez de vous connecter'}
+              {translate('signup.error.existing_account')}
             </Button>
           </Link>
         );
@@ -102,7 +102,7 @@ export default function Signup() {
             variant="outlined"
             color="error"
           >
-            {'Erreur de connexion, veuillez réessayer plus tard.'}
+            {translate('signin.error')}
           </Button>
         );
       }
