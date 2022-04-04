@@ -5,6 +5,7 @@ import {
   useGetWishesforUserQuery,
   GetWishesforUserQuery,
 } from 'generated/graphql';
+import AccountMenu from '@/components/AccountMenu/AccountMenu';
 import translate from '@/utils/translate';
 
 export default function Ceremonial() {
