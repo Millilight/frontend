@@ -23,7 +23,7 @@ export const config = {
 export const profil_url = '/profil';
 export const register_url = '/';
 export const login_url = '/?action=signin';
-export const ask_reset_password_url = '/auth/mot-de-passe-oublie';
+export const ask_reset_password_url = '/user/mot-de-passe-oublie';
 export const email_verification_url = '/verification';
 export const burrial_wishes_url = '/volontes-ceremoniales';
 
