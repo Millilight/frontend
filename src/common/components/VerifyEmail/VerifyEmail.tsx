@@ -20,12 +20,12 @@ export default function VerifyEmail() {
 
   //Mutation : use the codegen hook: which return a function (Login),
   //           and the lifecycle of the request
-  const [VerifyEmail, { data, loading, error }] = useVerifyEmailMutation();
+  const [verifyEmail, { data, loading, error }] = useVerifyEmailMutation();
 
   // Check if all fields are correct, and send the form to create User
   if (token && user_id && !isRequestSent) {
     setIsRequestSent(true);
-    VerifyEmail({ variables: { token: token, user_id: user_id } });
+    verifyEmail({ variables: { token: token, user_id: user_id } });
   }
 
   if (loading) {
