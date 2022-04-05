@@ -72,6 +72,12 @@
   "reset.send.request": "Réinitialiser mon mot de passe",
   "wish.error": "L'enregistrement a échoué. Veuillez réessayer plus tard.",
   "wish.label": "Entrez vos volontés ici...",
+  "myaccount.title": "Mon compte",
+  "myaccount.firstname": "Prénom",
+  "myaccount.lastname": "Nom de famille",
+  "myaccount.mail": "Adresse mail",
+  "myaccount.error": "Une erreur est survenue, l’enregistrement n’a pas été effectué ! ",
+  "myaccount.password.changed": "Votre mot de passe a bien été modifié",
   "ceremonial.header": "Volontés cérémoniales",
   "ceremonial.title": "Renseigner mes volontés cérémoniales",
   "ceremonial.default_help": "Dans cet espace, vous allez pouvoir renseigner vos volontés concernant la cérémonie funéraire. Ces informations peuvent permettre à votre famille de s’accorder simplement sur la démarche à suivre, sans avoir à prendre de décision dans un moment difficile. {br}{br} Une fois que vous aurez transmis l’accès à vos proches de confiance, ils pourront accéder à ces informations s’ils le jugent nécessaire. Vous serez également notifié du dévérouillage de vos données de leur part.",
@@ -98,5 +104,7 @@
   "ceremonial.music.help.1": "Pourquoi indiquer cela ?",
   "ceremonial.music.help.2": "Lors de la préparation des funérailles, les proches décident de musiques à jouer lors de la cérémonie. Aidez vos proches dans ce choix en renseignant ici un ou des morceaux que vous voudriez qu'ils utilisent.{br}{br}A noter que s'il est commun que de la musique soit jouée pour les funérailles laïques ou chrétiennes, ce n'est normalement pas le cas pour certaines cérémonies religeuses (musulmanes et juives notamment).",
   "ceremonial.music.help.3": "Y a-t-il des règles ?",
-  "ceremonial.music.help.4": "Pas proprement parler, mais généralement 3 ou 4 musiques suffisent. Il est  courant que la dernière soit plus dynamique et positive, puique c'est celle qui conclura la cérémonie. {br}{br} En termes de contenu, libre vous de choisir le style qui vous convient.. Il peut s'agir de morceaux qui vous sont chers, qui rappeleront à vos proches des moments passés ensemble, ou simplement qui contribueront à embellir la cérémonie."
+  "ceremonial.music.help.4": "Pas proprement parler, mais généralement 3 ou 4 musiques suffisent. Il est  courant que la dernière soit plus dynamique et positive, puique c'est celle qui conclura la cérémonie. {br}{br} En termes de contenu, libre vous de choisir le style qui vous convient.. Il peut s'agir de morceaux qui vous sont chers, qui rappeleront à vos proches des moments passés ensemble, ou simplement qui contribueront à embellir la cérémonie.",
+  "changeMail.message.sent": "Un mail de confirmation a été envoyé à l'adresse mail renseignée",
+  "changeMail.back_to_personnal_space": "Retourner à mon espace personnel"
 }

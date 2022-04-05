@@ -32,6 +32,7 @@ export const medical_url = '/espace-personnel/volontes-medicales';
 export const administrative_url = '/espace-personnel/demarches-administratives';
 export const free_space_url = '/espace-personnel/espace-libre';
 export const trust_people_url = '/espace-personnel/personnes_de_confiance';
+export const my_account_url = '/espace-personnel/mon-compte';
 //define urls that are only accessible once connected
 export const protected_urls = [
   burrial_wishes_url,

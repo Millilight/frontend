@@ -222,6 +222,7 @@ export default function Signup() {
           )}
         </div>
       </div>
+      
       {isWritingPwd || !isPasswordValid ? (
         <ul className={styles.password_checking}>
           {translate('signup.password_help')}

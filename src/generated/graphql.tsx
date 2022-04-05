@@ -160,6 +160,50 @@ export type AskResetPasswordUserMutation = {
   };
 };
 
+export type UpdateEmailUserMutationVariables = Exact<{
+  token: Scalars['String'];
+  user_id: Scalars['String'];
+}>;
+
+export type UpdateEmailUserMutation = {
+  __typename?: 'Mutation';
+  updateEmailUser: {
+    __typename?: 'User';
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
+};
+
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetCurrentUserQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
+};
+
+export type UpdateUserMutationVariables = Exact<{
+  firstname?: InputMaybe<Scalars['String']>;
+  lastname?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+}>;
+
+export type UpdateUserMutation = {
+  __typename?: 'Mutation';
+  updateUser: {
+    __typename?: 'User';
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
+};
+
 export type ResetPasswordMutationVariables = Exact<{
   user_id: Scalars['String'];
   new_password: Scalars['String'];
@@ -287,6 +331,187 @@ export type AskResetPasswordUserMutationResult =
 export type AskResetPasswordUserMutationOptions = Apollo.BaseMutationOptions<
   AskResetPasswordUserMutation,
   AskResetPasswordUserMutationVariables
+>;
+export const UpdateEmailUserDocument = gql`
+  mutation updateEmailUser($token: String!, $user_id: String!) {
+    updateEmailUser(
+      update_email_user_dto: { token: $token, user_id: $user_id }
+    ) {
+      firstname
+      lastname
+      email
+    }
+  }
+`;
+export type UpdateEmailUserMutationFn = Apollo.MutationFunction<
+  UpdateEmailUserMutation,
+  UpdateEmailUserMutationVariables
+>;
+
+/**
+ * __useUpdateEmailUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateEmailUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateEmailUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateEmailUserMutation, { data, loading, error }] = useUpdateEmailUserMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *      user_id: // value for 'user_id'
+ *   },
+ * });
+ */
+export function useUpdateEmailUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateEmailUserMutation,
+    UpdateEmailUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateEmailUserMutation,
+    UpdateEmailUserMutationVariables
+  >(UpdateEmailUserDocument, options);
+}
+export type UpdateEmailUserMutationHookResult = ReturnType<
+  typeof useUpdateEmailUserMutation
+>;
+export type UpdateEmailUserMutationResult =
+  Apollo.MutationResult<UpdateEmailUserMutation>;
+export type UpdateEmailUserMutationOptions = Apollo.BaseMutationOptions<
+  UpdateEmailUserMutation,
+  UpdateEmailUserMutationVariables
+>;
+export const GetCurrentUserDocument = gql`
+  query getCurrentUser {
+    user {
+      firstname
+      lastname
+      email
+    }
+  }
+`;
+
+/**
+ * __useGetCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useGetCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCurrentUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetCurrentUserQuery,
+    GetCurrentUserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(
+    GetCurrentUserDocument,
+    options
+  );
+}
+export function useGetCurrentUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetCurrentUserQuery,
+    GetCurrentUserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(
+    GetCurrentUserDocument,
+    options
+  );
+}
+export type GetCurrentUserQueryHookResult = ReturnType<
+  typeof useGetCurrentUserQuery
+>;
+export type GetCurrentUserLazyQueryHookResult = ReturnType<
+  typeof useGetCurrentUserLazyQuery
+>;
+export type GetCurrentUserQueryResult = Apollo.QueryResult<
+  GetCurrentUserQuery,
+  GetCurrentUserQueryVariables
+>;
+export const UpdateUserDocument = gql`
+  mutation updateUser(
+    $firstname: String
+    $lastname: String
+    $password: String
+    $email: String
+  ) {
+    updateUser(
+      update_user_dto: {
+        firstname: $firstname
+        lastname: $lastname
+        password: $password
+        new_email: $email
+      }
+    ) {
+      firstname
+      lastname
+      email
+    }
+  }
+`;
+export type UpdateUserMutationFn = Apollo.MutationFunction<
+  UpdateUserMutation,
+  UpdateUserMutationVariables
+>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      firstname: // value for 'firstname'
+ *      lastname: // value for 'lastname'
+ *      password: // value for 'password'
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateUserMutation,
+    UpdateUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(
+    UpdateUserDocument,
+    options
+  );
+}
+export type UpdateUserMutationHookResult = ReturnType<
+  typeof useUpdateUserMutation
+>;
+export type UpdateUserMutationResult =
+  Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
+  UpdateUserMutation,
+  UpdateUserMutationVariables
 >;
 export const ResetPasswordDocument = gql`
   mutation resetPassword(

@@ -12,3 +12,9 @@ declare interface User {
   first_name: string;
   last_name: string;
 }
+declare interface MyAccountField {
+  fieldId: string;
+  title: JSX.Element;
+  content: string;
+  type: string;
+}
