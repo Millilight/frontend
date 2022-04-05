@@ -36,8 +36,8 @@ export default function VerifyEmail() {
     );
   }
 
-  if (error) {
-    if (error.message == 'This mail has already been verified') {
+  if (error || (data && !data.verifyEmail?.success)) {
+    if (error && error.message == 'This mail has already been verified') {
       return (
         <div style={{ textAlign: 'center', fontSize: '22px' }}>
           <DoneIcon color={'success'} style={{ fontSize: '60px' }} />
@@ -62,7 +62,7 @@ export default function VerifyEmail() {
       </div>
     );
   }
-  if (data) {
+  if (data && data.verifyEmail?.success) {
     return (
       <div style={{ textAlign: 'center' }}>
         <DoneIcon color={'success'} style={{ fontSize: '60px' }} />

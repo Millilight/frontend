@@ -57,7 +57,7 @@
   "verification.success": "Vérification réussie !",
   "verification.ongoing": "Vérification en cours",
   "verification.message_sent": "Cliquez sur le lien que vous avez reçu par email pour confirmer votre inscription (pensez à vérifier vos spams)",
-  "verification.outdated": "Votre compte n'existe plus, merci d'en créer un nouveau",
+  "verification.outdated": "Votre lien de vérification est expiré",
   "verification.back_to_login": "Retourner à l'écran de connexion",
   "verification.already_verified": "Votre email a déjà été vérifié !",
   "reset.title": "Récupération de compte",
