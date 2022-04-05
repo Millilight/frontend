@@ -16,7 +16,7 @@ import Router from 'next/router';
 import { removeCookies } from 'cookies-next';
 import translate from '@/utils/translate';
 
-function Disconnect() {
+function disconnect() {
   localStorage.removeItem('token');
   removeCookies('jwtoken');
   Router.push(login_url);
@@ -102,7 +102,7 @@ export default function AccountMenu() {
 
         <Divider />
 
-        <MenuItem onClick={() => Disconnect()}>
+        <MenuItem onClick={() => disconnect()}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
