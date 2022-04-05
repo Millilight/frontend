@@ -70,7 +70,6 @@ export default function WishContent(props: { wish: Wish }) {
               label={translate('wish.label')}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              defaultValue={props.wish.content}
               disabled={!editionMode}
               fullWidth
               required

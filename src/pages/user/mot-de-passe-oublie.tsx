@@ -8,6 +8,10 @@ import translate from '@/utils/translate';
 import Link from 'next/link';
 import { login_url } from '@/utils/config';
 
+/*
+La page qui s'affiche quand l'utilisateur clique sur 'mot de passe oublié'
+*/
+
 const MotDePasseOublie = () => {
   return (
     <div>

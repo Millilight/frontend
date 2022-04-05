@@ -1,6 +1,9 @@
 import { withApollo } from '@/utils/withApollo';
 import React from 'react';
 import VerifyEmail from '@/components/VerifyEmail/VerifyEmail';
+/*
+Le lien envoyé par mail pour confirmer l'adresse mail redirige vers cette page
+*/
 
 const Confirmation = () => {
   return (

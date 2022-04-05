@@ -3,8 +3,13 @@ import React from 'react';
 // import { Visibility, VisibilityOff } from '@mui/icons-material';
 import ResetPassword from '@/components/ResetPassword/ResetPassword';
 import { Typography } from '@mui/material';
+import translate from '@/utils/translate';
+/*
+Le mail pour mot de passe oublié contient une url qui renvoit vers 
+cette page, permettant à l'utilisateur de renseigner son nouveau mot de passe
+*/
 
-const Verification = () => {
+const Reinitialisation = () => {
   return (
     <div>
       <div className="visual-decoration-container">
@@ -17,10 +22,10 @@ const Verification = () => {
       <div className="container-column-center">
         <div className="inscription-white-container">
           <Typography variant="h4" style={{ textAlign: 'center' }}>
-            Récupération de compte
+            {translate('reset.password')}
           </Typography>
           <Typography variant="subtitle1" textAlign={'center'}>
-            Choisissez un nouveau mot de passe:
+            {translate('reset.new_password')}
           </Typography>
           <ResetPassword />
         </div>
@@ -29,4 +34,4 @@ const Verification = () => {
   );
 };
 
-export default withApollo(Verification);
+export default withApollo(Reinitialisation);

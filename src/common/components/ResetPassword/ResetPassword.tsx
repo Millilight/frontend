@@ -121,7 +121,9 @@ export default function ResetPassword() {
           disabled={loading || !isPasswordValid || !arePasswordsEquals}
           onClick={() => sendForm()}
         >
-          {loading ? 'Envoi en cours...' : 'Réinitialiser mon mot de passe'}
+          {loading
+            ? translate('common.button.sending')
+            : translate('reset.send.request')}
         </Button>
       </>
     );
@@ -133,7 +135,7 @@ export default function ResetPassword() {
         <TextField
           type={showPassword ? 'text' : 'password'}
           id="password"
-          label="Nouveau mot de passe"
+          label={translate('signup.new_password')}
           variant="standard"
           value={pwd}
           onClick={() => setIsWritingPwd(true)}
@@ -161,21 +163,21 @@ export default function ResetPassword() {
       </div>
       {isWritingPwd || !isPasswordValid ? (
         <ul className={styles.password_checking}>
-          Votre mot de passe doit contenir :
+          {translate('signup.password_help')}
           <li className={hasPwdCorrectLength ? styles.valid : styles.invalid}>
-            Au moins 8 caractères
+            {translate('signup.password_help.length')}
           </li>
           <li className={hasPwdLowerLetter ? styles.valid : styles.invalid}>
-            Une minuscule
+            {translate('signup.password_help.min')}
           </li>
           <li className={hasPwdUpperLetter ? styles.valid : styles.invalid}>
-            Une majuscule
+            {translate('signup.password_help.maj')}
           </li>
           <li className={hasPwdDigit ? styles.valid : styles.invalid}>
-            Un chiffre
+            {translate('signup.password_help.digit')}
           </li>
           <li className={hasPwdSpecialChar ? styles.valid : styles.invalid}>
-            Un caractère spécial
+            {translate('signup.password_help.special_character')}
           </li>
         </ul>
       ) : (
@@ -186,7 +188,7 @@ export default function ResetPassword() {
         <TextField
           type={showPassword ? 'text' : 'password'}
           id="confirm-password"
-          label="Confirmation de mot de passe"
+          label={translate('signup.label.password_confirmation')}
           variant="standard"
           value={confirmPwd}
           onChange={(e) => setConfirmPwd(e.target.value)}
@@ -213,7 +215,7 @@ export default function ResetPassword() {
       </div>
       {!arePasswordsEquals && (
         <span className={styles.invalid}>
-          Les mots de passes ne sont pas équivalents
+          {translate('signup.password_help.not_identical')}
         </span>
       )}
       {displayButton()}

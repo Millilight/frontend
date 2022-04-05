@@ -41,11 +41,11 @@ export default function VerifyEmail() {
       return (
         <div style={{ textAlign: 'center', fontSize: '22px' }}>
           <DoneIcon color={'success'} style={{ fontSize: '60px' }} />
-          <div>{'Votre email a déjà été vérifié !'}</div>
+          <div>{translate('verification.already_verified')}</div>
           <br />
           <Link href={login_url} passHref>
             <Button color={'success'} variant={'outlined'}>
-              Me connecter
+              {translate('signin.button.signin')}
             </Button>
           </Link>
         </div>
