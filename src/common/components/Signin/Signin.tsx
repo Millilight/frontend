@@ -48,7 +48,7 @@ export default function Signin() {
     if (error && !hasUpdatedAfterError) {
       let message = translate('signin.error');
       if (
-        (erro.message && error.message == 'Unauthorized') ||
+        (error.message && error.message == 'Unauthorized') ||
         error.message == "Cannot read properties of null (reading 'password')"
       ) {
         message = translate('signin.wrong_password');
