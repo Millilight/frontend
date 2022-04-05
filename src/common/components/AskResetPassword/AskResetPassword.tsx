@@ -1,58 +1,46 @@
-import { useLoginMutation } from 'generated/graphql';
 import { TextField, Button } from '@mui/material';
 import styles from '../Signup/Signup.module.css';
+import { useAskResetPasswordUserMutation } from 'generated/graphql';
 import Router from 'next/router';
 
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { setCookies } from 'cookies-next';
 import translate from '@/utils/translate';
-import { ask_reset_password_url, home_url } from '@/utils/config';
-import Link from 'next/link';
-
-function Authenticate(token: string) {
-  localStorage.setItem('token', token);
-  setCookies('jwtoken', token);
-  Router.push(home_url);
-}
 
 export default function Signin() {
   // Input Variables: updated by user input
   const [email, setEmail] = useState('');
-  const [pwd, setPwd] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [hasUpdatedAfterError, setHasUpdatedAfterError] = useState(false);
 
   //Mutation : use the codegen hook: which return a function (Login),
   //           and the lifecycle of the request
-  const [Login, { data, loading, error }] = useLoginMutation();
+  const [askResetPassword, { data, loading, error }] =
+    useAskResetPasswordUserMutation();
 
   const [isDoneWritingEmail, setIsDoneWritingEmail] = useState(false);
   const isEmailValid = !isDoneWritingEmail || /.+@.+\..+/.test(email);
-  const [hasUpdatedAfterError, sethasUpdatedAfterError] = useState(false);
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
     //Set all forms to written, in order to display the error messages
-    sethasUpdatedAfterError(false);
-    Login({
-      variables: { email: email, password: pwd },
-    });
-  }
-  if (data && !loading && !error) {
-    Authenticate(data.login.access_token);
+    setHasUpdatedAfterError(false);
+    setIsDoneWritingEmail(true);
+    if (isEmailValid) {
+      askResetPassword({
+        variables: { email: email },
+      });
+    }
   }
 
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {
+    console.log(error);
     if (error && !hasUpdatedAfterError) {
       let message = translate('signin.error');
-      if (
-        error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED' ||
-        error.message == 'Unauthorized' ||
-        error.message == "Cannot read properties of null (reading 'password')"
-      ) {
-        message = translate('signin.wrong_password');
+      if (error.message == 'Unauthorized') {
+        message = translate('reset.unkown_email');
       }
       return (
         <Button
@@ -72,7 +60,7 @@ export default function Signin() {
           variant="outlined"
           color="success"
         >
-          {translate('signin.success')}
+          {translate('reset.sent.success')}
         </Button>
       );
     }
@@ -84,14 +72,14 @@ export default function Signin() {
           variant="contained"
           color="success"
           style={{ marginTop: '20px' }}
-          disabled={loading}
+          disabled={loading || !isEmailValid}
           onClick={() => {
             sendForm();
           }}
         >
           {loading
             ? translate('common.button.sending')
-            : translate('signin.button.signin')}
+            : translate('reset.button.send')}
         </Button>
       </>
     );
@@ -102,11 +90,12 @@ export default function Signin() {
       <TextField
         id="email"
         type="email"
-        label={translate('common.label.email')}
+        label={translate('reset.label.email')}
         variant="standard"
         value={email}
         onChange={(e) => {
-          setEmail(e.target.value), sethasUpdatedAfterError(true);
+          setEmail(e.target.value);
+          setHasUpdatedAfterError(true);
         }}
         onBlur={() => setIsDoneWritingEmail(true)}
         fullWidth
@@ -117,38 +106,7 @@ export default function Signin() {
           {translate('common.invalid_email')}
         </span>
       )}
-      <div className={styles.field_container}>
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          id="password"
-          label={translate('common.label.password')}
-          variant="standard"
-          value={pwd}
-          onChange={(e) => {
-            setPwd(e.target.value), sethasUpdatedAfterError(true);
-          }}
-          fullWidth
-        />
-        <div
-          className={styles.visibility_button}
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? (
-            <div className={styles.visibility}>
-              <VisibilityOff />
-            </div>
-          ) : (
-            <div className={styles.visibility}>
-              <Visibility />
-            </div>
-          )}
-        </div>
-      </div>
-      <Link href={ask_reset_password_url} passHref>
-        <span className={styles.forgot_password}>
-          {translate('signin.forgot_password')}
-        </span>
-      </Link>
+
       {displayButton()}
     </form>
   );

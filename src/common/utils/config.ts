@@ -18,3 +18,35 @@ export const config = {
     process.env.NEXT_PUBLIC_API_URL
   ),
 };
+
+/* List of URLS */
+export const profil_url = '/profil';
+export const home_url = '/espace-personnel';
+export const register_url = '/';
+export const login_url = '/?action=signin';
+export const ask_reset_password_url = '/user/mot-de-passe-oublie';
+export const email_verification_url = '/verification';
+export const burrial_wishes_url = '/espace-personnel/volontes-ceremoniales';
+export const medical_url = '/espace-personnel/volontes-medicales';
+export const administrative_url = '/espace-personnel/demarches-administratives';
+export const free_space_url = '/espace-personnel/espace-libre';
+export const trust_people_url = '/espace-personnel/personnes_de_confiance';
+//define urls that are only accessible once connected
+export const protected_urls = [
+  burrial_wishes_url,
+  profil_url,
+  home_url,
+  profil_url,
+  medical_url,
+  administrative_url,
+  free_space_url,
+  trust_people_url,
+];
+
+//define urls that should not be accessible when you are connected
+export const public_only_urls = [
+  register_url,
+  login_url,
+  email_verification_url,
+  ask_reset_password_url,
+];
