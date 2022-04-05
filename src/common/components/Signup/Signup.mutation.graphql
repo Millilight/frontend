@@ -1,11 +1,11 @@
-mutation CreateUser(
+mutation createUser(
   $firstname: String!
   $lastname: String!
   $email: String!
   $password: String!
 ) {
   createUser(
-    createUserDto: {
+    create_user_dto: {
       firstname: $firstname
       lastname: $lastname
       email: $email

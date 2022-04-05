@@ -24,7 +24,7 @@ export default function Signin() {
 
   //Mutation : use the codegen hook: which return a function (Login),
   //           and the lifecycle of the request
-  const [Login, { data, loading, error }] = useLoginMutation();
+  const [login, { data, loading, error }] = useLoginMutation();
 
   const [isDoneWritingEmail, setIsDoneWritingEmail] = useState(false);
   const isEmailValid = !isDoneWritingEmail || /.+@.+\..+/.test(email);
@@ -34,7 +34,7 @@ export default function Signin() {
   function sendForm() {
     //Set all forms to written, in order to display the error messages
     sethasUpdatedAfterError(false);
-    Login({
+    login({
       variables: { email: email, password: pwd },
     });
   }
