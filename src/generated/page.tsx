@@ -9,6 +9,71 @@ import * as Apollo from '@apollo/client';
 import type React from 'react';
 import { getApolloClient, ApolloClientContext } from '@/utils/withApollo';
 
+export async function getServerPageGetCurrentUser(
+  options: Omit<
+    Apollo.QueryOptions<Types.GetCurrentUserQueryVariables>,
+    'query'
+  >,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data = await apolloClient.query<Types.GetCurrentUserQuery>({
+    ...options,
+    query: Operations.GetCurrentUserDocument,
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useGetCurrentUser = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<
+    Types.GetCurrentUserQuery,
+    Types.GetCurrentUserQueryVariables
+  >
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetCurrentUserDocument, options);
+};
+export type PageGetCurrentUserComp = React.FC<{
+  data?: Types.GetCurrentUserQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetCurrentUser =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<
+      Types.GetCurrentUserQuery,
+      Types.GetCurrentUserQueryVariables
+    >
+  ) =>
+  (WrappedComponent: PageGetCurrentUserComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(
+      Operations.GetCurrentUserDocument,
+      options
+    );
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetCurrentUser = {
+  getServerPage: getServerPageGetCurrentUser,
+  withPage: withPageGetCurrentUser,
+  usePage: useGetCurrentUser,
+};
+
 export async function getServerPageGetWishesforUser(
   options: Omit<
     Apollo.QueryOptions<Types.GetWishesforUserQueryVariables>,

@@ -1,4 +1,4 @@
-import { profil_url } from '@/utils/config';
+import { my_account_url } from '@/utils/config';
 import { login_url } from '@/utils/config';
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -93,7 +93,7 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link href={profil_url} passHref>
+        <Link href={my_account_url} passHref>
           <MenuItem>
             <Avatar />
             {translate('common.label.account')}

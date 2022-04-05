@@ -1,0 +1,19 @@
+mutation updateUser(
+  $firstname: String
+  $lastname: String
+  $password: String
+  $email: String
+) {
+  updateUser(
+    update_user_dto: {
+      firstname: $firstname
+      lastname: $lastname
+      password: $password
+      new_email: $email
+    }
+  ) {
+    firstname
+    lastname
+    email
+  }
+}
