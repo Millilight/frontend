@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import {
   public_only_urls,
   login_url,
@@ -13,22 +13,29 @@ export function middleware(req: NextRequest) {
 
   let expired = true;
   if (token && token.jwtoken) {
-    const decodedToken = jwt.decode(token.jwtoken, { complete: true });
-    const dateNow = new Date();
-    if (
-      decodedToken &&
-      decodedToken.payload &&
-      typeof decodedToken.payload != 'string' &&
-      decodedToken.payload.exp &&
-      decodedToken.payload.exp >= dateNow.getTime() / 1000
-    ) {
-      expired = false;
-    }
+    // const decodedToken = jwt.decode(token.jwtoken, { complete: true });
+    // const dateNow = new Date();
+    // if (
+    //   decodedToken &&
+    //   decodedToken.payload &&
+    //   typeof decodedToken.payload != 'string' &&
+    //   decodedToken.payload.exp &&
+    //   decodedToken.payload.exp >= dateNow.getTime() / 1000
+    // ) {
+    //   expired = false;
+    // }
+    console.log('has token');
+    expired =
+      Date.now() >=
+      JSON.parse(Buffer.from(token.jwtoken.split('.')[1], 'base64').toString())
+        .exp *
+        1000;
   }
+  console.log('expired');
 
   const request_protected = protected_urls.includes(req.nextUrl.pathname);
   const request_public_only = public_only_urls.includes(req.nextUrl.pathname);
-
+  console.log(request_protected, request_public_only);
   if (expired && request_protected) {
     return NextResponse.redirect(req.nextUrl.origin + login_url);
   } else if (!expired && request_public_only) {

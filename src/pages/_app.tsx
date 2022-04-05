@@ -10,21 +10,22 @@ import '@fontsource/roboto/700.css';
 
 import { IntlProvider } from 'react-intl';
 import French from '../lang/fr.json';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   // Currently : only in French
-  const [locale, setLocale] = useState('fr');
-  const [messages, setMessages] = useState(French);
-
-  // Not used for now, to update to add other languages
-  function changeLanguage(locale: string) {
-    setLocale(locale);
-    switch (locale) {
-      case 'fr':
-        setMessages(French);
-    }
-  }
+  // const [locale, setLocale] = useState('fr');
+  // const [messages, setMessages] = useState(French);
+  const locale = 'fr';
+  const messages = French;
+  // // Not used for now, to update to add other languages
+  // function changeLanguage(locale: string) {
+  //   setLocale(locale);
+  //   switch (locale) {
+  //     case 'fr':
+  //       setMessages(French);
+  //   }
+  // }
 
   return (
     <IntlProvider locale={locale} messages={messages}>
