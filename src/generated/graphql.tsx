@@ -62,35 +62,35 @@ export type Mutation = {
 };
 
 export type MutationAskResetPasswordUserArgs = {
-  askResetPasswordUserDto: AskResetPasswordUserDto;
+  ask_reset_password_user_dto: AskResetPasswordUserDto;
 };
 
 export type MutationCreateUserArgs = {
-  createUserDto: CreateUserDto;
+  create_user_dto: CreateUserDto;
 };
 
 export type MutationLoginArgs = {
-  loginUserDto: LoginUserDto;
+  login_user_dto: LoginUserDto;
 };
 
 export type MutationResetPasswordUserArgs = {
-  resetPasswordUserDto: ResetPasswordUserDto;
+  reset_password_user_dto: ResetPasswordUserDto;
 };
 
 export type MutationUpdateEmailUserArgs = {
-  updateEmailUserDto: UpdateEmailUserDto;
+  update_email_user_dto: UpdateEmailUserDto;
 };
 
 export type MutationUpdateUserArgs = {
-  updateUserDto: UpdateUserDto;
+  update_user_dto: UpdateUserDto;
 };
 
 export type MutationUpdateWishesArgs = {
-  updateWishesDto: UpdateWishesDto;
+  update_wishes_dto: UpdateWishesDto;
 };
 
 export type MutationVerifyEmailArgs = {
-  verifyEmailDto: VerifyEmailDto;
+  verify_email_dto: VerifyEmailDto;
 };
 
 export type Query = {
@@ -239,8 +239,8 @@ export type GetWishesforUserQuery = {
 };
 
 export const AskResetPasswordUserDocument = gql`
-  mutation AskResetPasswordUser($email: String!) {
-    askResetPasswordUser(askResetPasswordUserDto: { email: $email }) {
+  mutation askResetPasswordUser($email: String!) {
+    askResetPasswordUser(ask_reset_password_user_dto: { email: $email }) {
       success
     }
   }
@@ -289,13 +289,13 @@ export type AskResetPasswordUserMutationOptions = Apollo.BaseMutationOptions<
   AskResetPasswordUserMutationVariables
 >;
 export const ResetPasswordDocument = gql`
-  mutation ResetPassword(
+  mutation resetPassword(
     $user_id: String!
     $new_password: String!
     $token: String!
   ) {
     resetPasswordUser(
-      resetPasswordUserDto: {
+      reset_password_user_dto: {
         user_id: $user_id
         new_password: $new_password
         token: $token
@@ -351,8 +351,8 @@ export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<
   ResetPasswordMutationVariables
 >;
 export const LoginDocument = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(loginUserDto: { email: $email, password: $password }) {
+  mutation login($email: String!, $password: String!) {
+    login(login_user_dto: { email: $email, password: $password }) {
       user {
         _id
       }
@@ -402,14 +402,14 @@ export type LoginMutationOptions = Apollo.BaseMutationOptions<
   LoginMutationVariables
 >;
 export const CreateUserDocument = gql`
-  mutation CreateUser(
+  mutation createUser(
     $firstname: String!
     $lastname: String!
     $email: String!
     $password: String!
   ) {
     createUser(
-      createUserDto: {
+      create_user_dto: {
         firstname: $firstname
         lastname: $lastname
         email: $email
@@ -468,8 +468,8 @@ export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
   CreateUserMutationVariables
 >;
 export const VerifyEmailDocument = gql`
-  mutation VerifyEmail($token: String!, $user_id: String!) {
-    verifyEmail(verifyEmailDto: { token: $token, user_id: $user_id }) {
+  mutation verifyEmail($token: String!, $user_id: String!) {
+    verifyEmail(verify_email_dto: { token: $token, user_id: $user_id }) {
       success
     }
   }
@@ -525,7 +525,7 @@ export const UpdateWishesDocument = gql`
     $music: String
   ) {
     updateWishes(
-      updateWishesDto: {
+      update_wishes_dto: {
         burial_cremation: $burial_cremation
         burial_cremation_place: $burial_cremation_place
         music: $music

@@ -4,7 +4,7 @@ mutation updateWishes(
   $music: String
 ) {
   updateWishes(
-    updateWishesDto: {
+    update_wishes_dto: {
       burial_cremation: $burial_cremation
       burial_cremation_place: $burial_cremation_place
       music: $music
