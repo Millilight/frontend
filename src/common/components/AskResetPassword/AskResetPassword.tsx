@@ -36,7 +36,6 @@ export default function Signin() {
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {
-    console.log(error);
     if (error && !hasUpdatedAfterError) {
       let message = translate('signin.error');
       if (error.message == 'Unauthorized') {

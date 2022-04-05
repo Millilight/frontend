@@ -39,7 +39,6 @@ export default function ResetPassword() {
   //Mutation : use the codegen hook: which return a function (createUser),
   //           and the lifecycle of the request
   const [resetPassword, { data, loading, error }] = useResetPasswordMutation();
-  console.log(data, loading, error);
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
