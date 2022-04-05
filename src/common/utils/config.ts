@@ -24,8 +24,9 @@ export const profil_url = '/profil';
 export const home_url = '/espace-personnel';
 export const register_url = '/';
 export const login_url = '/?action=signin';
-export const ask_reset_password_url = '/user/mot-de-passe-oublie';
-export const email_verification_url = '/verification';
+export const ask_reset_password_url = '/auth/mot-de-passe-oublie';
+export const reset_password_url = '/auth/reset_password';
+export const email_verification_url = '/user/confirmation';
 export const burrial_wishes_url = '/espace-personnel/volontes-ceremoniales';
 export const medical_url = '/espace-personnel/volontes-medicales';
 export const administrative_url = '/espace-personnel/demarches-administratives';
@@ -49,4 +50,5 @@ export const public_only_urls = [
   login_url,
   email_verification_url,
   ask_reset_password_url,
+  reset_password_url,
 ];
