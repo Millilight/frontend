@@ -61,6 +61,7 @@
   "verification.back_to_login": "Retourner à l'écran de connexion",
   "verification.already_verified": "Votre email a déjà été vérifié !",
   "reset.title": "Récupération de compte",
+  "reset.password": "Réinitialisation de mot de passe",
   "reset.label.email": "Renseignez votre email",
   "reset.unkown_email": "Cette adresse mail n'est ratachée à aucun compte",
   "reset.new_password": "Choisissez un nouveau mot de passe:",
