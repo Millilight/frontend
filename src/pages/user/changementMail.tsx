@@ -3,7 +3,7 @@ import React from 'react';
 import { withApollo } from '@/utils/withApollo';
 import ChangeMail from '@/components/ChangeMail/ChangeMail';
 /*
-Le lien envoyé par mail pour confirmer l'adresse mail redirige vers cette page
+User will be redirected to with page by clicking on the link sent by mail
 */
 
 const Confirmation = () => {

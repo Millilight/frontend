@@ -32,6 +32,7 @@
   "signup.password_help.maj": "Une majuscule",
   "signup.password_help.digit": "Un chiffre",
   "signup.password_help.special_character": "Un caractère spécial",
+  "signup.password_help.full_sentence": "Le mot de passe doit contenir 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
   "signup.password_help.not_identical": "Les mots de passe ne sont pas équivalents.",
   "signup.error.existing_account": "Vous avez déjà un compte : essayez de vous connecter",
   "signin.title": "Connexion",

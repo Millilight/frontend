@@ -51,15 +51,13 @@ export default function MyAccount() {
     );
   }
   if (error) {
-    console.error(error);
     return null;
   }
   const savedInfos: GetCurrentUserQuery['user'] | undefined = data?.user;
   if (!savedInfos) {
-    console.error(savedInfos);
     return null;
   }
-  console.log(savedInfos);
+
   updateSavedInfos(savedInfos);
 
   return (
