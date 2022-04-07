@@ -77,7 +77,7 @@ export default function MyAccountFieldContent(props: {
 
   function submitPassword(pwd: string) {
     updateUserMutation({ variables: { password: pwd } });
-    setEditionMode(false);
+
     if (loading) {
       return (
         <Box
@@ -92,11 +92,10 @@ export default function MyAccountFieldContent(props: {
       );
     }
     if (error) {
-      alert(translate('myaccount.error'));
       return null;
     }
     if (data) {
-      alert(translate('myaccount.password.changed'));
+      setEditionMode(false);
     }
   }
 
@@ -299,16 +298,14 @@ export default function MyAccountFieldContent(props: {
                 onClick={() => {
                   if (arePasswordsEquals && isPasswordValid) {
                     submitPassword(pwd);
-                  } else if (!arePasswordsEquals) {
-                    alert('Les mots de passes ne sont pas identiques');
+                  } /*else if (!arePasswordsEquals) {
+                    alert(translate('signup.password_help.not_identical'));
                   } else {
-                    alert(
-                      'Le mot de passe doit contenir 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial'
-                    );
-                  }
+                    alert(translate('signup.password_help.full_sentence'));
+                  }*/
                 }}
               >
-                Enregistrer
+                {translate('common.button.save')}
               </Button>
               <Button
                 sx={{
@@ -322,7 +319,7 @@ export default function MyAccountFieldContent(props: {
                 variant="outlined"
                 onClick={() => setEditionMode(!editionMode)}
               >
-                Annuler
+                {translate('common.button.cancel')}]
               </Button>
             </div>
           )}

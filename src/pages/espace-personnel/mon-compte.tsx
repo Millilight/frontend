@@ -1,13 +1,11 @@
 import { withApollo } from '@/utils/withApollo';
-import { CircularProgress, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import { useGetCurrentUserQuery, GetCurrentUserQuery } from 'generated/graphql';
 
-import MyAccountField from '@/components/MyAccount/MyAccountField';
+import { Box } from '@mui/system';
+
 import MenuDrawer from '@/components/MenuDrawer/MenuDrawer';
 import MyAccount from '@/components/MyAccount/MyAccount';
 
-const MonCompte = () => {
+const MyAccountPage = () => {
   return (
     <div className="flex-container">
       <MenuDrawer selectedPage={''} />
@@ -17,4 +15,4 @@ const MonCompte = () => {
     </div>
   );
 };
-export default withApollo(MonCompte);
+export default withApollo(MyAccountPage);
