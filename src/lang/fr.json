@@ -107,5 +107,7 @@
   "ceremonial.music.help.3": "Y a-t-il des règles ?",
   "ceremonial.music.help.4": "Pas proprement parler, mais généralement 3 ou 4 musiques suffisent. Il est  courant que la dernière soit plus dynamique et positive, puique c'est celle qui conclura la cérémonie. {br}{br} En termes de contenu, libre vous de choisir le style qui vous convient.. Il peut s'agir de morceaux qui vous sont chers, qui rappeleront à vos proches des moments passés ensemble, ou simplement qui contribueront à embellir la cérémonie.",
   "changeMail.message.sent": "Un mail de confirmation a été envoyé à l'adresse mail renseignée",
-  "changeMail.back_to_personnal_space": "Retourner à mon espace personnel"
+  "changeMail.back_to_personnal_space": "Retourner à mon espace personnel",
+  "trustedperson.title": "Mes personnes de confiance",
+  "trustedperson.subtitle": "Mes proches qui auront accès à mes données"
 }
