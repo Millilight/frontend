@@ -20,7 +20,7 @@ export const config = {
 };
 
 /* List of URLS */
-export const profil_url = '/profil';
+export const profil_url = '/espace-personnel/mon-compte';
 export const home_url = '/espace-personnel';
 export const register_url = '/';
 export const login_url = '/?action=signin';
