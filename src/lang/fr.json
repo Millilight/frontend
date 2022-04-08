@@ -132,5 +132,7 @@
   "ceremonial.text.title": "Voulez-vous indiquer un texte à lire pendant la cérémonie ?",
   "ceremonial.text.help.1": "Durant la cérémonie, il est très courant que des textes ou des poèmes soient lus. Vous pouvez indiquer ici, un texte ou un poème qui vous est cher afin qu'il soit lu durant la céremonie",
   "changeMail.message.sent": "Un mail de confirmation a été envoyé à l'adresse mail renseignée",
-  "changeMail.back_to_personnal_space": "Retourner à mon espace personnel"
+  "changeMail.back_to_personnal_space": "Retourner à mon espace personnel",
+  "trustedperson.title": "Mes personnes de confiance",
+  "trustedperson.subtitle": "Mes proches qui auront accès à mes données"
 }
