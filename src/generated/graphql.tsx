@@ -20,6 +20,19 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** Date custom scalar type */
+  Date: any;
+};
+
+export type AddHeirInput = {
+  email: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+};
+
+export type AddHeirResponse = {
+  __typename?: 'AddHeirResponse';
+  heir_user: Heir;
 };
 
 export type AskResetPasswordUserDto = {
@@ -31,11 +44,42 @@ export type AskResetPasswordUserResponse = {
   success: Scalars['Boolean'];
 };
 
+export type ConfirmSecurityCodeInput = {
+  legator_user_id: Scalars['ID'];
+  security_code: Scalars['String'];
+};
+
+export type ConfirmSecurityCodeResponse = {
+  __typename?: 'ConfirmSecurityCodeResponse';
+  legator_user: Legator;
+};
+
 export type CreateUserDto = {
   email: Scalars['String'];
   firstname: Scalars['String'];
   lastname: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type Heir = {
+  __typename?: 'Heir';
+  _id: Scalars['ID'];
+  added_date: Scalars['Date'];
+  security_code?: Maybe<Scalars['String']>;
+  state: StateTrust;
+  urgent_data_unlocked: Scalars['Boolean'];
+  urgent_data_unlocked_date?: Maybe<Scalars['Date']>;
+  user_details: UserDetails;
+};
+
+export type Legator = {
+  __typename?: 'Legator';
+  _id: Scalars['ID'];
+  added_date: Scalars['Date'];
+  state: StateTrust;
+  urgent_data_unlocked: Scalars['Boolean'];
+  urgent_data_unlocked_date?: Maybe<Scalars['Date']>;
+  user_details: UserDetails;
 };
 
 export type LoginResponse = {
@@ -51,18 +95,30 @@ export type LoginUserDto = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addHeir: AddHeirResponse;
   askResetPasswordUser: AskResetPasswordUserResponse;
+  confirmSecurityCode: ConfirmSecurityCodeResponse;
   createUser: User;
   login: LoginResponse;
   resetPasswordUser: User;
+  unlockUrgentData: UnlockUrgentDataResponse;
   updateEmailUser: User;
   updateUser: User;
   updateWishes: Wishes;
   verifyEmail: VerifyEmailResponse;
+  verifyEmailWithInvitation: VerifyEmailWithInvitationResponse;
+};
+
+export type MutationAddHeirArgs = {
+  add_heir_user_input: AddHeirInput;
 };
 
 export type MutationAskResetPasswordUserArgs = {
   ask_reset_password_user_dto: AskResetPasswordUserDto;
+};
+
+export type MutationConfirmSecurityCodeArgs = {
+  confirm_security_code_input: ConfirmSecurityCodeInput;
 };
 
 export type MutationCreateUserArgs = {
@@ -75,6 +131,10 @@ export type MutationLoginArgs = {
 
 export type MutationResetPasswordUserArgs = {
   reset_password_user_dto: ResetPasswordUserDto;
+};
+
+export type MutationUnlockUrgentDataArgs = {
+  unlock_urgent_data_input: UnlockUrgentDataInput;
 };
 
 export type MutationUpdateEmailUserArgs = {
@@ -93,15 +153,38 @@ export type MutationVerifyEmailArgs = {
   verify_email_dto: VerifyEmailDto;
 };
 
+export type MutationVerifyEmailWithInvitationArgs = {
+  verify_email_with_invitation_input: VerifyEmailWithInvitationInput;
+};
+
 export type Query = {
   __typename?: 'Query';
+  urgentData: UrgentDataResponse;
   user: User;
+};
+
+export type QueryUrgentDataArgs = {
+  urgent_data_input: UrgentDataInput;
 };
 
 export type ResetPasswordUserDto = {
   new_password: Scalars['String'];
   token: Scalars['String'];
   user_id: Scalars['String'];
+};
+
+export enum StateTrust {
+  InvitationSent = 'INVITATION_SENT',
+  Validated = 'VALIDATED',
+}
+
+export type UnlockUrgentDataInput = {
+  legator_user_id: Scalars['ID'];
+};
+
+export type UnlockUrgentDataResponse = {
+  __typename?: 'UnlockUrgentDataResponse';
+  urgent_data: UrgentData;
 };
 
 export type UpdateEmailUserDto = {
@@ -122,16 +205,40 @@ export type UpdateWishesDto = {
   music?: InputMaybe<Scalars['String']>;
 };
 
+export type UrgentData = {
+  __typename?: 'UrgentData';
+  wishes: Wishes;
+};
+
+export type UrgentDataInput = {
+  legator_user_id: Scalars['ID'];
+};
+
+export type UrgentDataResponse = {
+  __typename?: 'UrgentDataResponse';
+  urgent_data: UrgentData;
+};
+
 export type User = {
   __typename?: 'User';
   _id: Scalars['ID'];
   email: Scalars['String'];
   firstname: Scalars['String'];
+  heir_users: Array<Heir>;
   lastname: Scalars['String'];
-  wishes: Wishes;
+  legator_users: Array<Legator>;
+  urgent_data: UrgentData;
+};
+
+export type UserDetails = {
+  __typename?: 'UserDetails';
+  email: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
 };
 
 export type VerifyEmailDto = {
+  password?: InputMaybe<Scalars['String']>;
   token: Scalars['String'];
   user_id: Scalars['String'];
 };
@@ -139,6 +246,17 @@ export type VerifyEmailDto = {
 export type VerifyEmailResponse = {
   __typename?: 'VerifyEmailResponse';
   success: Scalars['Boolean'];
+};
+
+export type VerifyEmailWithInvitationInput = {
+  password: Scalars['String'];
+  token: Scalars['String'];
+  user_id: Scalars['ID'];
+};
+
+export type VerifyEmailWithInvitationResponse = {
+  __typename?: 'VerifyEmailWithInvitationResponse';
+  sucess: Scalars['Boolean'];
 };
 
 export type Wishes = {
@@ -273,11 +391,14 @@ export type GetWishesforUserQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
-    wishes: {
-      __typename?: 'Wishes';
-      burial_cremation?: string | null;
-      burial_cremation_place?: string | null;
-      music?: string | null;
+    urgent_data: {
+      __typename?: 'UrgentData';
+      wishes: {
+        __typename?: 'Wishes';
+        burial_cremation?: string | null;
+        burial_cremation_place?: string | null;
+        music?: string | null;
+      };
     };
   };
 };
@@ -810,10 +931,12 @@ export type UpdateWishesMutationOptions = Apollo.BaseMutationOptions<
 export const GetWishesforUserDocument = gql`
   query getWishesforUser {
     user {
-      wishes {
-        burial_cremation
-        burial_cremation_place
-        music
+      urgent_data {
+        wishes {
+          burial_cremation
+          burial_cremation_place
+          music
+        }
       }
     }
   }

@@ -1,9 +1,11 @@
 query getWishesforUser {
   user {
-    wishes {
-      burial_cremation
-      burial_cremation_place
-      music
+    urgent_data {
+      wishes {
+        burial_cremation
+        burial_cremation_place
+        music
+      }
     }
   }
 }
