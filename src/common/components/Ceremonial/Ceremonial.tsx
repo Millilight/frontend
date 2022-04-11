@@ -90,6 +90,103 @@ export default function Ceremonial() {
       image: '/place.png',
     },
     {
+      wishId: 'religion',
+      title: translate('ceremonial.religion.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.music.help.1')}</h3>
+          <p>{translate('ceremonial.religion.help1')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/icons8-religions-64.png',
+    },
+    {
+      wishId: 'place',
+      title: translate('ceremonial.place.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.place.help.1')}</h3>
+          <p>{translate('ceremonial.place.help.2')}</p>
+          <p>{translate('ceremonial.place.help.3')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/place.png',
+    },
+    {
+      wishId: 'prevoyance',
+      title: translate('ceremonial.prevoyance.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.prevoyance.help.1')}</h3>
+          <p>{translate('ceremonial.prevoyance.help.2')}</p>
+          <p>{translate('ceremonial.prevoyance.help.3')}</p>
+          <h3>{translate('ceremonial.prevoyance.help.4')}</h3>
+          <p>{translate('ceremonial.prevoyance.help.5')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/parapluie.png',
+    },
+    {
+      wishId: 'list_of_people',
+      title: translate('ceremonial.list_of_people.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.music.help.1')}</h3>
+          <p>{translate('ceremonial.list_of_people.help.1')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/contacts.png',
+    },
+    {
+      wishId: 'coffin',
+      title: translate('ceremonial.coffin.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.coffin.help.1')}</h3>
+          <p>{translate('ceremonial.coffin.help.2')}</p>
+          <p>{translate('ceremonial.coffin.help.3')}</p>
+          <p>{translate('ceremonial.coffin.help.4')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/sarcophage.png',
+    },
+    {
+      wishId: 'ornament',
+      title: translate('ceremonial.ornament.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.music.help.1')}</h3>
+          <p>{translate('ceremonial.ornament.help.1')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/bouquet-de-fleurs.png',
+    },
+    {
+      wishId: 'text',
+      title: translate('ceremonial.text.title'),
+      content: '',
+      help: (
+        <div>
+          <h3>{translate('ceremonial.music.help.1')}</h3>
+          <p>{translate('ceremonial.text.help.1')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/faire-defiler.png',
+    },
+    {
       wishId: 'music',
       title: translate('ceremonial.music.title'),
       content: '',
@@ -103,6 +200,18 @@ export default function Ceremonial() {
       ),
       type: 'textfield',
       image: '/music.png',
+    },
+    {
+      wishId: 'other',
+      title: translate('ceremonial.other.title'),
+      content: '',
+      help: (
+        <div>
+          <p>{translate('ceremonial.other.help.1')}</p>
+        </div>
+      ),
+      type: 'textfield',
+      image: '/signe-plus.png',
     },
   ];
 
