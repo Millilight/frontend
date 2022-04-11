@@ -1,0 +1,16 @@
+query getHeirs {
+  user {
+    heir_users {
+      _id
+      added_date
+      security_code
+      state
+      urgent_data_unlocked
+      user_details {
+        firstname
+        lastname
+        email
+      }
+    }
+  }
+}

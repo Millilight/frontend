@@ -138,3 +138,56 @@ export const ssrGetWishesforUser = {
   withPage: withPageGetWishesforUser,
   usePage: useGetWishesforUser,
 };
+
+export async function getServerPageGetHeirs(
+  options: Omit<Apollo.QueryOptions<Types.GetHeirsQueryVariables>, 'query'>,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data = await apolloClient.query<Types.GetHeirsQuery>({
+    ...options,
+    query: Operations.GetHeirsDocument,
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useGetHeirs = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<Types.GetHeirsQuery, Types.GetHeirsQueryVariables>
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetHeirsDocument, options);
+};
+export type PageGetHeirsComp = React.FC<{
+  data?: Types.GetHeirsQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetHeirs =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<Types.GetHeirsQuery, Types.GetHeirsQueryVariables>
+  ) =>
+  (WrappedComponent: PageGetHeirsComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.GetHeirsDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetHeirs = {
+  getServerPage: getServerPageGetHeirs,
+  withPage: withPageGetHeirs,
+  usePage: useGetHeirs,
+};

@@ -1,0 +1,18 @@
+mutation addHeir($firstname: String!, $lastname: String!, $email: String!) {
+  addHeir(
+    add_heir_user_input: {
+      firstname: $firstname
+      lastname: $lastname
+      email: $email
+    }
+  ) {
+    heir_user {
+      _id
+      user_details {
+        firstname
+        lastname
+        email
+      }
+    }
+  }
+}
