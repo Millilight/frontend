@@ -1,5 +1,13 @@
 # THIS FILE IS GENERATED; DO NOT EDIT
-directive @upper on FIELD_DEFINITION
+input AddHeirInput {
+  email: String!
+  firstname: String!
+  lastname: String!
+}
+
+type AddHeirResponse {
+  heir_user: Heir!
+}
 
 input AskResetPasswordUserDto {
   email: String!
@@ -9,11 +17,44 @@ type AskResetPasswordUserResponse {
   success: Boolean!
 }
 
+input ConfirmSecurityCodeInput {
+  legator_user_id: ID!
+  security_code: String!
+}
+
+type ConfirmSecurityCodeResponse {
+  legator_user: Legator!
+}
+
 input CreateUserDto {
   email: String!
   firstname: String!
   lastname: String!
   password: String!
+}
+
+"""
+Date custom scalar type
+"""
+scalar Date
+
+type Heir {
+  _id: ID!
+  added_date: Date!
+  security_code: String
+  state: StateTrust!
+  urgent_data_unlocked: Boolean!
+  urgent_data_unlocked_date: Date
+  user_details: UserDetails!
+}
+
+type Legator {
+  _id: ID!
+  added_date: Date!
+  state: StateTrust!
+  urgent_data_unlocked: Boolean!
+  urgent_data_unlocked_date: Date
+  user_details: UserDetails!
 }
 
 type LoginResponse {
@@ -27,19 +68,30 @@ input LoginUserDto {
 }
 
 type Mutation {
+  addHeir(add_heir_user_input: AddHeirInput!): AddHeirResponse!
   askResetPasswordUser(
     ask_reset_password_user_dto: AskResetPasswordUserDto!
   ): AskResetPasswordUserResponse!
+  confirmSecurityCode(
+    confirm_security_code_input: ConfirmSecurityCodeInput!
+  ): ConfirmSecurityCodeResponse!
   createUser(create_user_dto: CreateUserDto!): User!
   login(login_user_dto: LoginUserDto!): LoginResponse!
   resetPasswordUser(reset_password_user_dto: ResetPasswordUserDto!): User!
+  unlockUrgentData(
+    unlock_urgent_data_input: UnlockUrgentDataInput!
+  ): UnlockUrgentDataResponse!
   updateEmailUser(update_email_user_dto: UpdateEmailUserDto!): User!
   updateUser(update_user_dto: UpdateUserDto!): User!
   updateWishes(update_wishes_dto: UpdateWishesDto!): Wishes!
   verifyEmail(verify_email_dto: VerifyEmailDto!): VerifyEmailResponse!
+  verifyEmailWithInvitation(
+    verify_email_with_invitation_input: VerifyEmailWithInvitationInput!
+  ): VerifyEmailWithInvitationResponse!
 }
 
 type Query {
+  urgentData(urgent_data_input: UrgentDataInput!): UrgentDataResponse!
   user: User!
 }
 
@@ -47,6 +99,19 @@ input ResetPasswordUserDto {
   new_password: String!
   token: String!
   user_id: String!
+}
+
+enum StateTrust {
+  INVITATION_SENT
+  VALIDATED
+}
+
+input UnlockUrgentDataInput {
+  legator_user_id: ID!
+}
+
+type UnlockUrgentDataResponse {
+  urgent_data: UrgentData!
 }
 
 input UpdateEmailUserDto {
@@ -67,21 +132,52 @@ input UpdateWishesDto {
   music: String
 }
 
+type UrgentData {
+  wishes: Wishes!
+}
+
+input UrgentDataInput {
+  legator_user_id: ID!
+}
+
+type UrgentDataResponse {
+  urgent_data: UrgentData!
+}
+
 type User {
   _id: ID!
   email: String!
   firstname: String!
+  heir_users: [Heir!]!
   lastname: String!
-  wishes: Wishes!
+  legator_users: [Legator!]!
+  urgent_data: UrgentData!
+}
+
+type UserDetails {
+  email: String!
+  firstname: String!
+  lastname: String!
 }
 
 input VerifyEmailDto {
+  password: String
   token: String!
   user_id: String!
 }
 
 type VerifyEmailResponse {
   success: Boolean!
+}
+
+input VerifyEmailWithInvitationInput {
+  password: String!
+  token: String!
+  user_id: ID!
+}
+
+type VerifyEmailWithInvitationResponse {
+  sucess: Boolean!
 }
 
 type Wishes {

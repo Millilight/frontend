@@ -217,7 +217,7 @@ export default function Ceremonial() {
 
   //Update the list of wishes with data (content) retreived from backend
   function updateWishesList(
-    savedWishes: GetWishesforUserQuery['user']['wishes']
+    savedWishes: GetWishesforUserQuery['user']['urgent_data']['wishes']
   ) {
     if (savedWishes !== undefined && savedWishes !== null) {
       for (const [key, value] of Object.entries(savedWishes)) {
@@ -242,8 +242,9 @@ export default function Ceremonial() {
     console.error(error);
     return null;
   }
-  const savedWishes: GetWishesforUserQuery['user']['wishes'] | undefined =
-    data?.user.wishes;
+  const savedWishes:
+    | GetWishesforUserQuery['user']['urgent_data']['wishes']
+    | undefined = data?.user.urgent_data.wishes;
   if (!savedWishes) {
     console.error(savedWishes);
     return null;
