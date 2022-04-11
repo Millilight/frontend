@@ -66,17 +66,8 @@ export default function TrustedPersons() {
       return (
         <>
           {' '}
-          <p>
-            {`Les personnes de confiance sont les proches qui auront accès à
-        votre coffre-fort en cas de nécessité. Nous vous invitons à
-        renseigner plusieurs personnes de confiance afin d’être certain
-        que vos données soient récupérées.`}
-          </p>
-          <p>
-            {`Une fois renseigné, votre proche recevra un mail l'invitant à
-        créer son compte. Vous devrez lui transmettre un code de vérification 
-        lui permettant d'accéder à vos informations`}
-          </p>
+          <p>{translate('addheirs.help1')}</p>
+          <p>{translate('addheirs.help2')}</p>
         </>
       );
     } else if (
@@ -96,7 +87,7 @@ export default function TrustedPersons() {
                   : ''
               }
             >
-              Invitez votre proche
+              {translate('addheirs.invite')}
             </li>
             <li
               className={
@@ -107,18 +98,18 @@ export default function TrustedPersons() {
                   : ''
               }
             >
-              Transmettez lui le code de sécurité
+              {translate('addheirs.transmit')}
             </li>
             <li className={step == 'verified_user' ? styles.current_step : ''}>
-              Votre lien de confiance est validé !
+              {translate('addheirs.contact_validated')}
             </li>
           </ul>
           <div>
             {step == 'adding_user'
-              ? 'Renseignez les volontés de votre proche : Il recevra une invitation par mail pour créer son compte et accéder à vos informations'
+              ? translate('addheirs.add_user')
               : step == 'display_code'
-              ? "Transmettez ce code à votre proche de confiance. Il doit le renseigner dans son compte afin d'avoir accès à vos données. Ce mécanisme permet de s'assurer que la personne qui accède à vos données est bien celle que vous pensez."
-              : "Votre proche de confiance a validé son lien avec vous. Il peut désormais accéder à vos informations s'il le juge nécessaire."}
+              ? translate('addheirs.send_code')
+              : translate('addheirs.validated')}
           </div>
         </>
       );
@@ -133,7 +124,7 @@ export default function TrustedPersons() {
         </Box>
       );
     } else if (getHeirsResponse.error) {
-      return <div>{'Il semblerait que vous ayiez un problème de réseau'}</div>;
+      return <div>{translate('common.error.network')}</div>;
     } else if (
       getHeirsResponse.data &&
       getHeirsResponse.data.user &&
@@ -163,12 +154,12 @@ export default function TrustedPersons() {
               <div className={styles.heir_user_status}>
                 {user.state == 'INVITATION_SENT' ? (
                   <div className={styles.heir_status_icon_waiting}>
-                    <span>En attente</span>
+                    <span>{translate('addheirs.status.waiting')}</span>
                     <WatchLaterIcon />
                   </div>
                 ) : (
                   <div className={styles.heir_status_icon_valid}>
-                    <span>Lien validé</span>
+                    <span>{translate('addheirs.status.validated')}</span>
                     <DoneAllIcon />
                   </div>
                 )}
@@ -177,15 +168,11 @@ export default function TrustedPersons() {
             <div className={styles.heir_information}>
               {user.state == 'INVITATION_SENT' ? (
                 <>
-                  Transmettez ce code de façon orale à votre proche, il devra le
-                  renseigner pour valider votre lien.
+                  {translate('addheirs.advice.sendcode')}
                   <div className={styles.heir_code}>{user.security_code}</div>
                 </>
               ) : (
-                <>
-                  Votre proche de confiance est validé et peut accéder à vos
-                  informations en cas de nécessité
-                </>
+                <>{translate('addheirs.advice.validated')}</>
               )}
             </div>
           </div>
@@ -209,7 +196,9 @@ export default function TrustedPersons() {
           >
             X
           </div>
-          <Typography variant="h6">Ajouter un proche</Typography>
+          <Typography variant="h6">
+            {translate('addheirs.addheirs.text')}
+          </Typography>
           <TextField
             id="firstname"
             label={translate('signup.label.first_name')}
@@ -278,12 +267,12 @@ export default function TrustedPersons() {
             }
           >
             {addHeirUserResponse.error
-              ? 'Il semblerait que vous ayez un problème de réseau'
+              ? translate('common.error.network')
               : addHeirUserResponse.data
-              ? 'Invitation envoyée avec succès !'
+              ? translate('common.success.invit_sent')
               : addHeirUserResponse.loading
-              ? 'Envoi de la demande en cours...'
-              : 'Inviter à devenir votre personne de confiance'}
+              ? translate('common.button.sending')
+              : translate('addheirs.button.invite')}
           </Button>
         </div>
       );
@@ -291,7 +280,7 @@ export default function TrustedPersons() {
       return (
         <>
           <Button variant="contained" onClick={() => setAddingUser(true)}>
-            Ajouter
+            {translate('common.button.add')}
           </Button>
         </>
       );
