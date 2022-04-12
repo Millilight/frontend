@@ -1,5 +1,7 @@
-mutation verifyEmail($token: String!, $user_id: String!) {
-  verifyEmail(verify_email_dto: { token: $token, user_id: $user_id }) {
+mutation verifyEmail($token: String!, $user_id: String!, $password: String) {
+  verifyEmail(
+    verify_email_dto: { token: $token, user_id: $user_id, password: $password }
+  ) {
     success
   }
 }
