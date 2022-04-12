@@ -466,6 +466,7 @@ export type CreateUserMutation = {
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String'];
   user_id: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
 }>;
 
 export type VerifyEmailMutation = {
@@ -1296,8 +1297,14 @@ export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
   CreateUserMutationVariables
 >;
 export const VerifyEmailDocument = gql`
-  mutation verifyEmail($token: String!, $user_id: String!) {
-    verifyEmail(verify_email_dto: { token: $token, user_id: $user_id }) {
+  mutation verifyEmail($token: String!, $user_id: String!, $password: String) {
+    verifyEmail(
+      verify_email_dto: {
+        token: $token
+        user_id: $user_id
+        password: $password
+      }
+    ) {
       success
     }
   }
@@ -1322,6 +1329,7 @@ export type VerifyEmailMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      token: // value for 'token'
  *      user_id: // value for 'user_id'
+ *      password: // value for 'password'
  *   },
  * });
  */
