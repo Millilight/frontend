@@ -403,6 +403,52 @@ export type GetWishesforUserQuery = {
   };
 };
 
+export type AddHeirMutationVariables = Exact<{
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  email: Scalars['String'];
+}>;
+
+export type AddHeirMutation = {
+  __typename?: 'Mutation';
+  addHeir: {
+    __typename?: 'AddHeirResponse';
+    heir_user: {
+      __typename?: 'Heir';
+      _id: string;
+      user_details: {
+        __typename?: 'UserDetails';
+        firstname: string;
+        lastname: string;
+        email: string;
+      };
+    };
+  };
+};
+
+export type GetHeirsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetHeirsQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    heir_users: Array<{
+      __typename?: 'Heir';
+      _id: string;
+      added_date: any;
+      security_code?: string | null;
+      state: StateTrust;
+      urgent_data_unlocked: boolean;
+      user_details: {
+        __typename?: 'UserDetails';
+        firstname: string;
+        lastname: string;
+        email: string;
+      };
+    }>;
+  };
+};
+
 export const AskResetPasswordUserDocument = gql`
   mutation askResetPasswordUser($email: String!) {
     askResetPasswordUser(ask_reset_password_user_dto: { email: $email }) {
@@ -990,4 +1036,129 @@ export type GetWishesforUserLazyQueryHookResult = ReturnType<
 export type GetWishesforUserQueryResult = Apollo.QueryResult<
   GetWishesforUserQuery,
   GetWishesforUserQueryVariables
+>;
+export const AddHeirDocument = gql`
+  mutation addHeir($firstname: String!, $lastname: String!, $email: String!) {
+    addHeir(
+      add_heir_user_input: {
+        firstname: $firstname
+        lastname: $lastname
+        email: $email
+      }
+    ) {
+      heir_user {
+        _id
+        user_details {
+          firstname
+          lastname
+          email
+        }
+      }
+    }
+  }
+`;
+export type AddHeirMutationFn = Apollo.MutationFunction<
+  AddHeirMutation,
+  AddHeirMutationVariables
+>;
+
+/**
+ * __useAddHeirMutation__
+ *
+ * To run a mutation, you first call `useAddHeirMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddHeirMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addHeirMutation, { data, loading, error }] = useAddHeirMutation({
+ *   variables: {
+ *      firstname: // value for 'firstname'
+ *      lastname: // value for 'lastname'
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useAddHeirMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    AddHeirMutation,
+    AddHeirMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<AddHeirMutation, AddHeirMutationVariables>(
+    AddHeirDocument,
+    options
+  );
+}
+export type AddHeirMutationHookResult = ReturnType<typeof useAddHeirMutation>;
+export type AddHeirMutationResult = Apollo.MutationResult<AddHeirMutation>;
+export type AddHeirMutationOptions = Apollo.BaseMutationOptions<
+  AddHeirMutation,
+  AddHeirMutationVariables
+>;
+export const GetHeirsDocument = gql`
+  query getHeirs {
+    user {
+      heir_users {
+        _id
+        added_date
+        security_code
+        state
+        urgent_data_unlocked
+        user_details {
+          firstname
+          lastname
+          email
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetHeirsQuery__
+ *
+ * To run a query within a React component, call `useGetHeirsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetHeirsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetHeirsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetHeirsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetHeirsQuery, GetHeirsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetHeirsQuery, GetHeirsQueryVariables>(
+    GetHeirsDocument,
+    options
+  );
+}
+export function useGetHeirsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetHeirsQuery,
+    GetHeirsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetHeirsQuery, GetHeirsQueryVariables>(
+    GetHeirsDocument,
+    options
+  );
+}
+export type GetHeirsQueryHookResult = ReturnType<typeof useGetHeirsQuery>;
+export type GetHeirsLazyQueryHookResult = ReturnType<
+  typeof useGetHeirsLazyQuery
+>;
+export type GetHeirsQueryResult = Apollo.QueryResult<
+  GetHeirsQuery,
+  GetHeirsQueryVariables
 >;
