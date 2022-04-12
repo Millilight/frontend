@@ -1403,6 +1403,7 @@ export const VerifyEmailDocument = gql`
     }
   }
 `;
+
 export type VerifyEmailMutationFn = Apollo.MutationFunction<
   VerifyEmailMutation,
   VerifyEmailMutationVariables
