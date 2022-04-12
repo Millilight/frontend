@@ -496,6 +496,7 @@ export type CreateUserMutation = {
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String'];
   user_id: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
 }>;
 
 export type VerifyEmailMutation = {
@@ -1423,6 +1424,7 @@ export type VerifyEmailMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      token: // value for 'token'
  *      user_id: // value for 'user_id'
+ *      password: // value for 'password'
  *   },
  * });
  */
