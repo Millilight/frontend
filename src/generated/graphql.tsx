@@ -77,6 +77,7 @@ export type Legator = {
   _id: Scalars['ID'];
   added_date: Scalars['Date'];
   state: StateTrust;
+  urgent_data?: Maybe<UrgentData>;
   urgent_data_unlocked: Scalars['Boolean'];
   urgent_data_unlocked_date?: Maybe<Scalars['Date']>;
   user_details: UserDetails;
@@ -146,7 +147,7 @@ export type MutationUpdateUserArgs = {
 };
 
 export type MutationUpdateWishesArgs = {
-  update_wishes_dto: UpdateWishesDto;
+  update_wishes_dto: UpdateWishesInput;
 };
 
 export type MutationVerifyEmailArgs = {
@@ -184,7 +185,7 @@ export type UnlockUrgentDataInput = {
 
 export type UnlockUrgentDataResponse = {
   __typename?: 'UnlockUrgentDataResponse';
-  urgent_data: UrgentData;
+  success: Scalars['Boolean'];
 };
 
 export type UpdateEmailUserDto = {
@@ -199,10 +200,18 @@ export type UpdateUserDto = {
   password?: InputMaybe<Scalars['String']>;
 };
 
-export type UpdateWishesDto = {
+export type UpdateWishesInput = {
   burial_cremation?: InputMaybe<Scalars['String']>;
   burial_cremation_place?: InputMaybe<Scalars['String']>;
+  coffin?: InputMaybe<Scalars['String']>;
+  list_of_people?: InputMaybe<Scalars['String']>;
   music?: InputMaybe<Scalars['String']>;
+  ornament?: InputMaybe<Scalars['String']>;
+  other?: InputMaybe<Scalars['String']>;
+  place?: InputMaybe<Scalars['String']>;
+  prevoyance?: InputMaybe<Scalars['String']>;
+  religion?: InputMaybe<Scalars['String']>;
+  text?: InputMaybe<Scalars['String']>;
 };
 
 export type UrgentData = {
@@ -263,7 +272,15 @@ export type Wishes = {
   __typename?: 'Wishes';
   burial_cremation?: Maybe<Scalars['String']>;
   burial_cremation_place?: Maybe<Scalars['String']>;
+  coffin?: Maybe<Scalars['String']>;
+  list_of_people?: Maybe<Scalars['String']>;
   music?: Maybe<Scalars['String']>;
+  ornament?: Maybe<Scalars['String']>;
+  other?: Maybe<Scalars['String']>;
+  place?: Maybe<Scalars['String']>;
+  prevoyance?: Maybe<Scalars['String']>;
+  religion?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
 };
 
 export type AskResetPasswordUserMutationVariables = Exact<{
@@ -362,6 +379,7 @@ export type CreateUserMutation = {
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String'];
   user_id: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
 }>;
 
 export type VerifyEmailMutation = {
@@ -860,8 +878,14 @@ export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
   CreateUserMutationVariables
 >;
 export const VerifyEmailDocument = gql`
-  mutation verifyEmail($token: String!, $user_id: String!) {
-    verifyEmail(verify_email_dto: { token: $token, user_id: $user_id }) {
+  mutation verifyEmail($token: String!, $user_id: String!, $password: String) {
+    verifyEmail(
+      verify_email_dto: {
+        token: $token
+        user_id: $user_id
+        password: $password
+      }
+    ) {
       success
     }
   }
@@ -886,6 +910,7 @@ export type VerifyEmailMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      token: // value for 'token'
  *      user_id: // value for 'user_id'
+ *      password: // value for 'password'
  *   },
  * });
  */
