@@ -178,7 +178,6 @@ export enum StateTrust {
   InvitationSent = 'INVITATION_SENT',
   Validated = 'VALIDATED',
 }
-
 export type UnlockUrgentDataInput = {
   legator_user_id: Scalars['ID'];
 };
