@@ -1,5 +1,4 @@
 import { withApollo } from '@/utils/withApollo';
-import { Box } from '@mui/material';
 import MenuDrawer from '@/components/MenuDrawer/MenuDrawer';
 import FreeSpace from '@/components/FreeSpace/FreeSpace';
 
@@ -10,9 +9,9 @@ const FreeSpacePage = () => {
   return (
     <div className="flex-container">
       <MenuDrawer selectedPage={selectedPage} />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <main>
         <FreeSpace />
-      </Box>
+      </main>
     </div>
   );
 };

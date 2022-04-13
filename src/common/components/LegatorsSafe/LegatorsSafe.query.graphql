@@ -1,0 +1,13 @@
+query getLegatorUsersDetails {
+  user {
+    legator_users {
+      _id
+      user_details {
+        firstname
+        lastname
+      }
+      state
+      urgent_data_unlocked
+    }
+  }
+}

@@ -16,6 +16,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import styles from './MenuDrawer.module.css';
 import translate from '@/utils/translate';
 import { useRouter } from 'next/router';
+import { useGetLegatorUsersQuery } from 'generated/graphql';
 
 const drawerWidth = 350;
 
@@ -33,8 +34,8 @@ const Drawer = styled(MuiDrawer, {
     '& .MuiDrawer-paper': {
       width: drawerWidth,
       overflowX: 'hidden',
-      backgroundColor: '#03546d',
-      color: '#ffffff',
+      backgroundColor: 'var(--dark-blue)',
+      color: 'var(--white)',
     },
   }),
   ...(!open && {
@@ -43,8 +44,8 @@ const Drawer = styled(MuiDrawer, {
     '& .MuiDrawer-paper': {
       overflowX: 'hidden',
       width: '80px',
-      backgroundColor: '#03546d',
-      color: '#ffffff',
+      backgroundColor: 'var(--dark-blue)',
+      color: 'var(--white)',
     },
   }),
 }));
@@ -55,6 +56,51 @@ export default function MenuDrawer(props: { selectedPage: string }) {
 
   // Whether the menu is opened (icons + text) or shrunk on the left hand side (icons only)
   const [open, setOpen] = React.useState(false);
+
+  // Conditional display of "Access to legators' safe" : if at least 1 legator
+  const { data, error } = useGetLegatorUsersQuery();
+  const legators = data?.user.legator_users;
+  const hasLegators = !error && legators?.length ? true : false;
+
+  function displayAccessToLegatorsSafe() {
+    if (hasLegators) {
+      return (
+        <ListItemButton
+          onClick={() => {
+            router.push('/espace-personnel/coffre-fort-de-mes-proches');
+          }}
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+            backgroundColor:
+              props.selectedPage === 'legators_safe' ? '#000000' : 'null',
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}
+          >
+            <Box
+              component="img"
+              sx={{
+                width: '35px',
+              }}
+              alt="..."
+              src="/key.png"
+            />
+          </ListItemIcon>
+          <ListItemText
+            primary={translate('menu.legators_safe')}
+            sx={{ opacity: open ? 1 : 0 }}
+          />
+        </ListItemButton>
+      );
+    }
+  }
 
   return (
     <Drawer
@@ -277,6 +323,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
             sx={{ opacity: open ? 1 : 0 }}
           />
         </ListItemButton>
+        {displayAccessToLegatorsSafe()}
       </List>
     </Drawer>
   );
