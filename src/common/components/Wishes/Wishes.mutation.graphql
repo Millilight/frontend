@@ -1,17 +1,41 @@
 mutation updateWishes(
   $burial_cremation: String
   $burial_cremation_place: String
+  $religion: String
+  $place: String
+  $prevoyance: String
+  $list_of_people: String
+  $coffin: String
+  $ornament: String
+  $text: String
   $music: String
+  $other: String
 ) {
   updateWishes(
     update_wishes_dto: {
       burial_cremation: $burial_cremation
       burial_cremation_place: $burial_cremation_place
+      religion: $religion
+      place: $place
+      prevoyance: $prevoyance
+      list_of_people: $list_of_people
+      coffin: $coffin
+      ornament: $ornament
+      text: $text
       music: $music
+      other: $other
     }
   ) {
     burial_cremation
     burial_cremation_place
+    religion
+    place
+    prevoyance
+    list_of_people
+    coffin
+    ornament
+    text
     music
+    other
   }
 }
