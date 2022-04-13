@@ -231,6 +231,7 @@ export default function Ceremonial() {
 
   //Load ceremonial wishes
   const { data, loading, error } = useGetWishesforUserQuery();
+
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>

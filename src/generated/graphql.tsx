@@ -77,6 +77,7 @@ export type Legator = {
   _id: Scalars['ID'];
   added_date: Scalars['Date'];
   state: StateTrust;
+  urgent_data?: Maybe<UrgentData>;
   urgent_data_unlocked: Scalars['Boolean'];
   urgent_data_unlocked_date?: Maybe<Scalars['Date']>;
   user_details: UserDetails;
@@ -146,7 +147,7 @@ export type MutationUpdateUserArgs = {
 };
 
 export type MutationUpdateWishesArgs = {
-  update_wishes_dto: UpdateWishesDto;
+  update_wishes_dto: UpdateWishesInput;
 };
 
 export type MutationVerifyEmailArgs = {
@@ -184,7 +185,7 @@ export type UnlockUrgentDataInput = {
 
 export type UnlockUrgentDataResponse = {
   __typename?: 'UnlockUrgentDataResponse';
-  urgent_data: UrgentData;
+  success: Scalars['Boolean'];
 };
 
 export type UpdateEmailUserDto = {
@@ -199,10 +200,18 @@ export type UpdateUserDto = {
   password?: InputMaybe<Scalars['String']>;
 };
 
-export type UpdateWishesDto = {
+export type UpdateWishesInput = {
   burial_cremation?: InputMaybe<Scalars['String']>;
   burial_cremation_place?: InputMaybe<Scalars['String']>;
+  coffin?: InputMaybe<Scalars['String']>;
+  list_of_people?: InputMaybe<Scalars['String']>;
   music?: InputMaybe<Scalars['String']>;
+  ornament?: InputMaybe<Scalars['String']>;
+  other?: InputMaybe<Scalars['String']>;
+  place?: InputMaybe<Scalars['String']>;
+  prevoyance?: InputMaybe<Scalars['String']>;
+  religion?: InputMaybe<Scalars['String']>;
+  text?: InputMaybe<Scalars['String']>;
 };
 
 export type UrgentData = {
@@ -263,7 +272,15 @@ export type Wishes = {
   __typename?: 'Wishes';
   burial_cremation?: Maybe<Scalars['String']>;
   burial_cremation_place?: Maybe<Scalars['String']>;
+  coffin?: Maybe<Scalars['String']>;
+  list_of_people?: Maybe<Scalars['String']>;
   music?: Maybe<Scalars['String']>;
+  ornament?: Maybe<Scalars['String']>;
+  other?: Maybe<Scalars['String']>;
+  place?: Maybe<Scalars['String']>;
+  prevoyance?: Maybe<Scalars['String']>;
+  religion?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
 };
 
 export type AskResetPasswordUserMutationVariables = Exact<{
@@ -372,7 +389,15 @@ export type VerifyEmailMutation = {
 export type UpdateWishesMutationVariables = Exact<{
   burial_cremation?: InputMaybe<Scalars['String']>;
   burial_cremation_place?: InputMaybe<Scalars['String']>;
+  religion?: InputMaybe<Scalars['String']>;
+  place?: InputMaybe<Scalars['String']>;
+  prevoyance?: InputMaybe<Scalars['String']>;
+  list_of_people?: InputMaybe<Scalars['String']>;
+  coffin?: InputMaybe<Scalars['String']>;
+  ornament?: InputMaybe<Scalars['String']>;
+  text?: InputMaybe<Scalars['String']>;
   music?: InputMaybe<Scalars['String']>;
+  other?: InputMaybe<Scalars['String']>;
 }>;
 
 export type UpdateWishesMutation = {
@@ -381,7 +406,15 @@ export type UpdateWishesMutation = {
     __typename?: 'Wishes';
     burial_cremation?: string | null;
     burial_cremation_place?: string | null;
+    religion?: string | null;
+    place?: string | null;
+    prevoyance?: string | null;
+    list_of_people?: string | null;
+    coffin?: string | null;
+    ornament?: string | null;
+    text?: string | null;
     music?: string | null;
+    other?: string | null;
   };
 };
 
@@ -397,7 +430,15 @@ export type GetWishesforUserQuery = {
         __typename?: 'Wishes';
         burial_cremation?: string | null;
         burial_cremation_place?: string | null;
+        religion?: string | null;
+        place?: string | null;
+        prevoyance?: string | null;
+        list_of_people?: string | null;
+        coffin?: string | null;
+        ornament?: string | null;
+        text?: string | null;
         music?: string | null;
+        other?: string | null;
       };
     };
   };
@@ -914,18 +955,42 @@ export const UpdateWishesDocument = gql`
   mutation updateWishes(
     $burial_cremation: String
     $burial_cremation_place: String
+    $religion: String
+    $place: String
+    $prevoyance: String
+    $list_of_people: String
+    $coffin: String
+    $ornament: String
+    $text: String
     $music: String
+    $other: String
   ) {
     updateWishes(
       update_wishes_dto: {
         burial_cremation: $burial_cremation
         burial_cremation_place: $burial_cremation_place
+        religion: $religion
+        place: $place
+        prevoyance: $prevoyance
+        list_of_people: $list_of_people
+        coffin: $coffin
+        ornament: $ornament
+        text: $text
         music: $music
+        other: $other
       }
     ) {
       burial_cremation
       burial_cremation_place
+      religion
+      place
+      prevoyance
+      list_of_people
+      coffin
+      ornament
+      text
       music
+      other
     }
   }
 `;
@@ -949,7 +1014,15 @@ export type UpdateWishesMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      burial_cremation: // value for 'burial_cremation'
  *      burial_cremation_place: // value for 'burial_cremation_place'
+ *      religion: // value for 'religion'
+ *      place: // value for 'place'
+ *      prevoyance: // value for 'prevoyance'
+ *      list_of_people: // value for 'list_of_people'
+ *      coffin: // value for 'coffin'
+ *      ornament: // value for 'ornament'
+ *      text: // value for 'text'
  *      music: // value for 'music'
+ *      other: // value for 'other'
  *   },
  * });
  */
@@ -981,7 +1054,15 @@ export const GetWishesforUserDocument = gql`
         wishes {
           burial_cremation
           burial_cremation_place
+          religion
+          place
+          prevoyance
+          list_of_people
+          coffin
+          ornament
+          text
           music
+          other
         }
       }
     }

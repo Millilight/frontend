@@ -4,7 +4,15 @@ query getWishesforUser {
       wishes {
         burial_cremation
         burial_cremation_place
+        religion
+        place
+        prevoyance
+        list_of_people
+        coffin
+        ornament
+        text
         music
+        other
       }
     }
   }
