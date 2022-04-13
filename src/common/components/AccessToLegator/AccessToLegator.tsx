@@ -229,7 +229,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
   }
 
   function displayGetUrgentDataButton() {
-    if (dataGet && !errorGet && !loadingGet) {
+    if (dataGet && !loadingGet) {
       const response: GetUrgentDataQuery['user']['legator_users'] | undefined =
         dataGet?.user.legator_users;
       if (response) {
