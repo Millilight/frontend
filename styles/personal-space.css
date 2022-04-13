@@ -54,6 +54,16 @@
   width: 50%;
 }
 
+@media (max-width: 900px) {
+  .personnal-space-main-container {
+    flex-direction: column;
+  }
+  .personnal-space-content-container,
+  .personnal-space-help-container {
+    width: 100%;
+  }
+}
+
 .personnal-space-content-container {
   padding-top: 20px;
 }
