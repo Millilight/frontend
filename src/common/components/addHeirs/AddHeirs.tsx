@@ -269,7 +269,7 @@ export default function TrustedPersons() {
             {addHeirUserResponse.error
               ? translate('common.error.network')
               : addHeirUserResponse.data
-              ? translate('common.success.invit_sent')
+              ? translate('common.success.invite_sent')
               : addHeirUserResponse.loading
               ? translate('common.button.sending')
               : translate('addheirs.button.invite')}
