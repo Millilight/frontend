@@ -1,5 +1,4 @@
 import { withApollo } from '@/utils/withApollo';
-import { Box } from '@mui/material';
 import MenuDrawer from '@/components/MenuDrawer/MenuDrawer';
 import Medical from '@/components/Medical/Medical';
 
@@ -10,9 +9,9 @@ const MedicalWishesPage = () => {
   return (
     <div className="flex-container">
       <MenuDrawer selectedPage={selectedPage} />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <main>
         <Medical />
-      </Box>
+      </main>
     </div>
   );
 };

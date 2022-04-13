@@ -1,0 +1,20 @@
+mutation confirmSecurityCode($legator_user_id: ID!, $security_code: String!) {
+  confirmSecurityCode(
+    confirm_security_code_input: {
+      legator_user_id: $legator_user_id
+      security_code: $security_code
+    }
+  ) {
+    legator_user {
+      state
+    }
+  }
+}
+
+mutation unlockUrgentData($legator_user_id: ID!) {
+  unlockUrgentData(
+    unlock_urgent_data_input: { legator_user_id: $legator_user_id }
+  ) {
+    success
+  }
+}

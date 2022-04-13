@@ -1,19 +1,19 @@
 import { withApollo } from '@/utils/withApollo';
 import MenuDrawer from '@/components/MenuDrawer/MenuDrawer';
-import Paperwork from '@/components/Paperwork/Paperwork';
+import LegatorsSafe from '@/components/LegatorsSafe/LegatorsSafe';
 
-const PaperworkPage = () => {
+const LegatorsSafePage = () => {
   //To know what to highlight on the menu
-  const selectedPage = 'paperwork';
+  const selectedPage = 'legators_safe';
 
   return (
     <div className="flex-container">
       <MenuDrawer selectedPage={selectedPage} />
       <main>
-        <Paperwork />
+        <LegatorsSafe />
       </main>
     </div>
   );
 };
 
-export default withApollo(PaperworkPage);
+export default withApollo(LegatorsSafePage);

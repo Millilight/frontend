@@ -1,11 +1,12 @@
 import Wishes from '@/components/Wishes/Wishes';
-import { Typography, Grid, Box, Paper, CircularProgress } from '@mui/material';
+import { Typography, Box, CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import {
   useGetWishesforUserQuery,
   GetWishesforUserQuery,
 } from 'generated/graphql';
 import translate from '@/utils/translate';
+import styles from './Ceremonial.module.css';
 
 export default function Ceremonial() {
   // Help on the right hand side  pannel
@@ -254,49 +255,33 @@ export default function Ceremonial() {
   updateWishesList(savedWishes);
 
   return (
-    <main>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <div onClick={() => setHelp(initial_help)}>
-            <Typography
-              variant="h3"
-              sx={{
-                m: 10,
-                textAlign: 'center',
-              }}
-            >
-              <Box
-                component="img"
-                sx={{
-                  width: '50px',
-                }}
-                alt="..."
-                src="/candle.png"
-              />
-              {'   '}
-              {translate('ceremonial.title')}
-            </Typography>
-          </div>
-          <Wishes wishes={ceremonialWishesList} helpCallback={changeHelp} />
-        </Grid>
-        <Grid item xs={6}>
-          <Paper
+    <div className={styles.horizontal_container}>
+      <div className={styles.item}>
+        <div onClick={() => setHelp(initial_help)}>
+          <Typography
+            variant="h3"
             sx={{
               m: 10,
-              p: 10,
-              bgcolor: '#03546D',
-              color: 'white',
-              textAlign: 'justify',
-              borderRadius: '40px',
-              position: 'fixed',
-              maxHeight: '80%',
-              overflow: 'auto',
+              textAlign: 'center',
             }}
           >
-            {help}
-          </Paper>
-        </Grid>
-      </Grid>
-    </main>
+            <Box
+              component="img"
+              sx={{
+                width: '50px',
+              }}
+              alt="..."
+              src="/candle.png"
+            />
+            {'   '}
+            {translate('ceremonial.title')}
+          </Typography>
+        </div>
+        <Wishes wishes={ceremonialWishesList} helpCallback={changeHelp} />
+      </div>
+      <div className={styles.item}>
+        <div className={styles.help}>{help}</div>
+      </div>
+    </div>
   );
 }
