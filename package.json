@@ -10,6 +10,7 @@
     "lint-all": "next lint",
     "format": "prettier -w .",
     "setup": "husky install",
+    "install": "npm run build",
     "start": "next start -p \"${APP_PORT:-8080}\"",
     "test:ci": "jest --ci",
     "test": "jest --watch --coverage"
