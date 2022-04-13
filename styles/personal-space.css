@@ -26,9 +26,9 @@
   width: 90%;
   min-height: 50px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
-  border-style: hidden;
-  color: rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
+  border-style: hidden !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+  border-radius: 10px !important;
 }
 
 .category-button:hover,
