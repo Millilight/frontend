@@ -1,0 +1,65 @@
+/********* Legators' safe********/
+
+.horizontal_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.item {
+  width: 50%;
+}
+
+.help {
+  background-color: var(--dark-blue);
+  margin: 2vw;
+  margin-top: 80px;
+  padding: 8vh;
+  color: var(--white);
+  text-align: justify;
+  border-radius: 10px;
+  max-height: 80%;
+  max-width: 796px;
+  overflow: auto;
+}
+
+.icon {
+  position: relative;
+  top: +5px;
+  margin-right: 5px;
+}
+
+.yellow {
+  color: var(--yellow);
+}
+
+@media (max-width: 796px) {
+  .horizontal_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0px;
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  .help {
+    background-color: var(--dark-blue);
+    margin: 0px;
+    margin-top: 5vh;
+    padding: 8vw;
+    color: var(--white);
+    text-align: justify;
+    border-radius: 0px;
+    overflow: auto;
+  }
+}
+
+/********* End Legators' safe ********/

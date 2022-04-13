@@ -1,0 +1,95 @@
+/********* Access to legator ********/
+.rounded_container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
+  padding: 3vh;
+}
+
+.horizontal_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.horizontal_container_right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.dialog {
+  padding: 5vh;
+  text-align: 'justify';
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.status_icon_valid {
+  color: var(--green);
+}
+
+.status_icon_pending {
+  color: var(--yellow);
+}
+
+.status_text {
+  position: relative;
+  top: -5px;
+  left: -10px;
+}
+
+.icon {
+  position: relative;
+  top: -2px;
+  margin-right: 4px;
+}
+
+.code_input {
+  border: none;
+  text-transform: uppercase;
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: 1px solid var(--yellow);
+  text-align: center;
+  border-radius: 10px;
+}
+
+@media (max-width: 796px) {
+  .horizontal_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .horizontal_container_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+}
+
+/********* End Access to legator ********/

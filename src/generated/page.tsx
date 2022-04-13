@@ -9,6 +9,132 @@ import * as Apollo from '@apollo/client';
 import type React from 'react';
 import { getApolloClient, ApolloClientContext } from '@/utils/withApollo';
 
+export async function getServerPageGetUrgentData(
+  options: Omit<
+    Apollo.QueryOptions<Types.GetUrgentDataQueryVariables>,
+    'query'
+  >,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data = await apolloClient.query<Types.GetUrgentDataQuery>({
+    ...options,
+    query: Operations.GetUrgentDataDocument,
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useGetUrgentData = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<
+    Types.GetUrgentDataQuery,
+    Types.GetUrgentDataQueryVariables
+  >
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetUrgentDataDocument, options);
+};
+export type PageGetUrgentDataComp = React.FC<{
+  data?: Types.GetUrgentDataQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetUrgentData =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<
+      Types.GetUrgentDataQuery,
+      Types.GetUrgentDataQueryVariables
+    >
+  ) =>
+  (WrappedComponent: PageGetUrgentDataComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.GetUrgentDataDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetUrgentData = {
+  getServerPage: getServerPageGetUrgentData,
+  withPage: withPageGetUrgentData,
+  usePage: useGetUrgentData,
+};
+
+export async function getServerPageGetLegatorUsersDetails(
+  options: Omit<
+    Apollo.QueryOptions<Types.GetLegatorUsersDetailsQueryVariables>,
+    'query'
+  >,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data = await apolloClient.query<Types.GetLegatorUsersDetailsQuery>({
+    ...options,
+    query: Operations.GetLegatorUsersDetailsDocument,
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useGetLegatorUsersDetails = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<
+    Types.GetLegatorUsersDetailsQuery,
+    Types.GetLegatorUsersDetailsQueryVariables
+  >
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetLegatorUsersDetailsDocument, options);
+};
+export type PageGetLegatorUsersDetailsComp = React.FC<{
+  data?: Types.GetLegatorUsersDetailsQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetLegatorUsersDetails =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<
+      Types.GetLegatorUsersDetailsQuery,
+      Types.GetLegatorUsersDetailsQueryVariables
+    >
+  ) =>
+  (WrappedComponent: PageGetLegatorUsersDetailsComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(
+      Operations.GetLegatorUsersDetailsDocument,
+      options
+    );
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetLegatorUsersDetails = {
+  getServerPage: getServerPageGetLegatorUsersDetails,
+  withPage: withPageGetLegatorUsersDetails,
+  usePage: useGetLegatorUsersDetails,
+};
 export async function getServerPageGetCurrentUser(
   options: Omit<
     Apollo.QueryOptions<Types.GetCurrentUserQueryVariables>,
@@ -72,6 +198,71 @@ export const ssrGetCurrentUser = {
   getServerPage: getServerPageGetCurrentUser,
   withPage: withPageGetCurrentUser,
   usePage: useGetCurrentUser,
+};
+
+export async function getServerPageGetLegatorUsers(
+  options: Omit<
+    Apollo.QueryOptions<Types.GetLegatorUsersQueryVariables>,
+    'query'
+  >,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data = await apolloClient.query<Types.GetLegatorUsersQuery>({
+    ...options,
+    query: Operations.GetLegatorUsersDocument,
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useGetLegatorUsers = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<
+    Types.GetLegatorUsersQuery,
+    Types.GetLegatorUsersQueryVariables
+  >
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetLegatorUsersDocument, options);
+};
+export type PageGetLegatorUsersComp = React.FC<{
+  data?: Types.GetLegatorUsersQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetLegatorUsers =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<
+      Types.GetLegatorUsersQuery,
+      Types.GetLegatorUsersQueryVariables
+    >
+  ) =>
+  (WrappedComponent: PageGetLegatorUsersComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(
+      Operations.GetLegatorUsersDocument,
+      options
+    );
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetLegatorUsers = {
+  getServerPage: getServerPageGetLegatorUsers,
+  withPage: withPageGetLegatorUsers,
+  usePage: useGetLegatorUsers,
 };
 
 export async function getServerPageGetWishesforUser(

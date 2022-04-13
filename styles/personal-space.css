@@ -1,37 +1,41 @@
+/********* Personal space ********/
 .flex-container {
   display: flex;
 }
 
 .rounded-container {
-  border-radius: 40px;
+  border-radius: 10px;
   background-color: #ffffff;
-  margin: 40px;
-  padding: 40px;
-  max-width: 800px;
+  margin: 8vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  padding: 4vh;
+  max-width: 900px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
 }
 
 .invisible-container {
-  margin: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 40px;
+  margin: 4vh;
+  padding-left: 4vh;
+  padding-right: 4vh;
+  padding-top: 4vh;
   max-width: 1200px;
 }
 
 .category-button {
   width: 90%;
   min-height: 50px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
   border-style: hidden;
   color: rgba(0, 0, 0, 0.6);
-  border-radius: 40px;
+  border-radius: 10px;
 }
 
 .category-button:hover,
 .emphasis-on-hover:hover {
-  background-color: #f8f6f4;
+  background-color: var(--beige);
   border-style: hidden;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
 }
 
 .personnal-space-main-container {
@@ -85,4 +89,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media (max-width: 796px) {
+  .rounded-container {
+    border-radius: 0px;
+    background-color: #ffffff;
+    margin: 0vh;
+    margin-top: 2vh;
+    padding: 2vh;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
+  }
+
+  .invisible-container {
+    margin: 0vh;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-top: 2vh;
+  }
 }

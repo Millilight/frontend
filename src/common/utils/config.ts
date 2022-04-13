@@ -31,7 +31,8 @@ export const burrial_wishes_url = '/espace-personnel/volontes-ceremoniales';
 export const medical_url = '/espace-personnel/volontes-medicales';
 export const administrative_url = '/espace-personnel/demarches-administratives';
 export const free_space_url = '/espace-personnel/espace-libre';
-export const trust_people_url = '/espace-personnel/personnes-de-confiance';
+export const trusted_users_url = '/espace-personnel/personnes-de-confiance';
+export const legators_safe_url = '/espace-personnel/coffre-fort-de-mes-proches';
 export const my_account_url = '/espace-personnel/mon-compte';
 //define urls that are only accessible once connected
 export const protected_urls = [
@@ -42,7 +43,8 @@ export const protected_urls = [
   medical_url,
   administrative_url,
   free_space_url,
-  trust_people_url,
+  trusted_users_url,
+  legators_safe_url,
 ];
 
 //define urls that should not be accessible when you are connected

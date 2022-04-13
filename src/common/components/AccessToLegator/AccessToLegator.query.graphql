@@ -1,0 +1,22 @@
+query getUrgentData {
+  user {
+    legator_users {
+      _id
+      urgent_data {
+        wishes {
+          burial_cremation
+          burial_cremation_place
+          music
+          religion
+          place
+          prevoyance
+          list_of_people
+          coffin
+          ornament
+          text
+          other
+        }
+      }
+    }
+  }
+}

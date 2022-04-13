@@ -283,6 +283,61 @@ export type Wishes = {
   text?: Maybe<Scalars['String']>;
 };
 
+export type ConfirmSecurityCodeMutationVariables = Exact<{
+  legator_user_id: Scalars['ID'];
+  security_code: Scalars['String'];
+}>;
+
+export type ConfirmSecurityCodeMutation = {
+  __typename?: 'Mutation';
+  confirmSecurityCode: {
+    __typename?: 'ConfirmSecurityCodeResponse';
+    legator_user: { __typename?: 'Legator'; state: StateTrust };
+  };
+};
+
+export type UnlockUrgentDataMutationVariables = Exact<{
+  legator_user_id: Scalars['ID'];
+}>;
+
+export type UnlockUrgentDataMutation = {
+  __typename?: 'Mutation';
+  unlockUrgentData: {
+    __typename?: 'UnlockUrgentDataResponse';
+    success: boolean;
+  };
+};
+
+export type GetUrgentDataQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetUrgentDataQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    legator_users: Array<{
+      __typename?: 'Legator';
+      _id: string;
+      urgent_data?: {
+        __typename?: 'UrgentData';
+        wishes: {
+          __typename?: 'Wishes';
+          burial_cremation?: string | null;
+          burial_cremation_place?: string | null;
+          music?: string | null;
+          religion?: string | null;
+          place?: string | null;
+          prevoyance?: string | null;
+          list_of_people?: string | null;
+          coffin?: string | null;
+          ornament?: string | null;
+          text?: string | null;
+          other?: string | null;
+        };
+      } | null;
+    }>;
+  };
+};
+
 export type AskResetPasswordUserMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -307,6 +362,28 @@ export type UpdateEmailUserMutation = {
     firstname: string;
     lastname: string;
     email: string;
+  };
+};
+
+export type GetLegatorUsersDetailsQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetLegatorUsersDetailsQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    legator_users: Array<{
+      __typename?: 'Legator';
+      _id: string;
+      state: StateTrust;
+      urgent_data_unlocked: boolean;
+      user_details: {
+        __typename?: 'UserDetails';
+        firstname: string;
+        lastname: string;
+      };
+    }>;
   };
 };
 
@@ -336,6 +413,16 @@ export type UpdateUserMutation = {
     firstname: string;
     lastname: string;
     email: string;
+  };
+};
+
+export type GetLegatorUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetLegatorUsersQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    legator_users: Array<{ __typename?: 'Legator'; _id: string }>;
   };
 };
 
@@ -490,6 +577,190 @@ export type GetHeirsQuery = {
   };
 };
 
+export const ConfirmSecurityCodeDocument = gql`
+  mutation confirmSecurityCode($legator_user_id: ID!, $security_code: String!) {
+    confirmSecurityCode(
+      confirm_security_code_input: {
+        legator_user_id: $legator_user_id
+        security_code: $security_code
+      }
+    ) {
+      legator_user {
+        state
+      }
+    }
+  }
+`;
+export type ConfirmSecurityCodeMutationFn = Apollo.MutationFunction<
+  ConfirmSecurityCodeMutation,
+  ConfirmSecurityCodeMutationVariables
+>;
+
+/**
+ * __useConfirmSecurityCodeMutation__
+ *
+ * To run a mutation, you first call `useConfirmSecurityCodeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useConfirmSecurityCodeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [confirmSecurityCodeMutation, { data, loading, error }] = useConfirmSecurityCodeMutation({
+ *   variables: {
+ *      legator_user_id: // value for 'legator_user_id'
+ *      security_code: // value for 'security_code'
+ *   },
+ * });
+ */
+export function useConfirmSecurityCodeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    ConfirmSecurityCodeMutation,
+    ConfirmSecurityCodeMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    ConfirmSecurityCodeMutation,
+    ConfirmSecurityCodeMutationVariables
+  >(ConfirmSecurityCodeDocument, options);
+}
+export type ConfirmSecurityCodeMutationHookResult = ReturnType<
+  typeof useConfirmSecurityCodeMutation
+>;
+export type ConfirmSecurityCodeMutationResult =
+  Apollo.MutationResult<ConfirmSecurityCodeMutation>;
+export type ConfirmSecurityCodeMutationOptions = Apollo.BaseMutationOptions<
+  ConfirmSecurityCodeMutation,
+  ConfirmSecurityCodeMutationVariables
+>;
+export const UnlockUrgentDataDocument = gql`
+  mutation unlockUrgentData($legator_user_id: ID!) {
+    unlockUrgentData(
+      unlock_urgent_data_input: { legator_user_id: $legator_user_id }
+    ) {
+      success
+    }
+  }
+`;
+export type UnlockUrgentDataMutationFn = Apollo.MutationFunction<
+  UnlockUrgentDataMutation,
+  UnlockUrgentDataMutationVariables
+>;
+
+/**
+ * __useUnlockUrgentDataMutation__
+ *
+ * To run a mutation, you first call `useUnlockUrgentDataMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUnlockUrgentDataMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [unlockUrgentDataMutation, { data, loading, error }] = useUnlockUrgentDataMutation({
+ *   variables: {
+ *      legator_user_id: // value for 'legator_user_id'
+ *   },
+ * });
+ */
+export function useUnlockUrgentDataMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UnlockUrgentDataMutation,
+    UnlockUrgentDataMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UnlockUrgentDataMutation,
+    UnlockUrgentDataMutationVariables
+  >(UnlockUrgentDataDocument, options);
+}
+export type UnlockUrgentDataMutationHookResult = ReturnType<
+  typeof useUnlockUrgentDataMutation
+>;
+export type UnlockUrgentDataMutationResult =
+  Apollo.MutationResult<UnlockUrgentDataMutation>;
+export type UnlockUrgentDataMutationOptions = Apollo.BaseMutationOptions<
+  UnlockUrgentDataMutation,
+  UnlockUrgentDataMutationVariables
+>;
+export const GetUrgentDataDocument = gql`
+  query getUrgentData {
+    user {
+      legator_users {
+        _id
+        urgent_data {
+          wishes {
+            burial_cremation
+            burial_cremation_place
+            music
+            religion
+            place
+            prevoyance
+            list_of_people
+            coffin
+            ornament
+            text
+            other
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetUrgentDataQuery__
+ *
+ * To run a query within a React component, call `useGetUrgentDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUrgentDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUrgentDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUrgentDataQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetUrgentDataQuery,
+    GetUrgentDataQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUrgentDataQuery, GetUrgentDataQueryVariables>(
+    GetUrgentDataDocument,
+    options
+  );
+}
+export function useGetUrgentDataLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUrgentDataQuery,
+    GetUrgentDataQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUrgentDataQuery, GetUrgentDataQueryVariables>(
+    GetUrgentDataDocument,
+    options
+  );
+}
+export type GetUrgentDataQueryHookResult = ReturnType<
+  typeof useGetUrgentDataQuery
+>;
+export type GetUrgentDataLazyQueryHookResult = ReturnType<
+  typeof useGetUrgentDataLazyQuery
+>;
+export type GetUrgentDataQueryResult = Apollo.QueryResult<
+  GetUrgentDataQuery,
+  GetUrgentDataQueryVariables
+>;
 export const AskResetPasswordUserDocument = gql`
   mutation askResetPasswordUser($email: String!) {
     askResetPasswordUser(ask_reset_password_user_dto: { email: $email }) {
@@ -594,6 +865,71 @@ export type UpdateEmailUserMutationResult =
 export type UpdateEmailUserMutationOptions = Apollo.BaseMutationOptions<
   UpdateEmailUserMutation,
   UpdateEmailUserMutationVariables
+>;
+export const GetLegatorUsersDetailsDocument = gql`
+  query getLegatorUsersDetails {
+    user {
+      legator_users {
+        _id
+        user_details {
+          firstname
+          lastname
+        }
+        state
+        urgent_data_unlocked
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetLegatorUsersDetailsQuery__
+ *
+ * To run a query within a React component, call `useGetLegatorUsersDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLegatorUsersDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLegatorUsersDetailsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetLegatorUsersDetailsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetLegatorUsersDetailsQuery,
+    GetLegatorUsersDetailsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetLegatorUsersDetailsQuery,
+    GetLegatorUsersDetailsQueryVariables
+  >(GetLegatorUsersDetailsDocument, options);
+}
+export function useGetLegatorUsersDetailsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetLegatorUsersDetailsQuery,
+    GetLegatorUsersDetailsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetLegatorUsersDetailsQuery,
+    GetLegatorUsersDetailsQueryVariables
+  >(GetLegatorUsersDetailsDocument, options);
+}
+export type GetLegatorUsersDetailsQueryHookResult = ReturnType<
+  typeof useGetLegatorUsersDetailsQuery
+>;
+export type GetLegatorUsersDetailsLazyQueryHookResult = ReturnType<
+  typeof useGetLegatorUsersDetailsLazyQuery
+>;
+export type GetLegatorUsersDetailsQueryResult = Apollo.QueryResult<
+  GetLegatorUsersDetailsQuery,
+  GetLegatorUsersDetailsQueryVariables
 >;
 export const GetCurrentUserDocument = gql`
   query getCurrentUser {
@@ -720,6 +1056,65 @@ export type UpdateUserMutationResult =
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
+>;
+export const GetLegatorUsersDocument = gql`
+  query getLegatorUsers {
+    user {
+      legator_users {
+        _id
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetLegatorUsersQuery__
+ *
+ * To run a query within a React component, call `useGetLegatorUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLegatorUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLegatorUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetLegatorUsersQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetLegatorUsersQuery,
+    GetLegatorUsersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetLegatorUsersQuery, GetLegatorUsersQueryVariables>(
+    GetLegatorUsersDocument,
+    options
+  );
+}
+export function useGetLegatorUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetLegatorUsersQuery,
+    GetLegatorUsersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetLegatorUsersQuery,
+    GetLegatorUsersQueryVariables
+  >(GetLegatorUsersDocument, options);
+}
+export type GetLegatorUsersQueryHookResult = ReturnType<
+  typeof useGetLegatorUsersQuery
+>;
+export type GetLegatorUsersLazyQueryHookResult = ReturnType<
+  typeof useGetLegatorUsersLazyQuery
+>;
+export type GetLegatorUsersQueryResult = Apollo.QueryResult<
+  GetLegatorUsersQuery,
+  GetLegatorUsersQueryVariables
 >;
 export const ResetPasswordDocument = gql`
   mutation resetPassword(
