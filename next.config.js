@@ -31,7 +31,7 @@ const securityHeaders = [
   },
   {
     key: 'Referrer-Policy',
-    value: 'same-origin',
+    value: 'origin-when-cross-origin',
   },
   // {
   //   key: 'Content-Security-Policy',
