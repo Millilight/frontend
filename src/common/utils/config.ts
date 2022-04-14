@@ -17,6 +17,7 @@ export const config = {
     'NEXT_PUBLIC_API_URL',
     process.env.NEXT_PUBLIC_API_URL
   ),
+  crispWebsiteId: 'c03c561a-cc0f-43b2-9969-ec1f7926b437',
 };
 
 /* List of URLS */
