@@ -308,9 +308,11 @@ export type UnlockUrgentDataMutation = {
   };
 };
 
-export type GetUrgentDataQueryVariables = Exact<{ [key: string]: never }>;
+export type GetLegatorUrgentDataWishesQueryVariables = Exact<{
+  [key: string]: never;
+}>;
 
-export type GetUrgentDataQuery = {
+export type GetLegatorUrgentDataWishesQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
@@ -347,6 +349,34 @@ export type AskResetPasswordUserMutation = {
   askResetPasswordUser: {
     __typename?: 'AskResetPasswordUserResponse';
     success: boolean;
+  };
+};
+
+export type GetMyUrgentDataWishesQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetMyUrgentDataWishesQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    urgent_data: {
+      __typename?: 'UrgentData';
+      wishes: {
+        __typename?: 'Wishes';
+        burial_cremation?: string | null;
+        burial_cremation_place?: string | null;
+        music?: string | null;
+        religion?: string | null;
+        place?: string | null;
+        prevoyance?: string | null;
+        list_of_people?: string | null;
+        coffin?: string | null;
+        ornament?: string | null;
+        text?: string | null;
+        other?: string | null;
+      };
+    };
   };
 };
 
@@ -687,8 +717,8 @@ export type UnlockUrgentDataMutationOptions = Apollo.BaseMutationOptions<
   UnlockUrgentDataMutation,
   UnlockUrgentDataMutationVariables
 >;
-export const GetUrgentDataDocument = gql`
-  query getUrgentData {
+export const GetLegatorUrgentDataWishesDocument = gql`
+  query getLegatorUrgentDataWishes {
     user {
       legator_users {
         _id
@@ -713,53 +743,53 @@ export const GetUrgentDataDocument = gql`
 `;
 
 /**
- * __useGetUrgentDataQuery__
+ * __useGetLegatorUrgentDataWishesQuery__
  *
- * To run a query within a React component, call `useGetUrgentDataQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUrgentDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetLegatorUrgentDataWishesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLegatorUrgentDataWishesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetUrgentDataQuery({
+ * const { data, loading, error } = useGetLegatorUrgentDataWishesQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetUrgentDataQuery(
+export function useGetLegatorUrgentDataWishesQuery(
   baseOptions?: Apollo.QueryHookOptions<
-    GetUrgentDataQuery,
-    GetUrgentDataQueryVariables
+    GetLegatorUrgentDataWishesQuery,
+    GetLegatorUrgentDataWishesQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetUrgentDataQuery, GetUrgentDataQueryVariables>(
-    GetUrgentDataDocument,
-    options
-  );
+  return Apollo.useQuery<
+    GetLegatorUrgentDataWishesQuery,
+    GetLegatorUrgentDataWishesQueryVariables
+  >(GetLegatorUrgentDataWishesDocument, options);
 }
-export function useGetUrgentDataLazyQuery(
+export function useGetLegatorUrgentDataWishesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    GetUrgentDataQuery,
-    GetUrgentDataQueryVariables
+    GetLegatorUrgentDataWishesQuery,
+    GetLegatorUrgentDataWishesQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetUrgentDataQuery, GetUrgentDataQueryVariables>(
-    GetUrgentDataDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    GetLegatorUrgentDataWishesQuery,
+    GetLegatorUrgentDataWishesQueryVariables
+  >(GetLegatorUrgentDataWishesDocument, options);
 }
-export type GetUrgentDataQueryHookResult = ReturnType<
-  typeof useGetUrgentDataQuery
+export type GetLegatorUrgentDataWishesQueryHookResult = ReturnType<
+  typeof useGetLegatorUrgentDataWishesQuery
 >;
-export type GetUrgentDataLazyQueryHookResult = ReturnType<
-  typeof useGetUrgentDataLazyQuery
+export type GetLegatorUrgentDataWishesLazyQueryHookResult = ReturnType<
+  typeof useGetLegatorUrgentDataWishesLazyQuery
 >;
-export type GetUrgentDataQueryResult = Apollo.QueryResult<
-  GetUrgentDataQuery,
-  GetUrgentDataQueryVariables
+export type GetLegatorUrgentDataWishesQueryResult = Apollo.QueryResult<
+  GetLegatorUrgentDataWishesQuery,
+  GetLegatorUrgentDataWishesQueryVariables
 >;
 export const AskResetPasswordUserDocument = gql`
   mutation askResetPasswordUser($email: String!) {
@@ -810,6 +840,77 @@ export type AskResetPasswordUserMutationResult =
 export type AskResetPasswordUserMutationOptions = Apollo.BaseMutationOptions<
   AskResetPasswordUserMutation,
   AskResetPasswordUserMutationVariables
+>;
+export const GetMyUrgentDataWishesDocument = gql`
+  query getMyUrgentDataWishes {
+    user {
+      urgent_data {
+        wishes {
+          burial_cremation
+          burial_cremation_place
+          music
+          religion
+          place
+          prevoyance
+          list_of_people
+          coffin
+          ornament
+          text
+          other
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetMyUrgentDataWishesQuery__
+ *
+ * To run a query within a React component, call `useGetMyUrgentDataWishesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyUrgentDataWishesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyUrgentDataWishesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMyUrgentDataWishesQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetMyUrgentDataWishesQuery,
+    GetMyUrgentDataWishesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetMyUrgentDataWishesQuery,
+    GetMyUrgentDataWishesQueryVariables
+  >(GetMyUrgentDataWishesDocument, options);
+}
+export function useGetMyUrgentDataWishesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetMyUrgentDataWishesQuery,
+    GetMyUrgentDataWishesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetMyUrgentDataWishesQuery,
+    GetMyUrgentDataWishesQueryVariables
+  >(GetMyUrgentDataWishesDocument, options);
+}
+export type GetMyUrgentDataWishesQueryHookResult = ReturnType<
+  typeof useGetMyUrgentDataWishesQuery
+>;
+export type GetMyUrgentDataWishesLazyQueryHookResult = ReturnType<
+  typeof useGetMyUrgentDataWishesLazyQuery
+>;
+export type GetMyUrgentDataWishesQueryResult = Apollo.QueryResult<
+  GetMyUrgentDataWishesQuery,
+  GetMyUrgentDataWishesQueryVariables
 >;
 export const UpdateEmailUserDocument = gql`
   mutation updateEmailUser($token: String!, $user_id: String!) {

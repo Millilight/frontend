@@ -26,6 +26,23 @@
   overflow: auto;
 }
 
+.icon {
+  position: relative;
+  top: -2px;
+  margin-right: 4px;
+}
+
+.horizontal_container_right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 2px;
+  padding-right: 10%;
+}
+
 @media (max-width: 796px) {
   .horizontal_container {
     display: flex;
@@ -49,6 +66,16 @@
     text-align: justify;
     border-radius: 0px;
     overflow: auto;
+  }
+
+  .horizontal_container_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 2px;
   }
 }
 
