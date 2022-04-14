@@ -10,7 +10,13 @@ import '@fontsource/roboto/700.css';
 
 import { IntlProvider } from 'react-intl';
 import French from '../lang/fr.json';
+
 // import { useState } from 'react';
+
+// Crisp
+import dynamic from 'next/dynamic';
+
+const CrispWithNoSSR = dynamic(() => import('@/utils/crisp'), { ssr: false });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   // Currently : only in French
@@ -29,6 +35,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <IntlProvider locale={locale} messages={messages}>
+      <CrispWithNoSSR />
       <Component {...pageProps} />
     </IntlProvider>
   );
