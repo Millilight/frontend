@@ -13,10 +13,10 @@ import { dowloadLegatorWishes } from '@/utils/pdf';
 import styles from './AccessToLegator.module.css';
 import {
   ConfirmSecurityCodeMutation,
-  GetUrgentDataQuery,
+  GetLegatorUrgentDataWishesQuery,
   UnlockUrgentDataMutation,
   useConfirmSecurityCodeMutation,
-  useGetUrgentDataLazyQuery,
+  useGetLegatorUrgentDataWishesLazyQuery,
   useUnlockUrgentDataMutation,
 } from 'generated/graphql';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -222,7 +222,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
   const [
     getUrgentDataQuery,
     { data: dataGet, loading: loadingGet, error: errorGet },
-  ] = useGetUrgentDataLazyQuery();
+  ] = useGetLegatorUrgentDataWishesLazyQuery();
 
   function getUrgentData() {
     getUrgentDataQuery();
@@ -230,8 +230,9 @@ export default function AccessToLegator(props: { legator: Legator }) {
 
   function displayGetUrgentDataButton() {
     if (dataGet && !loadingGet) {
-      const response: GetUrgentDataQuery['user']['legator_users'] | undefined =
-        dataGet?.user.legator_users;
+      const response:
+        | GetLegatorUrgentDataWishesQuery['user']['legator_users']
+        | undefined = dataGet?.user.legator_users;
       if (response) {
         // Find the right legator by id
         const retrievedLegator = response.find((l) => {

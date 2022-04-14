@@ -1,14 +1,24 @@
 import Wishes from '@/components/Wishes/Wishes';
-import { Typography, Box, CircularProgress } from '@mui/material';
+import { Typography, Box, CircularProgress, Button } from '@mui/material';
 import { useState } from 'react';
 import {
   useGetWishesforUserQuery,
   GetWishesforUserQuery,
+  useGetMyUrgentDataWishesLazyQuery,
+  GetMyUrgentDataWishesQuery,
 } from 'generated/graphql';
 import translate from '@/utils/translate';
 import styles from './Ceremonial.module.css';
+import { dowloadMyWishes } from '@/utils/pdf';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 export default function Ceremonial() {
+  // Hook to fetch urgent data wishes
+  const [
+    getUrgentDataWishesQuery,
+    { data: dataGet, loading: loadingGet, error: errorGet },
+  ] = useGetMyUrgentDataWishesLazyQuery();
+
   // Help on the right hand side  pannel
   const initial_help = (
     <div>
@@ -254,6 +264,64 @@ export default function Ceremonial() {
 
   updateWishesList(savedWishes);
 
+  /*******  Access the content (urgent data - wishes) the safe  to dowload pdf ********* */
+
+  function getMyUrgentDataWishes() {
+    getUrgentDataWishesQuery();
+  }
+
+  function displayGetUrgentDataButton() {
+    if (dataGet && !loadingGet && !errorGet) {
+      const response:
+        | GetMyUrgentDataWishesQuery['user']['urgent_data']
+        | undefined = dataGet?.user.urgent_data;
+      if (response) {
+        // Extract urgent data wishes
+        const data: UrgentDataWishes = {};
+        if (response?.wishes) {
+          for (const [key, value] of Object.entries(response?.wishes)) {
+            data[key as keyof UrgentDataWishes] =
+              value !== null ? value : undefined;
+          }
+          delete data.__typename;
+
+          // Make PDF
+          dowloadMyWishes(data);
+        }
+      }
+    }
+
+    if (errorGet) {
+      return (
+        <Button
+          className={styles.inscription_button}
+          variant="outlined"
+          color="error"
+        >
+          {translate('common.button.error')}
+        </Button>
+      );
+    }
+
+    return (
+      <>
+        <Button
+          onClick={() => getMyUrgentDataWishes()}
+          sx={{
+            bgcolor: 'var(--yellow)',
+            '&:hover': {
+              bgcolor: 'var(--dark-blue)',
+            },
+          }}
+          variant="contained"
+        >
+          <CloudDownloadIcon className={styles.icon} />
+          {translate('wish.button.download')}
+        </Button>
+      </>
+    );
+  }
+
   return (
     <div className={styles.horizontal_container}>
       <div className={styles.item}>
@@ -261,7 +329,7 @@ export default function Ceremonial() {
           <Typography
             variant="h3"
             sx={{
-              m: 10,
+              m: 8,
               textAlign: 'center',
             }}
           >
@@ -276,6 +344,9 @@ export default function Ceremonial() {
             {'   '}
             {translate('ceremonial.title')}
           </Typography>
+        </div>
+        <div className={styles.horizontal_container_right}>
+          {displayGetUrgentDataButton()}
         </div>
         <Wishes wishes={ceremonialWishesList} helpCallback={changeHelp} />
       </div>

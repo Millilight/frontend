@@ -1,4 +1,4 @@
-query getUrgentData {
+query getLegatorUrgentDataWishes {
   user {
     legator_users {
       _id
