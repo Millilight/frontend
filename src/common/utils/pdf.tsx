@@ -12,7 +12,7 @@ const wishTitles: { [key: string]: string } = {
     "Attentes particulières concernant le choix du cercueil ou de l'urne:",
   ornament: 'Demandes concernant les décorations et ornements:',
   text: 'Texte à lire lors de la cérémonie',
-  other: 'Autres informatios laissées:',
+  other: 'Autres informations laissées:',
 };
 
 export function dowloadLegatorWishes(
@@ -78,5 +78,65 @@ export function dowloadLegatorWishes(
     offset += ((lines.length + 0.5) * 14) / 72;
   }
 
-  doc.save('volontes.pdf');
+  doc.save('volontes_ceremoniales.pdf');
+}
+
+export function dowloadMyWishes(wishes: UrgentDataWishes) {
+  const doc = new jsPDF('p', 'in', 'letter');
+
+  let offset = 1.8; // in inches
+
+  // Amuni logo
+  const img = new Image();
+  img.src = '/amuni.png';
+  doc.addImage(img, 'png', 0.75, 0.75, 2.8, 0.75);
+
+  // Title
+  const text =
+    'Voici les volontés cérémoniales que vous souhaitez transmettre à vos personnes de confiance ' +
+    ':\n';
+  let lines = doc.setFontSize(16).splitTextToSize(text, 7);
+  doc.setTextColor(3, 77, 110);
+  doc.text(lines, 0.75, offset + 16 / 72);
+  offset += ((lines.length + 0.5) * 18) / 72;
+
+  doc.setTextColor(0);
+
+  let noWishes = true;
+
+  // Display all wishes
+  for (const [key, value] of Object.entries(wishes)) {
+    if (value) {
+      noWishes = false;
+      // Title
+      const title = '• ' + wishTitles[key] + '\n';
+      lines = doc.setFontSize(14).splitTextToSize(title, 7);
+      if (offset + ((lines.length + 0.5) * 14) / 72 > 10.25) {
+        doc.addPage();
+        offset = 0.75;
+      }
+      doc.text(lines, 0.75, offset + 14 / 72);
+      offset += ((lines.length + 0.5) * 14) / 72;
+
+      // Content
+      const content = value + '\n';
+      lines = doc.setFontSize(11).splitTextToSize(content, 6.5);
+      if (offset + ((lines.length + 0.5) * 14) / 72 > 10.25) {
+        doc.addPage();
+        offset = 0.75;
+      }
+      doc.text(lines, 1.15, offset + 11 / 72);
+      offset += ((lines.length + 0.5) * 14) / 72;
+    }
+  }
+
+  // Messsage if no wishes
+  if (noWishes) {
+    const title = "Aucune volonté n'a été renseignée pour le moment." + '\n';
+    lines = doc.setFontSize(14).splitTextToSize(title, 7);
+    doc.text(lines, 0.75, offset + 14 / 72);
+    offset += ((lines.length + 0.5) * 14) / 72;
+  }
+
+  doc.save('mes_volontes_ceremoniales.pdf');
 }
