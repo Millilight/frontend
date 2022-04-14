@@ -4,7 +4,7 @@ import MyAccount from '@/components/MyAccount/MyAccount';
 
 const MyAccountPage = () => {
   return (
-    <div className="flex-container">
+    <div className="">
       <MenuDrawer selectedPage={''} />
       <main>
         <MyAccount />
