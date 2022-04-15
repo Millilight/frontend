@@ -12,7 +12,7 @@ mutation updateWishes(
   $other: String
 ) {
   updateWishes(
-    update_wishes_dto: {
+    update_wishes_input: {
       burial_cremation: $burial_cremation
       burial_cremation_place: $burial_cremation_place
       religion: $religion

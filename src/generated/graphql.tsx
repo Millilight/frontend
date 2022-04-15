@@ -35,7 +35,7 @@ export type AddHeirResponse = {
   heir_user: Heir;
 };
 
-export type AskResetPasswordUserDto = {
+export type AskResetPasswordUserInput = {
   email: Scalars['String'];
 };
 
@@ -54,7 +54,7 @@ export type ConfirmSecurityCodeResponse = {
   legator_user: Legator;
 };
 
-export type CreateUserDto = {
+export type CreateUserInput = {
   email: Scalars['String'];
   firstname: Scalars['String'];
   lastname: Scalars['String'];
@@ -77,7 +77,7 @@ export type Legator = {
   _id: Scalars['ID'];
   added_date: Scalars['Date'];
   state: StateTrust;
-  urgent_data?: Maybe<UrgentData>;
+  urgent_data: UrgentData;
   urgent_data_unlocked: Scalars['Boolean'];
   urgent_data_unlocked_date?: Maybe<Scalars['Date']>;
   user_details: UserDetails;
@@ -89,7 +89,7 @@ export type LoginResponse = {
   user: User;
 };
 
-export type LoginUserDto = {
+export type LoginUserInput = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
@@ -103,11 +103,11 @@ export type Mutation = {
   login: LoginResponse;
   resetPasswordUser: User;
   unlockUrgentData: UnlockUrgentDataResponse;
-  updateEmailUser: User;
   updateUser: User;
   updateWishes: Wishes;
   verifyEmail: VerifyEmailResponse;
   verifyEmailWithInvitation: VerifyEmailWithInvitationResponse;
+  verifyNewEmail: User;
 };
 
 export type MutationAddHeirArgs = {
@@ -115,7 +115,7 @@ export type MutationAddHeirArgs = {
 };
 
 export type MutationAskResetPasswordUserArgs = {
-  ask_reset_password_user_dto: AskResetPasswordUserDto;
+  ask_reset_password_user_input: AskResetPasswordUserInput;
 };
 
 export type MutationConfirmSecurityCodeArgs = {
@@ -123,39 +123,39 @@ export type MutationConfirmSecurityCodeArgs = {
 };
 
 export type MutationCreateUserArgs = {
-  create_user_dto: CreateUserDto;
+  create_user_input: CreateUserInput;
 };
 
 export type MutationLoginArgs = {
-  login_user_dto: LoginUserDto;
+  login_user_input: LoginUserInput;
 };
 
 export type MutationResetPasswordUserArgs = {
-  reset_password_user_dto: ResetPasswordUserDto;
+  reset_password_user_input: ResetPasswordUserInput;
 };
 
 export type MutationUnlockUrgentDataArgs = {
   unlock_urgent_data_input: UnlockUrgentDataInput;
 };
 
-export type MutationUpdateEmailUserArgs = {
-  update_email_user_dto: UpdateEmailUserDto;
-};
-
 export type MutationUpdateUserArgs = {
-  update_user_dto: UpdateUserDto;
+  update_user_input: UpdateUserInput;
 };
 
 export type MutationUpdateWishesArgs = {
-  update_wishes_dto: UpdateWishesInput;
+  update_wishes_input: UpdateWishesInput;
 };
 
 export type MutationVerifyEmailArgs = {
-  verify_email_dto: VerifyEmailDto;
+  verify_email_input: VerifyEmailInput;
 };
 
 export type MutationVerifyEmailWithInvitationArgs = {
   verify_email_with_invitation_input: VerifyEmailWithInvitationInput;
+};
+
+export type MutationVerifyNewEmailArgs = {
+  verify_new_email_input: VerifyNewEmailInput;
 };
 
 export type Query = {
@@ -168,7 +168,7 @@ export type QueryUrgentDataArgs = {
   urgent_data_input: UrgentDataInput;
 };
 
-export type ResetPasswordUserDto = {
+export type ResetPasswordUserInput = {
   new_password: Scalars['String'];
   token: Scalars['String'];
   user_id: Scalars['String'];
@@ -188,12 +188,7 @@ export type UnlockUrgentDataResponse = {
   success: Scalars['Boolean'];
 };
 
-export type UpdateEmailUserDto = {
-  token: Scalars['String'];
-  user_id: Scalars['String'];
-};
-
-export type UpdateUserDto = {
+export type UpdateUserInput = {
   firstname?: InputMaybe<Scalars['String']>;
   lastname?: InputMaybe<Scalars['String']>;
   new_email?: InputMaybe<Scalars['String']>;
@@ -216,6 +211,7 @@ export type UpdateWishesInput = {
 
 export type UrgentData = {
   __typename?: 'UrgentData';
+  user_id: Scalars['String'];
   wishes: Wishes;
 };
 
@@ -233,9 +229,9 @@ export type User = {
   _id: Scalars['ID'];
   email: Scalars['String'];
   firstname: Scalars['String'];
-  heir_users: Array<Heir>;
+  heirs: Array<Heir>;
   lastname: Scalars['String'];
-  legator_users: Array<Legator>;
+  legators: Array<Legator>;
   urgent_data: UrgentData;
 };
 
@@ -246,8 +242,7 @@ export type UserDetails = {
   lastname: Scalars['String'];
 };
 
-export type VerifyEmailDto = {
-  password?: InputMaybe<Scalars['String']>;
+export type VerifyEmailInput = {
   token: Scalars['String'];
   user_id: Scalars['String'];
 };
@@ -266,6 +261,11 @@ export type VerifyEmailWithInvitationInput = {
 export type VerifyEmailWithInvitationResponse = {
   __typename?: 'VerifyEmailWithInvitationResponse';
   sucess: Scalars['Boolean'];
+};
+
+export type VerifyNewEmailInput = {
+  token: Scalars['String'];
+  user_id: Scalars['String'];
 };
 
 export type Wishes = {
@@ -316,10 +316,10 @@ export type GetLegatorUrgentDataWishesQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
-    legator_users: Array<{
+    legators: Array<{
       __typename?: 'Legator';
       _id: string;
-      urgent_data?: {
+      urgent_data: {
         __typename?: 'UrgentData';
         wishes: {
           __typename?: 'Wishes';
@@ -335,7 +335,7 @@ export type GetLegatorUrgentDataWishesQuery = {
           text?: string | null;
           other?: string | null;
         };
-      } | null;
+      };
     }>;
   };
 };
@@ -387,7 +387,7 @@ export type UpdateEmailUserMutationVariables = Exact<{
 
 export type UpdateEmailUserMutation = {
   __typename?: 'Mutation';
-  updateEmailUser: {
+  verifyNewEmail: {
     __typename?: 'User';
     firstname: string;
     lastname: string;
@@ -403,7 +403,7 @@ export type GetLegatorUsersDetailsQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
-    legator_users: Array<{
+    legators: Array<{
       __typename?: 'Legator';
       _id: string;
       state: StateTrust;
@@ -452,7 +452,7 @@ export type GetLegatorUsersQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
-    legator_users: Array<{ __typename?: 'Legator'; _id: string }>;
+    legators: Array<{ __typename?: 'Legator'; _id: string }>;
   };
 };
 
@@ -590,7 +590,7 @@ export type GetHeirsQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
-    heir_users: Array<{
+    heirs: Array<{
       __typename?: 'Heir';
       _id: string;
       added_date: any;
@@ -720,7 +720,7 @@ export type UnlockUrgentDataMutationOptions = Apollo.BaseMutationOptions<
 export const GetLegatorUrgentDataWishesDocument = gql`
   query getLegatorUrgentDataWishes {
     user {
-      legator_users {
+      legators {
         _id
         urgent_data {
           wishes {
@@ -793,7 +793,7 @@ export type GetLegatorUrgentDataWishesQueryResult = Apollo.QueryResult<
 >;
 export const AskResetPasswordUserDocument = gql`
   mutation askResetPasswordUser($email: String!) {
-    askResetPasswordUser(ask_reset_password_user_dto: { email: $email }) {
+    askResetPasswordUser(ask_reset_password_user_input: { email: $email }) {
       success
     }
   }
@@ -914,8 +914,8 @@ export type GetMyUrgentDataWishesQueryResult = Apollo.QueryResult<
 >;
 export const UpdateEmailUserDocument = gql`
   mutation updateEmailUser($token: String!, $user_id: String!) {
-    updateEmailUser(
-      update_email_user_dto: { token: $token, user_id: $user_id }
+    verifyNewEmail(
+      verify_new_email_input: { token: $token, user_id: $user_id }
     ) {
       firstname
       lastname
@@ -970,7 +970,7 @@ export type UpdateEmailUserMutationOptions = Apollo.BaseMutationOptions<
 export const GetLegatorUsersDetailsDocument = gql`
   query getLegatorUsersDetails {
     user {
-      legator_users {
+      legators {
         _id
         user_details {
           firstname
@@ -1099,7 +1099,7 @@ export const UpdateUserDocument = gql`
     $email: String
   ) {
     updateUser(
-      update_user_dto: {
+      update_user_input: {
         firstname: $firstname
         lastname: $lastname
         password: $password
@@ -1161,7 +1161,7 @@ export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
 export const GetLegatorUsersDocument = gql`
   query getLegatorUsers {
     user {
-      legator_users {
+      legators {
         _id
       }
     }
@@ -1224,7 +1224,7 @@ export const ResetPasswordDocument = gql`
     $token: String!
   ) {
     resetPasswordUser(
-      reset_password_user_dto: {
+      reset_password_user_input: {
         user_id: $user_id
         new_password: $new_password
         token: $token
@@ -1281,7 +1281,7 @@ export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const LoginDocument = gql`
   mutation login($email: String!, $password: String!) {
-    login(login_user_dto: { email: $email, password: $password }) {
+    login(login_user_input: { email: $email, password: $password }) {
       user {
         _id
       }
@@ -1338,7 +1338,7 @@ export const CreateUserDocument = gql`
     $password: String!
   ) {
     createUser(
-      create_user_dto: {
+      create_user_input: {
         firstname: $firstname
         lastname: $lastname
         email: $email
@@ -1398,7 +1398,7 @@ export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const VerifyEmailDocument = gql`
   mutation verifyEmail($token: String!, $user_id: String!) {
-    verifyEmail(verify_email_dto: { token: $token, user_id: $user_id }) {
+    verifyEmail(verify_email_input: { token: $token, user_id: $user_id }) {
       success
     }
   }
@@ -1462,7 +1462,7 @@ export const UpdateWishesDocument = gql`
     $other: String
   ) {
     updateWishes(
-      update_wishes_dto: {
+      update_wishes_input: {
         burial_cremation: $burial_cremation
         burial_cremation_place: $burial_cremation_place
         religion: $religion
@@ -1679,7 +1679,7 @@ export type AddHeirMutationOptions = Apollo.BaseMutationOptions<
 export const GetHeirsDocument = gql`
   query getHeirs {
     user {
-      heir_users {
+      heirs {
         _id
         added_date
         security_code

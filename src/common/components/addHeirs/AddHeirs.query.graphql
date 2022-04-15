@@ -1,6 +1,6 @@
 query getHeirs {
   user {
-    heir_users {
+    heirs {
       _id
       added_date
       security_code

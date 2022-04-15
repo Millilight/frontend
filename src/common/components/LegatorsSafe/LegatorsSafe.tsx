@@ -25,9 +25,8 @@ export default function LegatorsSafe() {
   if (error) {
     return null;
   }
-  const legators:
-    | GetLegatorUsersDetailsQuery['user']['legator_users']
-    | undefined = data?.user.legator_users;
+  const legators: GetLegatorUsersDetailsQuery['user']['legators'] | undefined =
+    data?.user.legators;
   if (legators) {
     legators.forEach((l) => {
       legatorsList.push({

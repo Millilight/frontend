@@ -128,10 +128,10 @@ export default function TrustedPersons() {
     } else if (
       getHeirsResponse.data &&
       getHeirsResponse.data.user &&
-      getHeirsResponse.data.user.heir_users &&
-      getHeirsResponse.data.user.heir_users.length > 0
+      getHeirsResponse.data.user.heirs &&
+      getHeirsResponse.data.user.heirs.length > 0
     ) {
-      return getHeirsResponse.data.user.heir_users.map((user) => {
+      return getHeirsResponse.data.user.heirs.map((user) => {
         return (
           <div
             className={`${styles.heir_user_container} ${
@@ -269,7 +269,7 @@ export default function TrustedPersons() {
             {addHeirUserResponse.error
               ? translate('common.error.network')
               : addHeirUserResponse.data
-              ? translate('common.success.invit_sent')
+              ? translate('common.success.invite_sent')
               : addHeirUserResponse.loading
               ? translate('common.button.sending')
               : translate('addheirs.button.invite')}

@@ -9,7 +9,7 @@ type AddHeirResponse {
   heir_user: Heir!
 }
 
-input AskResetPasswordUserDto {
+input AskResetPasswordUserInput {
   email: String!
 }
 
@@ -26,7 +26,7 @@ type ConfirmSecurityCodeResponse {
   legator_user: Legator!
 }
 
-input CreateUserDto {
+input CreateUserInput {
   email: String!
   firstname: String!
   lastname: String!
@@ -52,7 +52,7 @@ type Legator {
   _id: ID!
   added_date: Date!
   state: StateTrust!
-  urgent_data: UrgentData
+  urgent_data: UrgentData!
   urgent_data_unlocked: Boolean!
   urgent_data_unlocked_date: Date
   user_details: UserDetails!
@@ -63,7 +63,7 @@ type LoginResponse {
   user: User!
 }
 
-input LoginUserDto {
+input LoginUserInput {
   email: String!
   password: String!
 }
@@ -71,24 +71,24 @@ input LoginUserDto {
 type Mutation {
   addHeir(add_heir_user_input: AddHeirInput!): AddHeirResponse!
   askResetPasswordUser(
-    ask_reset_password_user_dto: AskResetPasswordUserDto!
+    ask_reset_password_user_input: AskResetPasswordUserInput!
   ): AskResetPasswordUserResponse!
   confirmSecurityCode(
     confirm_security_code_input: ConfirmSecurityCodeInput!
   ): ConfirmSecurityCodeResponse!
-  createUser(create_user_dto: CreateUserDto!): User!
-  login(login_user_dto: LoginUserDto!): LoginResponse!
-  resetPasswordUser(reset_password_user_dto: ResetPasswordUserDto!): User!
+  createUser(create_user_input: CreateUserInput!): User!
+  login(login_user_input: LoginUserInput!): LoginResponse!
+  resetPasswordUser(reset_password_user_input: ResetPasswordUserInput!): User!
   unlockUrgentData(
     unlock_urgent_data_input: UnlockUrgentDataInput!
   ): UnlockUrgentDataResponse!
-  updateEmailUser(update_email_user_dto: UpdateEmailUserDto!): User!
-  updateUser(update_user_dto: UpdateUserDto!): User!
-  updateWishes(update_wishes_dto: UpdateWishesInput!): Wishes!
-  verifyEmail(verify_email_dto: VerifyEmailDto!): VerifyEmailResponse!
+  updateUser(update_user_input: UpdateUserInput!): User!
+  updateWishes(update_wishes_input: UpdateWishesInput!): Wishes!
+  verifyEmail(verify_email_input: VerifyEmailInput!): VerifyEmailResponse!
   verifyEmailWithInvitation(
     verify_email_with_invitation_input: VerifyEmailWithInvitationInput!
   ): VerifyEmailWithInvitationResponse!
+  verifyNewEmail(verify_new_email_input: VerifyNewEmailInput!): User!
 }
 
 type Query {
@@ -96,7 +96,7 @@ type Query {
   user: User!
 }
 
-input ResetPasswordUserDto {
+input ResetPasswordUserInput {
   new_password: String!
   token: String!
   user_id: String!
@@ -115,12 +115,7 @@ type UnlockUrgentDataResponse {
   success: Boolean!
 }
 
-input UpdateEmailUserDto {
-  token: String!
-  user_id: String!
-}
-
-input UpdateUserDto {
+input UpdateUserInput {
   firstname: String
   lastname: String
   new_email: String
@@ -142,6 +137,7 @@ input UpdateWishesInput {
 }
 
 type UrgentData {
+  user_id: String!
   wishes: Wishes!
 }
 
@@ -157,9 +153,9 @@ type User {
   _id: ID!
   email: String!
   firstname: String!
-  heir_users: [Heir!]!
+  heirs: [Heir!]!
   lastname: String!
-  legator_users: [Legator!]!
+  legators: [Legator!]!
   urgent_data: UrgentData!
 }
 
@@ -169,8 +165,7 @@ type UserDetails {
   lastname: String!
 }
 
-input VerifyEmailDto {
-  password: String
+input VerifyEmailInput {
   token: String!
   user_id: String!
 }
@@ -187,6 +182,11 @@ input VerifyEmailWithInvitationInput {
 
 type VerifyEmailWithInvitationResponse {
   sucess: Boolean!
+}
+
+input VerifyNewEmailInput {
+  token: String!
+  user_id: String!
 }
 
 type Wishes {
