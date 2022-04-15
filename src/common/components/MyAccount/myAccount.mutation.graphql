@@ -5,7 +5,7 @@ mutation updateUser(
   $email: String
 ) {
   updateUser(
-    update_user_dto: {
+    update_user_input: {
       firstname: $firstname
       lastname: $lastname
       password: $password

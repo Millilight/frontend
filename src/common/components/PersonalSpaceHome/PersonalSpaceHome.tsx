@@ -18,7 +18,7 @@ export default function PersonalSpaceHome() {
 
   // Conditional display of "Access to legators' safe" : if at least 1 legator
   const { data, error } = useGetLegatorUsersQuery();
-  const legators = data?.user.legator_users;
+  const legators = data?.user.legators;
   const hasLegators = !error && legators?.length ? true : false;
 
   function displayAccessToLegatorsSafe() {

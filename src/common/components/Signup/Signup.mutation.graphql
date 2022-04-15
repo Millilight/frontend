@@ -5,7 +5,7 @@ mutation createUser(
   $password: String!
 ) {
   createUser(
-    create_user_dto: {
+    create_user_input: {
       firstname: $firstname
       lastname: $lastname
       email: $email

@@ -231,8 +231,8 @@ export default function AccessToLegator(props: { legator: Legator }) {
   function displayGetUrgentDataButton() {
     if (dataGet && !loadingGet) {
       const response:
-        | GetLegatorUrgentDataWishesQuery['user']['legator_users']
-        | undefined = dataGet?.user.legator_users;
+        | GetLegatorUrgentDataWishesQuery['user']['legators']
+        | undefined = dataGet?.user.legators;
       if (response) {
         // Find the right legator by id
         const retrievedLegator = response.find((l) => {

@@ -1,5 +1,5 @@
 mutation verifyEmail($token: String!, $user_id: String!) {
-  verifyEmail(verify_email_dto: { token: $token, user_id: $user_id }) {
+  verifyEmail(verify_email_input: { token: $token, user_id: $user_id }) {
     success
   }
 }

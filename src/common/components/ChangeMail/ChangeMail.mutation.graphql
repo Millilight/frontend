@@ -1,5 +1,5 @@
 mutation updateEmailUser($token: String!, $user_id: String!) {
-  updateEmailUser(update_email_user_dto: { token: $token, user_id: $user_id }) {
+  verifyNewEmail(verify_new_email_input: { token: $token, user_id: $user_id }) {
     firstname
     lastname
     email

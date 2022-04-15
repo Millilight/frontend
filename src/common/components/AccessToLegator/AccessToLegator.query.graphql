@@ -1,6 +1,6 @@
 query getLegatorUrgentDataWishes {
   user {
-    legator_users {
+    legators {
       _id
       urgent_data {
         wishes {
