@@ -281,7 +281,6 @@ export type Wishes = {
   religion?: Maybe<Scalars['String']>;
   text?: Maybe<Scalars['String']>;
 };
-
 export type ConfirmSecurityCodeMutationVariables = Exact<{
   legator_user_id: Scalars['ID'];
   security_code: Scalars['String'];
