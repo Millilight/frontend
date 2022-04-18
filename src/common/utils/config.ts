@@ -18,6 +18,10 @@ export const config = {
     process.env.NEXT_PUBLIC_API_URL
   ),
   crispWebsiteId: 'c03c561a-cc0f-43b2-9969-ec1f7926b437',
+  amplitudeApiKey: getEnvironmentVariable(
+    'NEXT_PUBLIC_AMPLITUDE_API_KEY',
+    process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY
+  ),
 };
 
 /* List of URLS */

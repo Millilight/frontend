@@ -16,8 +16,11 @@ import French from '../lang/fr.json';
 
 // Crisp
 import dynamic from 'next/dynamic';
-
 const CrispWithNoSSR = dynamic(() => import('@/utils/crisp'), { ssr: false });
+
+const AmplitudeWithNoSSR = dynamic(() => import('@/utils/amplitude'), {
+  ssr: false,
+});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   // Currently : only in French
@@ -36,6 +39,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <IntlProvider locale={locale} messages={messages}>
+      <AmplitudeWithNoSSR />
       <CrispWithNoSSR />
       <Component {...pageProps} />
     </IntlProvider>

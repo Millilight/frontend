@@ -11,6 +11,7 @@ import translate from '@/utils/translate';
 import styles from './Ceremonial.module.css';
 import { dowloadMyWishes } from '@/utils/pdf';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import amplitude from 'amplitude-js';
 
 export default function Ceremonial() {
   const [shouldDownload, setShouldDownload] = useState(false);
@@ -274,6 +275,9 @@ export default function Ceremonial() {
   /*******  Access the content (urgent data - wishes) the safe  to dowload pdf ********* */
 
   function getMyUrgentDataWishes() {
+    amplitude.getInstance().logEvent('Personal pdf export', {
+      category: 'ceremonial_wishes',
+    });
     getUrgentDataWishesQuery();
   }
 

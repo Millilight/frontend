@@ -11,6 +11,7 @@ import {
 } from '@/utils/config';
 import styles from './PersonalSpaceHome.module.css';
 import { useGetLegatorUsersQuery } from 'generated/graphql';
+import amplitude from 'amplitude-js';
 
 export default function PersonalSpaceHome() {
   //To handle redirections
@@ -107,6 +108,9 @@ export default function PersonalSpaceHome() {
               className="category-button"
               onClick={() => {
                 router.push(burrial_wishes_url);
+                amplitude.getInstance().logEvent('Category clicked', {
+                  category: 'ceremonial_wishes',
+                });
               }}
             >
               {' '}
@@ -128,6 +132,9 @@ export default function PersonalSpaceHome() {
               className="category-button"
               onClick={() => {
                 router.push(medical_url);
+                amplitude.getInstance().logEvent('Category clicked', {
+                  category: 'medical_wishes',
+                });
               }}
             >
               {' '}
@@ -149,6 +156,9 @@ export default function PersonalSpaceHome() {
               className="category-button"
               onClick={() => {
                 router.push(administrative_url);
+                amplitude.getInstance().logEvent('Category clicked', {
+                  category: 'paperwork',
+                });
               }}
             >
               {' '}
@@ -170,6 +180,9 @@ export default function PersonalSpaceHome() {
               className="category-button"
               onClick={() => {
                 router.push(free_space_url);
+                amplitude.getInstance().logEvent('Category clicked', {
+                  category: 'free_space',
+                });
               }}
             >
               {' '}
