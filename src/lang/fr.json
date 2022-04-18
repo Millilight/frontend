@@ -22,6 +22,7 @@
   "signup.go_to_signin": "Déjà inscrit·e ? Connectez-vous ici",
   "signup.error": "Erreur de connexion, veuillez réessayer plus tard.",
   "signup.success": "Inscription réussie!",
+  "signup.check_your_emails": "Un lien de confirmation vous a été envoyé à l'adresse {email}.",
   "signup.enter_code": "Pour finaliser votre inscription, merci de renseigner le code reçu par email.",
   "signup.button.signup": "M'inscrire",
   "signup.label.first_name": "Prénom",

@@ -1,5 +1,5 @@
 import { useCreateUserMutation } from 'generated/graphql';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
 import styles from './Signup.module.css';
 import { login_url } from '@/utils/config';
 import { useState } from 'react';
@@ -110,13 +110,22 @@ export default function Signup() {
     if (data) {
       // TODO : redirect user to his homepage
       return (
-        <Button
-          className={styles.inscription_button}
-          variant="outlined"
-          color="success"
-        >
-          {translate('signup.success')}
-        </Button>
+        <>
+          <Button
+            className={styles.inscription_button}
+            variant="outlined"
+            color="success"
+          >
+            {translate('signup.success')}
+          </Button>
+          <Typography
+            variant="subtitle2"
+            textAlign={'center'}
+            style={{ marginTop: '10px' }}
+          >
+            {translate('signup.check_your_emails', { email: email })}
+          </Typography>
+        </>
       );
     }
 
@@ -222,7 +231,7 @@ export default function Signup() {
           )}
         </div>
       </div>
-      
+
       {isWritingPwd || !isPasswordValid ? (
         <ul className={styles.password_checking}>
           {translate('signup.password_help')}
