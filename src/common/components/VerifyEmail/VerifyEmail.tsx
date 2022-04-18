@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
-import { useVerifyEmailMutation } from 'generated/graphql';
+import {
+  useVerifyEmailMutation,
+  useVerifyEmailWithInvitationMutation,
+} from 'generated/graphql';
 import React, { useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import { login_url, register_url } from '@/utils/config';
 import Link from 'next/link';
 import DoneIcon from '@mui/icons-material/Done';
@@ -26,6 +29,8 @@ export default function VerifyEmail() {
   //Mutation : use the codegen hook: which return a function (Login),
   //           and the lifecycle of the request
   const [verifyEmail, { data, loading, error }] = useVerifyEmailMutation();
+  const [verifyEmailWithInvitation, verifyEmailWithInvitationResponse] =
+    useVerifyEmailWithInvitationMutation();
 
   // Input Variables: updated by user input
   const [pwd, setPwd] = useState('');
@@ -70,20 +75,29 @@ export default function VerifyEmail() {
       if (user_id && typeof user_id != 'string') {
         user_id = user_id[0];
       }
-      verifyEmail({
-        variables: {
-          password: pwd,
-          token: token,
-          user_id: user_id,
-        },
-      });
+      if (fromInvitation == 'true') {
+        verifyEmailWithInvitation({
+          variables: {
+            password: pwd,
+            token: token,
+            user_id: user_id,
+          },
+        });
+      } else {
+        verifyEmail({
+          variables: {
+            token: token,
+            user_id: user_id,
+          },
+        });
+      }
     }
   }
 
   // Display the conditionnal JSX to show the button, depending on the
   // corectness of the fields
   function displayButton() {
-    if (error) {
+    if (error || verifyEmailWithInvitationResponse.error) {
       return (
         <Button
           className={styles.inscription_button}
@@ -107,7 +121,7 @@ export default function VerifyEmail() {
       );
     }
 
-    if (data) {
+    if (data || verifyEmailWithInvitationResponse.data) {
       // TODO : redirect user to his homepage
       return (
         <Link href={login_url} passHref>
@@ -128,10 +142,15 @@ export default function VerifyEmail() {
           className={styles.inscription_button}
           variant="contained"
           color="success"
-          disabled={loading || !isPasswordValid || !arePasswordsEquals}
+          disabled={
+            loading ||
+            verifyEmailWithInvitationResponse.loading ||
+            !isPasswordValid ||
+            !arePasswordsEquals
+          }
           onClick={() => sendForm()}
         >
-          {loading
+          {loading || verifyEmailWithInvitationResponse.loading
             ? translate('common.button.sending')
             : translate('reset.send.request')}
         </Button>
@@ -141,6 +160,7 @@ export default function VerifyEmail() {
   if (fromInvitation == 'true') {
     return (
       <form className={styles.form}>
+        <Typography variant="h5">{translate('verify_email.title')}</Typography>
         <div className={styles.field_container}>
           <TextField
             type={showPassword ? 'text' : 'password'}
