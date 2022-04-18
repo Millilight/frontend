@@ -25,7 +25,7 @@
 .category-button {
   width: 90%;
   min-height: 50px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-style: hidden !important;
   color: rgba(0, 0, 0, 0.6) !important;
   border-radius: 10px !important;
@@ -52,6 +52,16 @@
   flex-direction: column;
   align-items: center;
   width: 50%;
+}
+
+@media (max-width: 900px) {
+  .personnal-space-main-container {
+    flex-direction: column;
+  }
+  .personnal-space-content-container,
+  .personnal-space-help-container {
+    width: 100%;
+  }
 }
 
 .personnal-space-content-container {

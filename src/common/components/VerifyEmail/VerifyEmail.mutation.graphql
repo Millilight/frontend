@@ -3,3 +3,19 @@ mutation verifyEmail($token: String!, $user_id: String!) {
     success
   }
 }
+
+mutation verifyEmailWithInvitation(
+  $token: String!
+  $user_id: ID!
+  $password: String!
+) {
+  verifyEmailWithInvitation(
+    verify_email_with_invitation_input: {
+      token: $token
+      user_id: $user_id
+      password: $password
+    }
+  ) {
+    sucess
+  }
+}

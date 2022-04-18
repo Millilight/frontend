@@ -64,6 +64,7 @@
   "menu.free_space": "Espace libre",
   "menu.trusted_persons": "Personnes de confiance",
   "menu.legators_safe": "Coffre-fort de mes proches",
+  "verify_email.title": "Finalisez votre inscription",
   "verification.success": "Vérification réussie !",
   "verification.ongoing": "Vérification en cours",
   "verification.message_sent": "Cliquez sur le lien que vous avez reçu par email pour confirmer votre inscription (pensez à vérifier vos spams)",

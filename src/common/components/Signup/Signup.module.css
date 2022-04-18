@@ -59,6 +59,10 @@
   width: 80%;
 }
 
+.form h5 {
+  margin-bottom: 50px;
+}
+
 .visibility svg {
   width: 50px;
   height: 30px;

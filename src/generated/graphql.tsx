@@ -77,7 +77,7 @@ export type Legator = {
   _id: Scalars['ID'];
   added_date: Scalars['Date'];
   state: StateTrust;
-  urgent_data: UrgentData;
+  urgent_data?: Maybe<UrgentData>;
   urgent_data_unlocked: Scalars['Boolean'];
   urgent_data_unlocked_date?: Maybe<Scalars['Date']>;
   user_details: UserDetails;
@@ -319,7 +319,7 @@ export type GetLegatorUrgentDataWishesQuery = {
     legators: Array<{
       __typename?: 'Legator';
       _id: string;
-      urgent_data: {
+      urgent_data?: {
         __typename?: 'UrgentData';
         wishes: {
           __typename?: 'Wishes';
@@ -335,7 +335,7 @@ export type GetLegatorUrgentDataWishesQuery = {
           text?: string | null;
           other?: string | null;
         };
-      };
+      } | null;
     }>;
   };
 };
@@ -501,6 +501,20 @@ export type VerifyEmailMutationVariables = Exact<{
 export type VerifyEmailMutation = {
   __typename?: 'Mutation';
   verifyEmail: { __typename?: 'VerifyEmailResponse'; success: boolean };
+};
+
+export type VerifyEmailWithInvitationMutationVariables = Exact<{
+  token: Scalars['String'];
+  user_id: Scalars['ID'];
+  password: Scalars['String'];
+}>;
+
+export type VerifyEmailWithInvitationMutation = {
+  __typename?: 'Mutation';
+  verifyEmailWithInvitation: {
+    __typename?: 'VerifyEmailWithInvitationResponse';
+    sucess: boolean;
+  };
 };
 
 export type UpdateWishesMutationVariables = Exact<{
@@ -1447,6 +1461,69 @@ export type VerifyEmailMutationOptions = Apollo.BaseMutationOptions<
   VerifyEmailMutation,
   VerifyEmailMutationVariables
 >;
+export const VerifyEmailWithInvitationDocument = gql`
+  mutation verifyEmailWithInvitation(
+    $token: String!
+    $user_id: ID!
+    $password: String!
+  ) {
+    verifyEmailWithInvitation(
+      verify_email_with_invitation_input: {
+        token: $token
+        user_id: $user_id
+        password: $password
+      }
+    ) {
+      sucess
+    }
+  }
+`;
+export type VerifyEmailWithInvitationMutationFn = Apollo.MutationFunction<
+  VerifyEmailWithInvitationMutation,
+  VerifyEmailWithInvitationMutationVariables
+>;
+
+/**
+ * __useVerifyEmailWithInvitationMutation__
+ *
+ * To run a mutation, you first call `useVerifyEmailWithInvitationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVerifyEmailWithInvitationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [verifyEmailWithInvitationMutation, { data, loading, error }] = useVerifyEmailWithInvitationMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *      user_id: // value for 'user_id'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useVerifyEmailWithInvitationMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    VerifyEmailWithInvitationMutation,
+    VerifyEmailWithInvitationMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    VerifyEmailWithInvitationMutation,
+    VerifyEmailWithInvitationMutationVariables
+  >(VerifyEmailWithInvitationDocument, options);
+}
+export type VerifyEmailWithInvitationMutationHookResult = ReturnType<
+  typeof useVerifyEmailWithInvitationMutation
+>;
+export type VerifyEmailWithInvitationMutationResult =
+  Apollo.MutationResult<VerifyEmailWithInvitationMutation>;
+export type VerifyEmailWithInvitationMutationOptions =
+  Apollo.BaseMutationOptions<
+    VerifyEmailWithInvitationMutation,
+    VerifyEmailWithInvitationMutationVariables
+  >;
 export const UpdateWishesDocument = gql`
   mutation updateWishes(
     $burial_cremation: String
