@@ -13,6 +13,7 @@ import { useAddHeirMutation, useGetHeirsQuery } from 'generated/graphql';
 import Router from 'next/router';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import amplitude from 'amplitude-js';
 
 export default function TrustedPersons() {
   //current step to display the corresponding help :
@@ -256,15 +257,16 @@ export default function TrustedPersons() {
               !isEmailValid ||
               addHeirUserResponse.loading
             }
-            onClick={() =>
+            onClick={() => {
+              amplitude.getInstance().logEvent('Heir Added');
               addHeirUser({
                 variables: {
                   firstname: firstname,
                   lastname: lastname,
                   email: email,
                 },
-              })
-            }
+              });
+            }}
           >
             {addHeirUserResponse.error
               ? translate('common.error.network')

@@ -23,6 +23,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import KeyIcon from '@mui/icons-material/Key';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import amplitude from 'amplitude-js';
 
 export default function AccessToLegator(props: { legator: Legator }) {
   const [legator, setLegator] = useState(props.legator);
@@ -38,6 +39,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
 
   // Handle form submit to validate the code
   function sendCodeForm() {
+    amplitude.getInstance().logEvent('Code Validation Button Clicked');
     sethasUpdatedAfterError(false);
     sendCode({
       variables: { legator_user_id: legator._id, security_code: code },

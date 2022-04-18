@@ -7,6 +7,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Link from 'next/link';
 
 import translate from '@/utils/translate';
+import amplitude from 'amplitude-js';
 
 export default function Signup() {
   // Input Variables: updated by user input
@@ -47,6 +48,7 @@ export default function Signup() {
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
+    amplitude.getInstance().logEvent('Signup Button Clicked');
     //Set all forms to written, in order to display the error messages
     setIsDoneWritingFirstname(true);
     setIsDoneWritingLastname(true);

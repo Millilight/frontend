@@ -19,6 +19,9 @@ import {
   medical_url,
   trusted_users_url,
 } from '@/utils/config';
+import amplitude from 'amplitude-js';
+
+const drawerWidth = 350;
 
 export default function MenuDrawer(props: { selectedPage: string }) {
   //To handle redirections
@@ -146,6 +149,9 @@ export default function MenuDrawer(props: { selectedPage: string }) {
               props.selectedPage === 'ceremonial' ? '#0b374c' : 'null',
           }}
           onClick={() => {
+            amplitude.getInstance().logEvent('Category clicked', {
+              category: 'ceremonial_wishes',
+            });
             router.push(burrial_wishes_url);
           }}
         >
@@ -175,6 +181,9 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
+            amplitude.getInstance().logEvent('Category clicked', {
+              category: 'medical_wishes',
+            });
             router.push(medical_url);
           }}
           sx={{
@@ -213,6 +222,9 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
+            amplitude.getInstance().logEvent('Category clicked', {
+              category: 'paperwork',
+            });
             router.push(administrative_url);
           }}
           sx={{
@@ -251,6 +263,9 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
+            amplitude.getInstance().logEvent('Category clicked', {
+              category: 'free_space',
+            });
             router.push(free_space_url);
           }}
           sx={{
