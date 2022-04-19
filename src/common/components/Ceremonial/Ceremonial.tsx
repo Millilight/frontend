@@ -13,11 +13,18 @@ import { dowloadMyWishes } from '@/utils/pdf';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 export default function Ceremonial() {
+  const [shouldDownload, setShouldDownload] = useState(false);
+
   // Hook to fetch urgent data wishes
   const [
     getUrgentDataWishesQuery,
     { data: dataGet, loading: loadingGet, error: errorGet },
-  ] = useGetMyUrgentDataWishesLazyQuery();
+  ] = useGetMyUrgentDataWishesLazyQuery({
+    fetchPolicy: 'network-only',
+    onCompleted: () => {
+      setShouldDownload(true);
+    },
+  });
 
   // Help on the right hand side  pannel
   const initial_help = (
@@ -271,7 +278,7 @@ export default function Ceremonial() {
   }
 
   function displayGetUrgentDataButton() {
-    if (dataGet && !loadingGet && !errorGet) {
+    if (shouldDownload && dataGet && !loadingGet && !errorGet) {
       const response:
         | GetMyUrgentDataWishesQuery['user']['urgent_data']
         | undefined = dataGet?.user.urgent_data;
@@ -287,6 +294,7 @@ export default function Ceremonial() {
 
           // Make PDF
           dowloadMyWishes(data);
+          setShouldDownload(false);
         }
       }
     }

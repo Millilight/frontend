@@ -128,10 +128,12 @@ export default function MyAccountFieldContent(props: {
             <div>
               <Button
                 sx={{
-                  bgcolor: '#03546D',
-                  width: '170px',
-                  borderRadius: '25px',
-                  mb: '10px',
+                  width: '120px',
+                  mr: '3px',
+                  bgcolor: 'var(--yellow)',
+                  '&:hover': {
+                    bgcolor: 'var(--dark-blue)',
+                  },
                 }}
                 variant="contained"
                 type="submit"
@@ -140,13 +142,14 @@ export default function MyAccountFieldContent(props: {
               </Button>
               <Button
                 sx={{
-                  bgcolor: '#ffffff',
-                  borderColor: '#03546D',
-                  width: '130px',
-                  borderRadius: '25px',
-                  color: '#03546D',
-                  ml: '10px',
-                  mb: '10px',
+                  color: 'var(--yellow)',
+                  border: '1px solid var(--yellow)',
+                  ml: '3px',
+                  '&:hover': {
+                    bgcolor: 'var(--dark-blue)',
+                    color: 'var(--white)',
+                    border: '1px solid var(--white)',
+                  },
                 }}
                 variant="outlined"
                 onClick={() => setEditionMode(!editionMode)}
@@ -157,14 +160,13 @@ export default function MyAccountFieldContent(props: {
           ) : (
             <Button
               sx={{
-                bgcolor: '#ffffff',
-                borderColor: '#03546D',
-                width: '170px',
-                borderRadius: '25px',
-                color: '#03546D',
-                mb: '10px',
+                width: '100px',
+                bgcolor: 'var(--yellow)',
+                '&:hover': {
+                  bgcolor: 'var(--dark-blue)',
+                },
               }}
-              variant="outlined"
+              variant="contained"
               onClick={() => setEditionMode(!editionMode)}
             >
               {translate('common.button.edit')}
@@ -180,14 +182,12 @@ export default function MyAccountFieldContent(props: {
           {!editionMode ? (
             <Button
               sx={{
-                bgcolor: '#ffffff',
-                borderColor: '#03546D',
-                width: '170px',
-                borderRadius: '25px',
-                color: '#03546D',
-                mb: '10px',
+                bgcolor: 'var(--yellow)',
+                '&:hover': {
+                  bgcolor: 'var(--dark-blue)',
+                },
               }}
-              variant="outlined"
+              variant="contained"
               onClick={() => setEditionMode(!editionMode)}
             >
               {translate('reset.send.request')}
@@ -288,15 +288,17 @@ export default function MyAccountFieldContent(props: {
 
               <Button
                 sx={{
-                  bgcolor: '#03546D',
-                  width: '170px',
-                  borderRadius: '25px',
-                  color: '#FFFFFF',
-                  mb: '10px',
+                  width: '120px',
+                  mt: '10px',
+                  bgcolor: 'var(--yellow)',
+                  '&:hover': {
+                    bgcolor: 'var(--dark-blue)',
+                  },
                 }}
-                variant="outlined"
+                variant="contained"
                 onClick={() => {
                   if (arePasswordsEquals && isPasswordValid) {
+                    setEditionMode(!editionMode);
                     submitPassword(pwd);
                   } /*else if (!arePasswordsEquals) {
                     alert(translate('signup.password_help.not_identical'));
@@ -309,17 +311,19 @@ export default function MyAccountFieldContent(props: {
               </Button>
               <Button
                 sx={{
-                  bgcolor: '#ffffff',
-                  borderColor: '#03546D',
-                  width: '170px',
-                  borderRadius: '25px',
-                  color: '#03546D',
-                  mb: '10px',
+                  color: 'var(--yellow)',
+                  border: '1px solid var(--yellow)',
+                  mt: '5px',
+                  '&:hover': {
+                    bgcolor: 'var(--dark-blue)',
+                    color: 'var(--white)',
+                    border: '1px solid var(--white)',
+                  },
                 }}
                 variant="outlined"
                 onClick={() => setEditionMode(!editionMode)}
               >
-                {translate('common.button.cancel')}]
+                {translate('common.button.cancel')}
               </Button>
             </div>
           )}

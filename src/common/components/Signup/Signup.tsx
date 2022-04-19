@@ -47,6 +47,7 @@ export default function Signup() {
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
+    event.preventDefault();
     //Set all forms to written, in order to display the error messages
     setIsDoneWritingFirstname(true);
     setIsDoneWritingLastname(true);
@@ -133,6 +134,7 @@ export default function Signup() {
       <>
         <Button
           className={styles.inscription_button}
+          type="submit"
           variant="contained"
           color="success"
           style={{ marginTop: '20px' }}
