@@ -32,7 +32,6 @@ export default function Signin() {
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
-    event.preventDefault();
     //Set all forms to written, in order to display the error messages
     sethasUpdatedAfterError(false);
     login({
@@ -86,7 +85,8 @@ export default function Signin() {
           color="success"
           style={{ marginTop: '20px' }}
           disabled={loading}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             sendForm();
           }}
         >

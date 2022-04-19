@@ -47,7 +47,6 @@ export default function Signup() {
 
   // Check if all fields are correct, and send the form to create User
   function sendForm() {
-    event.preventDefault();
     //Set all forms to written, in order to display the error messages
     setIsDoneWritingFirstname(true);
     setIsDoneWritingLastname(true);
@@ -146,7 +145,10 @@ export default function Signup() {
             !isEmailValid ||
             !arePasswordsEquals
           }
-          onClick={() => sendForm()}
+          onClick={(e) => {
+            e.preventDefault();
+            sendForm();
+          }}
         >
           {loading
             ? translate('common.button.sending')
