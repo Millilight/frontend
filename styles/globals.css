@@ -6,6 +6,25 @@
   --white: #ffffff;
   --beige: #f8f6f4;
 }
+@import url('https://fonts.googleapis.com/css2?family=Assistant&family=Poppins&family=Sanchez&display=swap');
+
+p,
+div,
+a,
+h5,
+h6 {
+  font-family: 'Assistant', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Poppins', sans-serif !important;
+}
+.subtitle {
+  font-family: 'Sanchez', serif !important;
+}
 
 html,
 body {
@@ -37,6 +56,11 @@ a {
   height: 100vh;
   overflow: hidden;
   z-index: -1;
+}
+.site-header .header-inner {
+  max-width: 100% !important;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 .visual-deco-1 {
   width: 50vw;

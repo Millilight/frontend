@@ -1,0 +1,5 @@
+@media (max-width: 796px) {
+  .wp_menu_container {
+    display: none;
+  }
+}

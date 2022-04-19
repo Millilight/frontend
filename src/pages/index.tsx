@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Signup from '@/components/Signup/Signup';
 import Signin from '@/components/Signin/Signin';
 import translate from '@/utils/translate';
+import WordpressMenu from '@/components/WordpressMenu/WordpressMenu';
 
 const Index = () => {
   const router = useRouter();
@@ -58,6 +59,7 @@ const Index = () => {
 
   return (
     <div>
+      <WordpressMenu />
       <div className="visual-decoration-container">
         <div className="visual-deco-1"></div>
         <div className="visual-deco-2"></div>
