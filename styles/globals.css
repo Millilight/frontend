@@ -132,3 +132,14 @@ a {
   text-align: center;
   cursor: pointer;
 }
+
+.wish-content-container {
+  height: 65vh;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
