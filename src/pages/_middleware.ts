@@ -5,6 +5,7 @@ import {
   login_url,
   protected_urls,
   home_url,
+  legators_safe_notification_url,
 } from '@/utils/config';
 
 export function middleware(req: NextRequest) {
@@ -38,6 +39,12 @@ export function middleware(req: NextRequest) {
   } else if (!expired && request_public_only) {
     return NextResponse.redirect(req.nextUrl.origin + home_url);
   } else {
+    //List of redirections
+    if (req.nextUrl.pathname == '/trust/notification') {
+      return NextResponse.redirect(
+        req.nextUrl.origin + legators_safe_notification_url
+      );
+    }
     return NextResponse.next();
   }
 }

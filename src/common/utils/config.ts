@@ -35,6 +35,8 @@ export const free_space_url = '/espace-personnel/espace-libre';
 export const trusted_users_url = '/espace-personnel/personnes-de-confiance';
 export const legators_safe_url = '/espace-personnel/coffre-fort-de-mes-proches';
 export const my_account_url = '/espace-personnel/mon-compte';
+export const legators_safe_notification_url =
+  '/espace-personnel/coffre-fort-de-mes-proches?notification=true';
 //define urls that are only accessible once connected
 export const protected_urls = [
   burrial_wishes_url,
