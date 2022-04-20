@@ -42,14 +42,7 @@ export default function LegatorsSafe() {
   return (
     <div className={styles.horizontal_container}>
       <div className={styles.item}>
-        <Typography
-          variant="h3"
-          sx={{
-            m: 2,
-            mt: 8,
-            textAlign: 'center',
-          }}
-        >
+        <h1 className={`${styles.title} ${'title'}`}>
           <Box
             component="img"
             sx={{
@@ -60,17 +53,10 @@ export default function LegatorsSafe() {
           />
           {'   '}
           {translate('legators_safe.title')}
-        </Typography>
-        <Typography
-          variant="h5"
-          sx={{
-            m: 2,
-            mb: 6,
-            textAlign: 'center',
-          }}
-        >
+        </h1>
+        <h2 className={`${styles.subtitle} ${'subtitle'}`}>
           {translate('legators_safe.subtitle')}
-        </Typography>
+        </h2>
         <Stack spacing={2} justifyContent="center" alignItems="center">
           {legatorsList.map((legator: Legator) => (
             <AccessToLegator legator={legator} key={legator._id} />
