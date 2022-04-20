@@ -10,7 +10,9 @@ import {
   styled,
   ListItem,
 } from '@mui/material';
-import MuiDrawer from '@mui/material/Drawer';
+import MenuIcon from '@mui/icons-material/Menu';
+// import MuiDrawer from '@mui/material/Drawer';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
 
 import styles from './MenuDrawer.module.css';
@@ -18,113 +20,128 @@ import translate from '@/utils/translate';
 import { useRouter } from 'next/router';
 import { useGetLegatorUsersQuery } from 'generated/graphql';
 
-const drawerWidth = 350;
-
-// Overriding the style of MUI's Drawer component to handle differences between opened and closed drawer
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ open }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
-  ...(open && {
-    width: drawerWidth,
-    overflowX: 'hidden',
-    '& .MuiDrawer-paper': {
-      width: drawerWidth,
-      overflowX: 'hidden',
-      backgroundColor: 'var(--dark-blue)',
-      color: 'var(--white)',
-    },
-  }),
-  ...(!open && {
-    overflowX: 'hidden',
-    width: '80px',
-    '& .MuiDrawer-paper': {
-      overflowX: 'hidden',
-      width: '80px',
-      backgroundColor: 'var(--dark-blue)',
-      color: 'var(--white)',
-    },
-  }),
-}));
-
 export default function MenuDrawer(props: { selectedPage: string }) {
   //To handle redirections
   const router = useRouter();
 
   // Whether the menu is opened (icons + text) or shrunk on the left hand side (icons only)
   const [open, setOpen] = React.useState(false);
-
+  // open = true;
   // Conditional display of "Access to legators' safe" : if at least 1 legator
   const { data, error } = useGetLegatorUsersQuery();
   const legators = data?.user.legators;
   const hasLegators = !error && legators?.length ? true : false;
 
-  function displayAccessToLegatorsSafe() {
-    if (hasLegators) {
-      return (
+  return (
+    <>
+      {' '}
+      <div className={styles.drawer_header}>
+        {open ? (
+          <MenuOpenIcon onClick={() => setOpen(false)} />
+        ) : (
+          <MenuIcon onClick={() => setOpen(true)} />
+        )}
+      </div>
+      <div
+        className={`${styles.menu_container} ${
+          open ? styles.menu_open : styles.menu_closed
+        }`}
+        // onMouseEnter={() => {
+        //   setOpen(true);
+        // }}
+        // onMouseLeave={() => {
+        //   setOpen(false);
+        // }}
+      >
+        {/* <Divider sx={{ color: '#FFFFFF', mt: 8, fontSize: '12px' }}>
+        Mon espace
+      </Divider> */}
+
         <ListItemButton
-          onClick={() => {
-            router.push('/espace-personnel/coffre-fort-de-mes-proches');
-          }}
           sx={{
             minHeight: 48,
-            justifyContent: open ? 'initial' : 'center',
+            justifyContent: 'flex-start',
             px: 2.5,
-            backgroundColor:
-              props.selectedPage === 'legators_safe' ? '#000000' : 'null',
+            pl: 3,
+            mt: 2,
+            backgroundColor: 'null',
           }}
-        >
-          <ListItemIcon
-            sx={{
-              minWidth: 0,
-              mr: open ? 3 : 'auto',
-              justifyContent: 'center',
-            }}
-          >
-            <Box
-              component="img"
-              sx={{
-                width: '35px',
-              }}
-              alt="..."
-              src="/key.png"
-            />
-          </ListItemIcon>
-          <ListItemText
-            primary={translate('menu.legators_safe')}
-            sx={{ opacity: open ? 1 : 0 }}
-          />
-        </ListItemButton>
-      );
-    }
-  }
-
-  return (
-    <Drawer
-      variant="permanent"
-      open={open}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <div className={styles.drawer_header}>
-        <IconButton
           onClick={() => {
             router.push('/espace-personnel');
           }}
         >
-          <HomeIcon sx={{ color: 'white' }} />
-        </IconButton>
-      </div>
-      <Divider />
-      <List>
-        <ListItem
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: 3,
+              justifyContent: 'center',
+            }}
+          >
+            <HomeIcon sx={{ color: 'white' }} />
+            <div
+              style={{ marginTop: '5px' }}
+              className={`${styles.text_item} ${
+                open ? styles.text_item_visible : styles.text_item_hidden
+              }`}
+            >
+              Espace Personnel
+            </div>
+          </ListItemIcon>
+        </ListItemButton>
+        <Divider sx={{ color: '#FFFFFF', mt: 8, fontSize: '12px' }}>
+          Coffre-fort
+        </Divider>
+
+        <ListItemButton
+          sx={{
+            minHeight: 48,
+            justifyContent: 'flex-start',
+            px: 2.5,
+            pl: 3,
+            mt: 2,
+            backgroundColor:
+              props.selectedPage === 'ceremonial' ? '#0b374c' : 'null',
+          }}
+          onClick={() => {
+            router.push('/espace-personnel/volontes-ceremoniales');
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: 3,
+              justifyContent: 'center',
+            }}
+          >
+            <Box
+              component="img"
+              sx={{
+                width: '30px',
+              }}
+              alt="..."
+              src="/candle.png"
+            />
+            <div
+              className={`${styles.text_item} ${
+                open ? styles.text_item_visible : styles.text_item_hidden
+              }`}
+            >
+              Volontés cérémoniales
+            </div>
+          </ListItemIcon>
+        </ListItemButton>
+        <ListItemButton
+          onClick={() => {
+            router.push('/espace-personnel/volontes-medicales');
+          }}
           sx={{
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
             px: 2.5,
+            pl: 3,
+            mt: 2,
+            backgroundColor:
+              props.selectedPage === 'medical' ? '#0b374c' : 'null',
           }}
         >
           <ListItemIcon
@@ -137,159 +154,99 @@ export default function MenuDrawer(props: { selectedPage: string }) {
             <Box
               component="img"
               sx={{
-                width: '40px',
+                width: '30px',
               }}
               alt="..."
-              src="/safe.png"
+              src="/caduce.png"
+            />
+            <div
+              className={`${styles.text_item} ${
+                open ? styles.text_item_visible : styles.text_item_hidden
+              }`}
+            >
+              Volontés médicales
+            </div>
+          </ListItemIcon>
+        </ListItemButton>
+        <ListItemButton
+          onClick={() => {
+            router.push('/espace-personnel/demarches-administratives');
+          }}
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+            pl: 3,
+            mt: 2,
+            backgroundColor:
+              props.selectedPage === 'paperwork' ? '#0b374c' : 'null',
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}
+          >
+            <Box
+              component="img"
+              sx={{
+                width: '30px',
+              }}
+              alt="..."
+              src="/house.png"
             />
           </ListItemIcon>
-          <ListItemText
-            primary={translate('menu.safe')}
-            sx={{ opacity: open ? 1 : 0 }}
-          />
-        </ListItem>
-        <div className="submenu">
-          <ListItemButton
+          <div
+            className={`${styles.text_item} ${
+              open ? styles.text_item_visible : styles.text_item_hidden
+            }`}
+          >
+            Démarches administratives
+          </div>
+        </ListItemButton>
+        <ListItemButton
+          onClick={() => {
+            router.push('/espace-personnel/espace-libre');
+          }}
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+            pl: 3,
+            mt: 2,
+            backgroundColor:
+              props.selectedPage === 'free_space' ? '#0b374c' : 'null',
+          }}
+        >
+          <ListItemIcon
             sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-              pl: open ? 10 : 3,
-              backgroundColor:
-                props.selectedPage === 'ceremonial' ? '#000000' : 'null',
-            }}
-            onClick={() => {
-              router.push('/espace-personnel/volontes-ceremoniales');
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
             }}
           >
-            <ListItemIcon
+            <Box
+              component="img"
               sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
+                width: '30px',
               }}
-            >
-              <Box
-                component="img"
-                sx={{
-                  width: '25px',
-                }}
-                alt="..."
-                src="/candle.png"
-              />
-            </ListItemIcon>
-            <ListItemText
-              primary={translate('menu.ceremonial')}
-              sx={{ opacity: open ? 1 : 0 }}
+              alt="..."
+              src="/paint.png"
             />
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => {
-              router.push('/espace-personnel/volontes-medicales');
-            }}
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-              pl: open ? 10 : 3,
-              backgroundColor:
-                props.selectedPage === 'medical' ? '#000000' : 'null',
-            }}
+          </ListItemIcon>
+          <div
+            className={`${styles.text_item} ${
+              open ? styles.text_item_visible : styles.text_item_hidden
+            }`}
           >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              <Box
-                component="img"
-                sx={{
-                  width: '25px',
-                }}
-                alt="..."
-                src="/caduce.png"
-              />
-            </ListItemIcon>
-            <ListItemText
-              primary={translate('menu.medical')}
-              sx={{ opacity: open ? 1 : 0 }}
-            />
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => {
-              router.push('/espace-personnel/demarches-administratives');
-            }}
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-              pl: open ? 10 : 3,
-              backgroundColor:
-                props.selectedPage === 'paperwork' ? '#000000' : 'null',
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              <Box
-                component="img"
-                sx={{
-                  width: '25px',
-                }}
-                alt="..."
-                src="/house.png"
-              />
-            </ListItemIcon>
-            <ListItemText
-              primary={translate('menu.admin')}
-              sx={{
-                overflowWrap: 'break-word',
-                wordWrap: 'break-word',
-                opacity: open ? 1 : 0,
-              }}
-            />
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => {
-              router.push('/espace-personnel/espace-libre');
-            }}
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-              pl: open ? 10 : 3,
-              backgroundColor:
-                props.selectedPage === 'free_space' ? '#000000' : 'null',
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              <Box
-                component="img"
-                sx={{
-                  width: '25px',
-                }}
-                alt="..."
-                src="/paint.png"
-              />
-            </ListItemIcon>
-            <ListItemText
-              primary={translate('menu.free_space')}
-              sx={{ opacity: open ? 1 : 0 }}
-            />
-          </ListItemButton>
-        </div>
+            Espace libre
+          </div>
+        </ListItemButton>
+        <Divider sx={{ color: '#FFFFFF', mt: 8, fontSize: '12px' }}>
+          Proches
+        </Divider>
         <ListItemButton
           onClick={() => {
             router.push('/espace-personnel/personnes-de-confiance');
@@ -298,8 +255,9 @@ export default function MenuDrawer(props: { selectedPage: string }) {
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
             px: 2.5,
+            mt: 2,
             backgroundColor:
-              props.selectedPage === 'trusted_persons' ? '#000000' : 'null',
+              props.selectedPage === 'trusted_persons' ? '#0b374c' : 'null',
           }}
         >
           <ListItemIcon
@@ -317,14 +275,18 @@ export default function MenuDrawer(props: { selectedPage: string }) {
               alt="..."
               src="/trusted_persons.png"
             />
+            <div
+              className={`${styles.text_item} ${
+                open ? styles.text_item_visible : styles.text_item_hidden
+              }`}
+              style={{ marginTop: '10px' }}
+            >
+              Mes proches de confiance
+            </div>
           </ListItemIcon>
-          <ListItemText
-            primary={translate('menu.trusted_persons')}
-            sx={{ opacity: open ? 1 : 0 }}
-          />
         </ListItemButton>
-        {displayAccessToLegatorsSafe()}
-      </List>
-    </Drawer>
+        {/* {displayAccessToLegatorsSafe()} */}
+      </div>
+    </>
   );
 }

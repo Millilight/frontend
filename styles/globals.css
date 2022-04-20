@@ -139,7 +139,8 @@ a {
   padding-bottom: 50px;
   padding-top: 50px;
 }
-
-*::-webkit-scrollbar {
-  width: 12px;
+@media (min-width: 1200px) {
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
 }
