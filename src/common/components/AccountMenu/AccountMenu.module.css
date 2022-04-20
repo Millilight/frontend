@@ -3,3 +3,9 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 998px) {
+  .account_menu_container {
+    display: none;
+  }
+}

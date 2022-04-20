@@ -314,6 +314,7 @@ export default function Ceremonial() {
     return (
       <>
         <Button
+          className={styles.download_button}
           onClick={() => getMyUrgentDataWishes()}
           sx={{
             bgcolor: 'var(--yellow)',
@@ -334,12 +335,13 @@ export default function Ceremonial() {
     <div className={styles.horizontal_container}>
       <div className={styles.item}>
         <div onClick={() => setHelp(initial_help)}>
-          <Typography
-            variant="h3"
-            sx={{
-              m: 8,
-              textAlign: 'center',
-            }}
+          <h3
+            className={styles.title}
+            // variant="h3"
+            // sx={{
+            //   m: 8,
+            //   textAlign: 'center',
+            // }}
           >
             <Box
               component="img"
@@ -351,7 +353,7 @@ export default function Ceremonial() {
             />
             {'   '}
             {translate('ceremonial.title')}
-          </Typography>
+          </h3>
         </div>
         <div className={styles.horizontal_container_right}>
           {displayGetUrgentDataButton()}

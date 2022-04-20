@@ -22,9 +22,9 @@ h3,
 h4 {
   font-family: 'Poppins', sans-serif !important;
 }
-.subtitle {
+/* .subtitle {
   font-family: 'Sanchez', serif !important;
-}
+} */
 
 html,
 body {
@@ -45,6 +45,39 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0px;
+}
+.title img {
+  position: relative;
+  top: 15px;
+}
+.subtitle {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px;
+}
+
+@media (max-width: 998px) {
+  .title {
+    /* overflow: hidden; */
+    padding: 0;
+    /* width: 50%; */
+    text-align: center;
+    margin: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 25px;
+  }
+  .subtitle {
+    font-size: 17px;
+    text-align: center;
+  }
 }
 
 /*Visual Blue circles*/

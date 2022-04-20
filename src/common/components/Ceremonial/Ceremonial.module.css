@@ -78,5 +78,48 @@
     margin-top: 2px;
   }
 }
+.title {
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+}
+.title img {
+  position: relative;
+  top: 15px;
+}
+@media (max-width: 998px) {
+  .title {
+    height: 70px;
+    /* overflow: hidden; */
+    padding: 0;
+    /* width: 50%; */
+    text-align: center;
+    margin: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 20px;
+  }
+
+  .horizontal_container_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-right: 0px;
+  }
+}
+
+@media (max-width: 500px) {
+  .title img {
+    display: none;
+  }
+  .title {
+    margin-top: 50px;
+  }
+}
 
 /********* End Ceremonial ********/

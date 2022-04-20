@@ -15,6 +15,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { removeCookies } from 'cookies-next';
 import translate from '@/utils/translate';
+import styles from './AccountMenu.module.css';
 
 function disconnect() {
   localStorage.removeItem('token');
@@ -42,6 +43,7 @@ export default function AccountMenu() {
           top: '20px',
           right: '20px',
         }}
+        className={styles.account_menu_container}
       >
         <Tooltip title="Account settings">
           <IconButton

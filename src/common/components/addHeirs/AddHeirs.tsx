@@ -290,10 +290,8 @@ export default function TrustedPersons() {
   return (
     <div className="personnal-space-main-container">
       <div className="personnal-space-content-container">
-        <Typography variant="h4">{translate('trustedperson.title')}</Typography>
-        <Typography variant="h5">
-          {translate('trustedperson.subtitle')}
-        </Typography>
+        <h1 className="title">{translate('trustedperson.title')}</h1>
+        <h2 className="subtitle">{translate('trustedperson.subtitle')}</h2>
         <div className="personnal-space-content-main">
           {displayHeirs()}
           {displayAddHeir()}
