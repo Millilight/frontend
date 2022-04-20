@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 // import MuiDrawer from '@mui/material/Drawer';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
+import AccountMenu from '../AccountMenu/AccountMenu';
 
 import styles from './MenuDrawer.module.css';
 import translate from '@/utils/translate';
@@ -46,13 +47,10 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         className={`${styles.menu_container} ${
           open ? styles.menu_open : styles.menu_closed
         }`}
-        // onMouseEnter={() => {
-        //   setOpen(true);
-        // }}
-        // onMouseLeave={() => {
-        //   setOpen(false);
-        // }}
       >
+        <div className={styles.account_menu_container}>
+          <AccountMenu />
+        </div>
         {/* <Divider sx={{ color: '#FFFFFF', mt: 8, fontSize: '12px' }}>
         Mon espace
       </Divider> */}
