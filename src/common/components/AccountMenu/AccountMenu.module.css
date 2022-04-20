@@ -6,6 +6,6 @@
 
 @media (max-width: 998px) {
   .account_menu_container {
-    display: none;
+    /* display: none; */
   }
 }

@@ -63,6 +63,13 @@
     left: -200px;
   }
 }
+@media (min-width: 996px) {
+  .account_menu_container {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+  }
+}
 
 @keyframes appear {
   0% {
