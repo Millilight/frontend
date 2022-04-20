@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'https://app-c304d12e-58fd-4254-bbf6-8256ba3daa59.cleverapps.io/graphql'
+schema: 'localhost:8080/graphql'
 documents:
   - 'src/common/**/*.graphql'
   - 'src/modules/**/*.graphql'

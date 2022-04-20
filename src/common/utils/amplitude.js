@@ -107,7 +107,13 @@ class Amplitude extends React.Component {
       e.amplitude = n;
     })(window, document);
 
-    amplitude.getInstance().init(config.amplitudeApiKey);
+    amplitude.getInstance().init(config.amplitudeApiKey, undefined, {
+      apiEndpoint: config.analyticsURL, // Without this option, calls directly https://api.amplitude.com
+      forceHttps: config.nodeEnv === 'production',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', //Try : 'content-type': 'application/json; charset=UTF-8'
+      },
+    });
   }
 
   render() {

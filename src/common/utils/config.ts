@@ -22,6 +22,10 @@ export const config = {
     'NEXT_PUBLIC_AMPLITUDE_API_KEY',
     process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY
   ),
+  analyticsURL: getEnvironmentVariable(
+    'NEXT_PUBLIC_ANALYTICS_URL',
+    process.env.NEXT_PUBLIC_ANALYTICS_URL
+  ),
 };
 
 /* List of URLS */
