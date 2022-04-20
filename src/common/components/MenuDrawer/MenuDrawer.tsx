@@ -1,15 +1,5 @@
 import * as React from 'react';
-import {
-  Box,
-  List,
-  Divider,
-  IconButton,
-  ListItemText,
-  ListItemIcon,
-  ListItemButton,
-  styled,
-  ListItem,
-} from '@mui/material';
+import { Box, Divider, ListItemIcon, ListItemButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 // import MuiDrawer from '@mui/material/Drawer';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -20,6 +10,15 @@ import styles from './MenuDrawer.module.css';
 import translate from '@/utils/translate';
 import { useRouter } from 'next/router';
 import { useGetLegatorUsersQuery } from 'generated/graphql';
+import {
+  administrative_url,
+  burrial_wishes_url,
+  free_space_url,
+  home_url,
+  legators_safe_url,
+  medical_url,
+  trusted_users_url,
+} from '@/utils/config';
 
 export default function MenuDrawer(props: { selectedPage: string }) {
   //To handle redirections
@@ -32,6 +31,52 @@ export default function MenuDrawer(props: { selectedPage: string }) {
   const { data, error } = useGetLegatorUsersQuery();
   const legators = data?.user.legators;
   const hasLegators = !error && legators?.length ? true : false;
+
+  function displayAccessToLegatorsSafe() {
+    if (hasLegators) {
+      return (
+        <ListItemButton
+          onClick={() => {
+            router.push(legators_safe_url);
+          }}
+          sx={{
+            minHeight: 48,
+            justifyContent: 'flex-start',
+            px: 2.5,
+            pl: 3,
+            mt: 2,
+            backgroundColor:
+              props.selectedPage === 'legators_safe' ? '#0b374c' : 'null',
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: 3,
+              justifyContent: 'center',
+            }}
+          >
+            <Box
+              component="img"
+              sx={{
+                width: '35px',
+              }}
+              alt="..."
+              src="/key.png"
+            />
+          </ListItemIcon>
+          <div
+            className={`${styles.text_item} ${
+              open ? styles.text_item_visible : styles.text_item_hidden
+            }`}
+            style={{ marginTop: '10px' }}
+          >
+            Mes proches de confiance
+          </div>
+        </ListItemButton>
+      );
+    }
+  }
 
   return (
     <>
@@ -65,7 +110,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
             backgroundColor: 'null',
           }}
           onClick={() => {
-            router.push('/espace-personnel');
+            router.push(home_url);
           }}
         >
           <ListItemIcon
@@ -101,7 +146,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
               props.selectedPage === 'ceremonial' ? '#0b374c' : 'null',
           }}
           onClick={() => {
-            router.push('/espace-personnel/volontes-ceremoniales');
+            router.push(burrial_wishes_url);
           }}
         >
           <ListItemIcon
@@ -130,7 +175,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
-            router.push('/espace-personnel/volontes-medicales');
+            router.push(medical_url);
           }}
           sx={{
             minHeight: 48,
@@ -168,7 +213,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
-            router.push('/espace-personnel/demarches-administratives');
+            router.push(administrative_url);
           }}
           sx={{
             minHeight: 48,
@@ -206,7 +251,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
-            router.push('/espace-personnel/espace-libre');
+            router.push(free_space_url);
           }}
           sx={{
             minHeight: 48,
@@ -247,7 +292,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
         </Divider>
         <ListItemButton
           onClick={() => {
-            router.push('/espace-personnel/personnes-de-confiance');
+            router.push(trusted_users_url);
           }}
           sx={{
             minHeight: 48,
@@ -283,7 +328,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
             </div>
           </ListItemIcon>
         </ListItemButton>
-        {/* {displayAccessToLegatorsSafe()} */}
+        {displayAccessToLegatorsSafe()}
       </div>
     </>
   );
