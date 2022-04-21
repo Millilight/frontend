@@ -1,7 +1,7 @@
 import { Box, Divider, ListItemIcon, ListItemButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 // import MuiDrawer from '@mui/material/Drawer';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountMenu from '../AccountMenu/AccountMenu';
 import { useContext } from 'react';
@@ -87,7 +87,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
       {' '}
       <div className={styles.drawer_header}>
         {open ? (
-          <MenuOpenIcon onClick={setOpen} />
+          <ArrowBackIosNewIcon onClick={setOpen} />
         ) : (
           <MenuIcon onClick={setOpen} />
         )}
