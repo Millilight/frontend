@@ -116,7 +116,8 @@ export default function MyAccountFieldContent(props: {
             defaultValue={props.myaccountfield.content}
             disabled={!editionMode}
             sx={{
-              width: '50%',
+              width: '100%',
+              maxWidth: '350px',
               textAlign: 'center',
             }}
             required
@@ -198,6 +199,7 @@ export default function MyAccountFieldContent(props: {
                 display: 'flex',
                 flexDirection: 'column',
                 width: '100%',
+                maxWidth: '350px',
                 alignItems: 'center',
               }}
             >
@@ -214,7 +216,7 @@ export default function MyAccountFieldContent(props: {
                   }}
                   onChange={(e) => setPwd(e.target.value)}
                   error={!isPasswordValid}
-                  sx={{ width: '50%' }}
+                  sx={{ width: '100%', maxWidth: '350px' }}
                 />
 
                 {isWritingPwd || !isPasswordValid ? (
@@ -283,7 +285,7 @@ export default function MyAccountFieldContent(props: {
                   setIsDoneWritingConfirmPwd(true);
                 }}
                 error={!arePasswordsEquals}
-                sx={{ width: '50%', mb: '2' }}
+                sx={{ width: '100%', maxWidth: '350px', mb: '2' }}
               />
 
               <Button

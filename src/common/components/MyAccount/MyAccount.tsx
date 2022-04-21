@@ -62,18 +62,16 @@ export default function MyAccount() {
 
   return (
     <div>
-      <main>
-        <Typography
-          variant="h4"
-          sx={{
-            m: 2,
-            textAlign: 'center',
-          }}
-        >
-          {translate('myaccount.title')}
-        </Typography>
-        <MyAccountField myaccountfields={allaccountfields} />
-      </main>
+      <Typography
+        variant="h4"
+        sx={{
+          m: 2,
+          textAlign: 'center',
+        }}
+      >
+        {translate('myaccount.title')}
+      </Typography>
+      <MyAccountField myaccountfields={allaccountfields} />
     </div>
   );
 }

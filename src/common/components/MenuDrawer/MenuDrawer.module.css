@@ -19,7 +19,7 @@
   position: fixed;
   height: 42px;
   top: 10px;
-  left: 0px;
+  left: 2px;
   background-color: var(--dark-blue);
   border-radius: 20px;
   z-index: 101;
@@ -28,6 +28,7 @@
 
 .menu_open {
   min-width: 300px;
+  max-width: 500px;
 }
 
 .menu_closed {

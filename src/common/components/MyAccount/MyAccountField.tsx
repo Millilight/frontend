@@ -18,7 +18,7 @@ export default function MyAccountField(props: {
             <Box
               key={field.fieldId}
               sx={{
-                width: '50%',
+                width: '90%',
                 boxShadow: 2,
                 bgcolor: '#FFFFFF',
                 borderRadius: '25px',
