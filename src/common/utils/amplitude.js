@@ -110,6 +110,7 @@ class Amplitude extends React.Component {
     amplitude.getInstance().init(config.amplitudeApiKey, undefined, {
       apiEndpoint: config.analyticsURL, // Without this option, calls directly https://api.amplitude.com
       forceHttps: config.nodeEnv === 'production',
+      disableCookies: true, // We would need cookies to track users across amuni.fr and app.amuni.fr
     });
   }
 
