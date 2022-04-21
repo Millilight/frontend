@@ -1,10 +1,11 @@
-import * as React from 'react';
 import { Box, Divider, ListItemIcon, ListItemButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 // import MuiDrawer from '@mui/material/Drawer';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountMenu from '../AccountMenu/AccountMenu';
+import { useContext } from 'react';
+import MenuContext from '../../../contexts/menuContext';
 
 import styles from './MenuDrawer.module.css';
 import translate from '@/utils/translate';
@@ -21,14 +22,14 @@ import {
 } from '@/utils/config';
 import amplitude from 'amplitude-js';
 
-const drawerWidth = 350;
-
 export default function MenuDrawer(props: { selectedPage: string }) {
   //To handle redirections
   const router = useRouter();
 
   // Whether the menu is opened (icons + text) or shrunk on the left hand side (icons only)
-  const [open, setOpen] = React.useState(false);
+  const context = useContext(MenuContext);
+  const open = context.bool;
+  const setOpen = context.func;
   // open = true;
   // Conditional display of "Access to legators' safe" : if at least 1 legator
   const { data, error } = useGetLegatorUsersQuery();
@@ -74,7 +75,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
             }`}
             style={{ marginTop: '10px' }}
           >
-            Mes proches de confiance
+            {translate('menu.legators_safe')}
           </div>
         </ListItemButton>
       );
@@ -86,9 +87,9 @@ export default function MenuDrawer(props: { selectedPage: string }) {
       {' '}
       <div className={styles.drawer_header}>
         {open ? (
-          <MenuOpenIcon onClick={() => setOpen(false)} />
+          <MenuOpenIcon onClick={setOpen} />
         ) : (
-          <MenuIcon onClick={() => setOpen(true)} />
+          <MenuIcon onClick={setOpen} />
         )}
       </div>
       <div
@@ -130,7 +131,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
                 open ? styles.text_item_visible : styles.text_item_hidden
               }`}
             >
-              Espace Personnel
+              {translate('menu.home')}
             </div>
           </ListItemIcon>
         </ListItemButton>
@@ -175,7 +176,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
                 open ? styles.text_item_visible : styles.text_item_hidden
               }`}
             >
-              Volontés cérémoniales
+              {translate('menu.ceremonial')}
             </div>
           </ListItemIcon>
         </ListItemButton>
@@ -216,7 +217,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
                 open ? styles.text_item_visible : styles.text_item_hidden
               }`}
             >
-              Volontés médicales
+              {translate('menu.medical')}
             </div>
           </ListItemIcon>
         </ListItemButton>
@@ -258,7 +259,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
               open ? styles.text_item_visible : styles.text_item_hidden
             }`}
           >
-            Démarches administratives
+            {translate('menu.admin')}
           </div>
         </ListItemButton>
         <ListItemButton
@@ -299,7 +300,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
               open ? styles.text_item_visible : styles.text_item_hidden
             }`}
           >
-            Espace libre
+            {translate('menu.free_space')}
           </div>
         </ListItemButton>
         <Divider sx={{ color: '#FFFFFF', mt: 8, fontSize: '12px' }}>
@@ -339,7 +340,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
               }`}
               style={{ marginTop: '10px' }}
             >
-              Mes proches de confiance
+              {translate('menu.trusted_persons')}
             </div>
           </ListItemIcon>
         </ListItemButton>

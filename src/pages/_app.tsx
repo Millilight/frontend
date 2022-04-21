@@ -11,6 +11,7 @@ import '@fontsource/roboto/700.css';
 
 import { IntlProvider } from 'react-intl';
 import French from '../lang/fr.json';
+import { MenuProvider } from '../contexts/menuContext';
 
 // import { useState } from 'react';
 
@@ -39,9 +40,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <IntlProvider locale={locale} messages={messages}>
-      <AmplitudeWithNoSSR />
-      <CrispWithNoSSR />
-      <Component {...pageProps} />
+      <MenuProvider>
+        <AmplitudeWithNoSSR />
+        <CrispWithNoSSR />
+        <Component {...pageProps} />
+      </MenuProvider>
     </IntlProvider>
   );
 }
