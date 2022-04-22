@@ -44,6 +44,19 @@ export type AskResetPasswordUserResponse = {
   success: Scalars['Boolean'];
 };
 
+export type BankProduct = {
+  __typename?: 'BankProduct';
+  company: Scalars['String'];
+  localization: Scalars['String'];
+  type: Scalars['String'];
+};
+
+export type BankProductInput = {
+  company: Scalars['String'];
+  localization: Scalars['String'];
+  type: Scalars['String'];
+};
+
 export type ConfirmSecurityCodeInput = {
   legator_user_id: Scalars['ID'];
   security_code: Scalars['String'];
@@ -52,6 +65,17 @@ export type ConfirmSecurityCodeInput = {
 export type ConfirmSecurityCodeResponse = {
   __typename?: 'ConfirmSecurityCodeResponse';
   legator_user: Legator;
+};
+
+export type ConsumerCredit = {
+  __typename?: 'ConsumerCredit';
+  company: Scalars['String'];
+  contract_number: Scalars['String'];
+};
+
+export type ConsumerCreditInput = {
+  company: Scalars['String'];
+  contract_number: Scalars['String'];
 };
 
 export type CreateUserInput = {
@@ -66,16 +90,45 @@ export type Heir = {
   _id: Scalars['ID'];
   added_date: Scalars['Date'];
   security_code?: Maybe<Scalars['String']>;
+  sensitive_data_unlocked: Scalars['Boolean'];
+  sensitive_data_unlocked_date?: Maybe<Scalars['Date']>;
   state: StateTrust;
   urgent_data_unlocked: Scalars['Boolean'];
   urgent_data_unlocked_date?: Maybe<Scalars['Date']>;
   user_details: UserDetails;
 };
 
+export type InsuranceProduct = {
+  __typename?: 'InsuranceProduct';
+  company: Scalars['String'];
+  localization: Scalars['String'];
+  type: Scalars['String'];
+};
+
+export type InsuranceProductInput = {
+  company: Scalars['String'];
+  localization: Scalars['String'];
+  type: Scalars['String'];
+};
+
+export type InternetAccountToBeDeleted = {
+  __typename?: 'InternetAccountToBeDeleted';
+  site: Scalars['String'];
+  username: Scalars['String'];
+};
+
+export type InternetAccountToBeDeletedInput = {
+  site: Scalars['String'];
+  username: Scalars['String'];
+};
+
 export type Legator = {
   __typename?: 'Legator';
   _id: Scalars['ID'];
   added_date: Scalars['Date'];
+  sensitive_data?: Maybe<SensitiveData>;
+  sensitive_data_unlocked: Scalars['Boolean'];
+  sensitive_data_unlocked_date?: Maybe<Scalars['Date']>;
   state: StateTrust;
   urgent_data?: Maybe<UrgentData>;
   urgent_data_unlocked: Scalars['Boolean'];
@@ -103,6 +156,7 @@ export type Mutation = {
   login: LoginResponse;
   resetPasswordUser: User;
   unlockUrgentData: UnlockUrgentDataResponse;
+  updateProcedures: Procedures;
   updateUser: User;
   updateWishes: Wishes;
   verifyEmail: VerifyEmailResponse;
@@ -138,6 +192,10 @@ export type MutationUnlockUrgentDataArgs = {
   unlock_urgent_data_input: UnlockUrgentDataInput;
 };
 
+export type MutationUpdateProceduresArgs = {
+  update_procedures_input: UpdateProceduresInput;
+};
+
 export type MutationUpdateUserArgs = {
   update_user_input: UpdateUserInput;
 };
@@ -158,20 +216,42 @@ export type MutationVerifyNewEmailArgs = {
   verify_new_email_input: VerifyNewEmailInput;
 };
 
+export type Procedures = {
+  __typename?: 'Procedures';
+  bank_products: Array<BankProduct>;
+  consumer_credits: Array<ConsumerCredit>;
+  insurance_products: Array<InsuranceProduct>;
+  internet_accounts_to_be_deleted: Array<InternetAccountToBeDeleted>;
+  properties: Array<RealEstate>;
+  vehicles: Array<Vehicle>;
+};
+
 export type Query = {
   __typename?: 'Query';
-  urgentData: UrgentDataResponse;
   user: User;
 };
 
-export type QueryUrgentDataArgs = {
-  urgent_data_input: UrgentDataInput;
+export type RealEstate = {
+  __typename?: 'RealEstate';
+  localization: Scalars['String'];
+  type: Scalars['String'];
+};
+
+export type RealEstateInput = {
+  localization: Scalars['String'];
+  type: Scalars['String'];
 };
 
 export type ResetPasswordUserInput = {
   new_password: Scalars['String'];
   token: Scalars['String'];
-  user_id: Scalars['String'];
+  user_id: Scalars['ID'];
+};
+
+export type SensitiveData = {
+  __typename?: 'SensitiveData';
+  procedures: Procedures;
+  user_id: Scalars['ID'];
 };
 
 export enum StateTrust {
@@ -186,6 +266,17 @@ export type UnlockUrgentDataInput = {
 export type UnlockUrgentDataResponse = {
   __typename?: 'UnlockUrgentDataResponse';
   success: Scalars['Boolean'];
+};
+
+export type UpdateProceduresInput = {
+  bank_products?: InputMaybe<Array<BankProductInput>>;
+  consumer_credits?: InputMaybe<Array<ConsumerCreditInput>>;
+  insurance_products?: InputMaybe<Array<InsuranceProductInput>>;
+  internet_accounts_to_be_deleted?: InputMaybe<
+    Array<InternetAccountToBeDeletedInput>
+  >;
+  properties?: InputMaybe<Array<RealEstateInput>>;
+  vehicles?: InputMaybe<Array<VehicleInput>>;
 };
 
 export type UpdateUserInput = {
@@ -211,17 +302,8 @@ export type UpdateWishesInput = {
 
 export type UrgentData = {
   __typename?: 'UrgentData';
-  user_id: Scalars['String'];
+  user_id: Scalars['ID'];
   wishes: Wishes;
-};
-
-export type UrgentDataInput = {
-  legator_user_id: Scalars['ID'];
-};
-
-export type UrgentDataResponse = {
-  __typename?: 'UrgentDataResponse';
-  urgent_data: UrgentData;
 };
 
 export type User = {
@@ -232,6 +314,7 @@ export type User = {
   heirs: Array<Heir>;
   lastname: Scalars['String'];
   legators: Array<Legator>;
+  sensitive_data: SensitiveData;
   urgent_data: UrgentData;
 };
 
@@ -242,9 +325,20 @@ export type UserDetails = {
   lastname: Scalars['String'];
 };
 
+export type Vehicle = {
+  __typename?: 'Vehicle';
+  registration_number: Scalars['String'];
+  type: Scalars['String'];
+};
+
+export type VehicleInput = {
+  registration_number: Scalars['String'];
+  type: Scalars['String'];
+};
+
 export type VerifyEmailInput = {
   token: Scalars['String'];
-  user_id: Scalars['String'];
+  user_id: Scalars['ID'];
 };
 
 export type VerifyEmailResponse = {
@@ -260,12 +354,12 @@ export type VerifyEmailWithInvitationInput = {
 
 export type VerifyEmailWithInvitationResponse = {
   __typename?: 'VerifyEmailWithInvitationResponse';
-  sucess: Scalars['Boolean'];
+  success: Scalars['Boolean'];
 };
 
 export type VerifyNewEmailInput = {
   token: Scalars['String'];
-  user_id: Scalars['String'];
+  user_id: Scalars['ID'];
 };
 
 export type Wishes = {
@@ -382,7 +476,7 @@ export type GetMyUrgentDataWishesQuery = {
 
 export type UpdateEmailUserMutationVariables = Exact<{
   token: Scalars['String'];
-  user_id: Scalars['String'];
+  user_id: Scalars['ID'];
 }>;
 
 export type UpdateEmailUserMutation = {
@@ -457,7 +551,7 @@ export type GetLegatorUsersQuery = {
 };
 
 export type ResetPasswordMutationVariables = Exact<{
-  user_id: Scalars['String'];
+  user_id: Scalars['ID'];
   new_password: Scalars['String'];
   token: Scalars['String'];
 }>;
@@ -495,7 +589,7 @@ export type CreateUserMutation = {
 
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String'];
-  user_id: Scalars['String'];
+  user_id: Scalars['ID'];
 }>;
 
 export type VerifyEmailMutation = {
@@ -513,7 +607,7 @@ export type VerifyEmailWithInvitationMutation = {
   __typename?: 'Mutation';
   verifyEmailWithInvitation: {
     __typename?: 'VerifyEmailWithInvitationResponse';
-    sucess: boolean;
+    success: boolean;
   };
 };
 
@@ -927,7 +1021,7 @@ export type GetMyUrgentDataWishesQueryResult = Apollo.QueryResult<
   GetMyUrgentDataWishesQueryVariables
 >;
 export const UpdateEmailUserDocument = gql`
-  mutation updateEmailUser($token: String!, $user_id: String!) {
+  mutation updateEmailUser($token: String!, $user_id: ID!) {
     verifyNewEmail(
       verify_new_email_input: { token: $token, user_id: $user_id }
     ) {
@@ -1233,7 +1327,7 @@ export type GetLegatorUsersQueryResult = Apollo.QueryResult<
 >;
 export const ResetPasswordDocument = gql`
   mutation resetPassword(
-    $user_id: String!
+    $user_id: ID!
     $new_password: String!
     $token: String!
   ) {
@@ -1411,7 +1505,7 @@ export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
   CreateUserMutationVariables
 >;
 export const VerifyEmailDocument = gql`
-  mutation verifyEmail($token: String!, $user_id: String!) {
+  mutation verifyEmail($token: String!, $user_id: ID!) {
     verifyEmail(verify_email_input: { token: $token, user_id: $user_id }) {
       success
     }
@@ -1474,7 +1568,7 @@ export const VerifyEmailWithInvitationDocument = gql`
         password: $password
       }
     ) {
-      sucess
+      success
     }
   }
 `;
