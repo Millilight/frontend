@@ -1,4 +1,4 @@
-mutation verifyEmail($token: String!, $user_id: String!) {
+mutation verifyEmail($token: String!, $user_id: ID!) {
   verifyEmail(verify_email_input: { token: $token, user_id: $user_id }) {
     success
   }
@@ -16,6 +16,6 @@ mutation verifyEmailWithInvitation(
       password: $password
     }
   ) {
-    sucess
+    success
   }
 }
