@@ -1,13 +1,14 @@
 import { useCreateUserMutation } from 'generated/graphql';
 import { TextField, Button, Typography } from '@mui/material';
 import styles from './Signup.module.css';
-import { login_url } from '@/utils/config';
+import { email_verification_url, login_url } from '@/utils/config';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Link from 'next/link';
 
 import translate from '@/utils/translate';
 import amplitude from 'amplitude-js';
+import Router from 'next/router';
 
 export default function Signup() {
   // Input Variables: updated by user input
@@ -76,6 +77,9 @@ export default function Signup() {
         },
       });
     }
+  }
+  if (data) {
+    Router.push(email_verification_url);
   }
 
   // Display the conditionnal JSX to show the button, depending on the

@@ -53,6 +53,12 @@ export default function Signin() {
       ) {
         message = translate('signin.wrong_password');
       }
+      if (error.message && error.message == 'Mail not verified') {
+        message = translate('signin.mail_not_verified');
+      }
+      if (error.message && error.message == 'User not found') {
+        message = translate('signin.user_not_found');
+      }
       return (
         <Button
           className={styles.inscription_button}

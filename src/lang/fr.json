@@ -48,6 +48,8 @@
   "signin.description": "Connectez-vous pour accéder à vos informations",
   "signin.go_to_signup": "Pas encore de compte ? Inscrivez-vous ici",
   "signin.error": "Erreur de connexion, veuillez réessayer plus tard.",
+  "signin.mail_not_verified": "Vous devez valider votre adresse email pour vous connecter. (Pensez à vérifier vos spams)",
+  "signin.user_not_found": "Votre compte n'existe pas ou n'a pas encore été vérifié",
   "signin.success": "Connexion réussie!",
   "signin.button.signin": "Me connecter",
   "personal_space.title": "Mon espace sécurisé",
