@@ -15,6 +15,18 @@ const wishTitles: { [key: string]: string } = {
   other: 'Autres informations laissées:',
 };
 
+const procedureTitles: { [key: string]: string } = {
+  bank_products: "Comptes bancaires (type, banque, localisation de l'agence):",
+  insurance_products:
+    "Assurances (type, assurance, localisation de l' agence):",
+  vehicles: 'Véhicules (type, numéro de carte grise):',
+  consumer_credits:
+    'Crédits à la consommation (entreprise, numéro de contrat):',
+  properties: 'Biens immobiliers (type, lieu):',
+  internet_accounts_to_be_deleted:
+    "Comptes internet à fermer (nom du site, nom d'utilisateur):",
+};
+
 export function dowloadLegatorWishes(
   wishes: UrgentDataWishes,
   legator: Legator
@@ -139,4 +151,75 @@ export function dowloadMyWishes(wishes: UrgentDataWishes) {
   }
 
   doc.save('mes_volontes_ceremoniales.pdf');
+}
+
+export function dowloadMyPaperworkProcedures(
+  procedures: SensitiveDataProcedures
+) {
+  const doc = new jsPDF('p', 'in', 'letter');
+
+  let offset = 1.8; // in inches
+
+  // Amuni logo
+  const img = new Image();
+  img.src = '/amuni.png';
+  doc.addImage(img, 'png', 0.75, 0.75, 2.8, 0.75);
+
+  // Title
+  const text =
+    'Voici les informations administratives qui seront transmises à vos personnes de confiance ' +
+    ':\n';
+  let lines = doc.setFontSize(16).splitTextToSize(text, 7);
+  doc.setTextColor(3, 77, 110);
+  doc.text(lines, 0.75, offset + 16 / 72);
+  offset += ((lines.length + 0.5) * 18) / 72;
+
+  doc.setTextColor(0);
+
+  let empty = true;
+
+  // Display all procedures
+  for (const [key, value] of Object.entries(procedures)) {
+    if (value.length) {
+      empty = false;
+      // Title
+      const title = '• ' + procedureTitles[key] + '\n';
+      lines = doc.setFontSize(14).splitTextToSize(title, 7);
+      if (offset + ((lines.length + 0.5) * 14) / 72 > 10.25) {
+        doc.addPage();
+        offset = 0.75;
+      }
+      doc.text(lines, 0.75, offset + 14 / 72);
+      offset += ((lines.length + 0.5) * 14) / 72;
+
+      // Content
+      value.map((row: string) => {
+        let rowContent = '- ';
+        for (const [id, field] of Object.entries(row)) {
+          if (id !== '__typename') {
+            rowContent += field + ', ';
+          }
+        }
+        let rowContent2 = rowContent.substring(0, rowContent.length - 2);
+        rowContent2 += '\n';
+        lines = doc.setFontSize(11).splitTextToSize(rowContent2, 6.5);
+        if (offset + ((lines.length + 0.5) * 14) / 72 > 10.25) {
+          doc.addPage();
+          offset = 0.75;
+        }
+        doc.text(lines, 1.15, offset + 11 / 72);
+        offset += ((lines.length + 0.5) * 14) / 72;
+      });
+    }
+  }
+
+  // Messsage if no wishes
+  if (empty) {
+    const title = 'Aucune informations renseignée pour le moment.' + '\n';
+    lines = doc.setFontSize(14).splitTextToSize(title, 7);
+    doc.text(lines, 0.75, offset + 14 / 72);
+    offset += ((lines.length + 0.5) * 14) / 72;
+  }
+
+  doc.save('mes_informations_administratives.pdf');
 }

@@ -166,7 +166,7 @@ a {
   cursor: pointer;
 }
 
-.wish-content-container {
+.content-container {
   height: 65vh;
   overflow-y: scroll;
   padding-bottom: 50px;

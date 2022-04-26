@@ -1,0 +1,46 @@
+mutation updateProcedures(
+  $bank_products: [BankProductInput!]
+  $insurance_products: [InsuranceProductInput!]
+  $vehicles: [VehicleInput!]
+  $properties: [RealEstateInput!]
+  $consumer_credits: [ConsumerCreditInput!]
+  $internet_accounts_to_be_deleted: [InternetAccountToBeDeletedInput!]
+) {
+  updateProcedures(
+    update_procedures_input: {
+      bank_products: $bank_products
+      insurance_products: $insurance_products
+      vehicles: $vehicles
+      properties: $properties
+      consumer_credits: $consumer_credits
+      internet_accounts_to_be_deleted: $internet_accounts_to_be_deleted
+    }
+  ) {
+    bank_products {
+      type
+      company
+      localization
+    }
+    insurance_products {
+      type
+      company
+      localization
+    }
+    vehicles {
+      type
+      registration_number
+    }
+    properties {
+      type
+      localization
+    }
+    consumer_credits {
+      company
+      contract_number
+    }
+    internet_accounts_to_be_deleted {
+      site
+      username
+    }
+  }
+}

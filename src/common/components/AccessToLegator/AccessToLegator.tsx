@@ -262,12 +262,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
       <>
         <Button
           onClick={() => getUrgentData()}
-          sx={{
-            bgcolor: 'var(--yellow)',
-            '&:hover': {
-              bgcolor: 'var(--dark-blue)',
-            },
-          }}
+          className="yellow-button"
           variant="contained"
         >
           {' '}

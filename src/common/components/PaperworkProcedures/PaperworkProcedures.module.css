@@ -1,0 +1,12 @@
+.accordion {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+  padding-top: 0px;
+}
+
+@media (max-width: 796px) {
+  .accordion {
+    padding: 5px;
+  }
+}
