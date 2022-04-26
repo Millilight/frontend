@@ -176,14 +176,8 @@ export default function Paperwork() {
           // Delete empty row
           existingProcedure?.rows?.pop();
           // Add existing rows
-          for (const [i] of Object.entries(procedureValues)) {
-            const newRow: PaperworkProcedureRow = {};
-            for (const [key, value] of Object.entries(
-              procedureValues.at(Number(i))
-            )) {
-              newRow[key as keyof PaperworkProcedureRow] =
-                value !== null ? value : undefined;
-            }
+          for (const [i, row] of Object.entries(procedureValues)) {
+            const newRow = { ...row };
             delete newRow.__typename;
             existingProcedure?.rows?.push(newRow);
           }
