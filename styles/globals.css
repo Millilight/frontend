@@ -83,7 +83,7 @@ a {
 /*Visual Blue circles*/
 
 .visual-decoration-container {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   width: 100vw;
   height: 100vh;
