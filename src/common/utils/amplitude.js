@@ -8,11 +8,9 @@ class Amplitude extends React.Component {
       var n = e.amplitude || { _q: [], _iq: {} };
       var r = t.createElement('script');
       r.type = 'text/javascript';
-      r.integrity =
-        'sha384-+EO59vL/X7v6VE2s6/F4HxfHlK0nDUVWKVg8K9oUlvffAeeaShVBmbORTC2D3UF+';
       r.crossOrigin = 'anonymous';
       r.async = true;
-      r.src = 'https://cdn.amplitude.com/libs/amplitude-8.17.0-min.gz.js';
+      r.src = '/amplitude/amplitude-8.18.1-min.gz.js';
       r.onload = function () {
         if (!e.amplitude.runQueuedFunctions) {
           console.log('[Amplitude] Error: could not load SDK');
@@ -109,7 +107,6 @@ class Amplitude extends React.Component {
 
     amplitude.getInstance().init(config.amplitudeApiKey, undefined, {
       apiEndpoint: config.analyticsURL, // Without this option, calls directly https://api.amplitude.com
-      forceHttps: config.nodeEnv === 'production',
       disableCookies: true, // We would need cookies to track users across amuni.fr and app.amuni.fr
     });
   }
