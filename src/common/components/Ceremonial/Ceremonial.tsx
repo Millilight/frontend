@@ -33,12 +33,13 @@ export default function Ceremonial() {
       <Box
         component="img"
         sx={{
-          width: '40%',
-          marginX: '30%',
+          width: '20%',
+          marginX: '40%',
         }}
         alt="..."
-        src="/yoga_woman.png"
+        src="/candle.png"
       />
+      <h2>{translate('ceremonial.title')}</h2>
       <p>{translate('ceremonial.default_help')}</p>
     </div>
   );

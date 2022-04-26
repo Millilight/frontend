@@ -18,8 +18,8 @@ const wishTitles: { [key: string]: string } = {
 const procedureTitles: { [key: string]: string } = {
   bank_products: "Comptes bancaires (type, banque, localisation de l'agence):",
   insurance_products:
-    "Assurances (type, assurance, localisation de l' agence):",
-  vehicles: 'Véhicules (type, numéro de carte grise):',
+    "Assurances (type, assurance, localisation de l' agence ou numéro de contrat):",
+  vehicles: "Véhicules (modèle, numéro d'immatriculation):",
   consumer_credits:
     'Crédits à la consommation (entreprise, numéro de contrat):',
   properties: 'Biens immobiliers (type, lieu):',
