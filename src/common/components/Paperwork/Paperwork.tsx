@@ -10,6 +10,7 @@ import translate from '@/utils/translate';
 import styles from './Paperwork.module.css';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { dowloadMyPaperworkProcedures } from '@/utils/pdf';
+import amplitude from 'amplitude-js';
 
 export default function Paperwork() {
   const [shouldDownload, setShouldDownload] = useState(false);
