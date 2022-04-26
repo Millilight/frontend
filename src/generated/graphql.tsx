@@ -540,6 +540,109 @@ export type UpdateUserMutation = {
   };
 };
 
+export type GetMySensitiveDataProceduresQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetMySensitiveDataProceduresQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    sensitive_data: {
+      __typename?: 'SensitiveData';
+      procedures: {
+        __typename?: 'Procedures';
+        bank_products: Array<{
+          __typename?: 'BankProduct';
+          type: string;
+          company: string;
+          localization: string;
+        }>;
+        insurance_products: Array<{
+          __typename?: 'InsuranceProduct';
+          type: string;
+          company: string;
+          localization: string;
+        }>;
+        vehicles: Array<{
+          __typename?: 'Vehicle';
+          type: string;
+          registration_number: string;
+        }>;
+        properties: Array<{
+          __typename?: 'RealEstate';
+          type: string;
+          localization: string;
+        }>;
+        consumer_credits: Array<{
+          __typename?: 'ConsumerCredit';
+          company: string;
+          contract_number: string;
+        }>;
+        internet_accounts_to_be_deleted: Array<{
+          __typename?: 'InternetAccountToBeDeleted';
+          site: string;
+          username: string;
+        }>;
+      };
+    };
+  };
+};
+
+export type UpdateProceduresMutationVariables = Exact<{
+  bank_products?: InputMaybe<Array<BankProductInput> | BankProductInput>;
+  insurance_products?: InputMaybe<
+    Array<InsuranceProductInput> | InsuranceProductInput
+  >;
+  vehicles?: InputMaybe<Array<VehicleInput> | VehicleInput>;
+  properties?: InputMaybe<Array<RealEstateInput> | RealEstateInput>;
+  consumer_credits?: InputMaybe<
+    Array<ConsumerCreditInput> | ConsumerCreditInput
+  >;
+  internet_accounts_to_be_deleted?: InputMaybe<
+    Array<InternetAccountToBeDeletedInput> | InternetAccountToBeDeletedInput
+  >;
+}>;
+
+export type UpdateProceduresMutation = {
+  __typename?: 'Mutation';
+  updateProcedures: {
+    __typename?: 'Procedures';
+    bank_products: Array<{
+      __typename?: 'BankProduct';
+      type: string;
+      company: string;
+      localization: string;
+    }>;
+    insurance_products: Array<{
+      __typename?: 'InsuranceProduct';
+      type: string;
+      company: string;
+      localization: string;
+    }>;
+    vehicles: Array<{
+      __typename?: 'Vehicle';
+      type: string;
+      registration_number: string;
+    }>;
+    properties: Array<{
+      __typename?: 'RealEstate';
+      type: string;
+      localization: string;
+    }>;
+    consumer_credits: Array<{
+      __typename?: 'ConsumerCredit';
+      company: string;
+      contract_number: string;
+    }>;
+    internet_accounts_to_be_deleted: Array<{
+      __typename?: 'InternetAccountToBeDeleted';
+      site: string;
+      username: string;
+    }>;
+  };
+};
+
 export type GetLegatorUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetLegatorUsersQuery = {
@@ -1265,6 +1368,188 @@ export type UpdateUserMutationResult =
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
+>;
+export const GetMySensitiveDataProceduresDocument = gql`
+  query getMySensitiveDataProcedures {
+    user {
+      sensitive_data {
+        procedures {
+          bank_products {
+            type
+            company
+            localization
+          }
+          insurance_products {
+            type
+            company
+            localization
+          }
+          vehicles {
+            type
+            registration_number
+          }
+          properties {
+            type
+            localization
+          }
+          consumer_credits {
+            company
+            contract_number
+          }
+          internet_accounts_to_be_deleted {
+            site
+            username
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetMySensitiveDataProceduresQuery__
+ *
+ * To run a query within a React component, call `useGetMySensitiveDataProceduresQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMySensitiveDataProceduresQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMySensitiveDataProceduresQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMySensitiveDataProceduresQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetMySensitiveDataProceduresQuery,
+    GetMySensitiveDataProceduresQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetMySensitiveDataProceduresQuery,
+    GetMySensitiveDataProceduresQueryVariables
+  >(GetMySensitiveDataProceduresDocument, options);
+}
+export function useGetMySensitiveDataProceduresLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetMySensitiveDataProceduresQuery,
+    GetMySensitiveDataProceduresQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetMySensitiveDataProceduresQuery,
+    GetMySensitiveDataProceduresQueryVariables
+  >(GetMySensitiveDataProceduresDocument, options);
+}
+export type GetMySensitiveDataProceduresQueryHookResult = ReturnType<
+  typeof useGetMySensitiveDataProceduresQuery
+>;
+export type GetMySensitiveDataProceduresLazyQueryHookResult = ReturnType<
+  typeof useGetMySensitiveDataProceduresLazyQuery
+>;
+export type GetMySensitiveDataProceduresQueryResult = Apollo.QueryResult<
+  GetMySensitiveDataProceduresQuery,
+  GetMySensitiveDataProceduresQueryVariables
+>;
+export const UpdateProceduresDocument = gql`
+  mutation updateProcedures(
+    $bank_products: [BankProductInput!]
+    $insurance_products: [InsuranceProductInput!]
+    $vehicles: [VehicleInput!]
+    $properties: [RealEstateInput!]
+    $consumer_credits: [ConsumerCreditInput!]
+    $internet_accounts_to_be_deleted: [InternetAccountToBeDeletedInput!]
+  ) {
+    updateProcedures(
+      update_procedures_input: {
+        bank_products: $bank_products
+        insurance_products: $insurance_products
+        vehicles: $vehicles
+        properties: $properties
+        consumer_credits: $consumer_credits
+        internet_accounts_to_be_deleted: $internet_accounts_to_be_deleted
+      }
+    ) {
+      bank_products {
+        type
+        company
+        localization
+      }
+      insurance_products {
+        type
+        company
+        localization
+      }
+      vehicles {
+        type
+        registration_number
+      }
+      properties {
+        type
+        localization
+      }
+      consumer_credits {
+        company
+        contract_number
+      }
+      internet_accounts_to_be_deleted {
+        site
+        username
+      }
+    }
+  }
+`;
+export type UpdateProceduresMutationFn = Apollo.MutationFunction<
+  UpdateProceduresMutation,
+  UpdateProceduresMutationVariables
+>;
+
+/**
+ * __useUpdateProceduresMutation__
+ *
+ * To run a mutation, you first call `useUpdateProceduresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProceduresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProceduresMutation, { data, loading, error }] = useUpdateProceduresMutation({
+ *   variables: {
+ *      bank_products: // value for 'bank_products'
+ *      insurance_products: // value for 'insurance_products'
+ *      vehicles: // value for 'vehicles'
+ *      properties: // value for 'properties'
+ *      consumer_credits: // value for 'consumer_credits'
+ *      internet_accounts_to_be_deleted: // value for 'internet_accounts_to_be_deleted'
+ *   },
+ * });
+ */
+export function useUpdateProceduresMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateProceduresMutation,
+    UpdateProceduresMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateProceduresMutation,
+    UpdateProceduresMutationVariables
+  >(UpdateProceduresDocument, options);
+}
+export type UpdateProceduresMutationHookResult = ReturnType<
+  typeof useUpdateProceduresMutation
+>;
+export type UpdateProceduresMutationResult =
+  Apollo.MutationResult<UpdateProceduresMutation>;
+export type UpdateProceduresMutationOptions = Apollo.BaseMutationOptions<
+  UpdateProceduresMutation,
+  UpdateProceduresMutationVariables
 >;
 export const GetLegatorUsersDocument = gql`
   query getLegatorUsers {

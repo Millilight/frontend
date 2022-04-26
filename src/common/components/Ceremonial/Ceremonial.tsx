@@ -1,5 +1,5 @@
 import Wishes from '@/components/Wishes/Wishes';
-import { Typography, Box, CircularProgress, Button } from '@mui/material';
+import { Box, CircularProgress, Button } from '@mui/material';
 import { useState } from 'react';
 import {
   useGetWishesforUserQuery,

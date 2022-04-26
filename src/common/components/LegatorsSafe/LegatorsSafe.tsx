@@ -1,5 +1,5 @@
 import translate from '@/utils/translate';
-import { Box, CircularProgress, Stack, Typography } from '@mui/material';
+import { Box, CircularProgress, Stack } from '@mui/material';
 import {
   GetLegatorUsersDetailsQuery,
   useGetLegatorUsersDetailsQuery,

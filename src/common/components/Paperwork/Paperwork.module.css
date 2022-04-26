@@ -1,4 +1,4 @@
-/********* Ceremonail ********/
+/********* Paperwork ********/
 
 .horizontal_container {
   display: flex;
@@ -9,8 +9,12 @@
   margin-top: 10px;
 }
 
-.item {
-  width: 50%;
+.item_list {
+  width: 60%;
+}
+
+.item_help {
+  width: 40%;
 }
 
 .help {
@@ -53,7 +57,8 @@
     margin-bottom: 0px;
   }
 
-  .item {
+  .item_list,
+  .item_help {
     width: 100%;
   }
 
@@ -122,4 +127,4 @@
   }
 }
 
-/********* End Ceremonial ********/
+/********* End Paperwork ********/

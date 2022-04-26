@@ -268,6 +268,72 @@ export const ssrGetCurrentUser = {
   usePage: useGetCurrentUser,
 };
 
+export async function getServerPageGetMySensitiveDataProcedures(
+  options: Omit<
+    Apollo.QueryOptions<Types.GetMySensitiveDataProceduresQueryVariables>,
+    'query'
+  >,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data =
+    await apolloClient.query<Types.GetMySensitiveDataProceduresQuery>({
+      ...options,
+      query: Operations.GetMySensitiveDataProceduresDocument,
+    });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useGetMySensitiveDataProcedures = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<
+    Types.GetMySensitiveDataProceduresQuery,
+    Types.GetMySensitiveDataProceduresQueryVariables
+  >
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetMySensitiveDataProceduresDocument, options);
+};
+export type PageGetMySensitiveDataProceduresComp = React.FC<{
+  data?: Types.GetMySensitiveDataProceduresQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetMySensitiveDataProcedures =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<
+      Types.GetMySensitiveDataProceduresQuery,
+      Types.GetMySensitiveDataProceduresQueryVariables
+    >
+  ) =>
+  (WrappedComponent: PageGetMySensitiveDataProceduresComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(
+      Operations.GetMySensitiveDataProceduresDocument,
+      options
+    );
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetMySensitiveDataProcedures = {
+  getServerPage: getServerPageGetMySensitiveDataProcedures,
+  withPage: withPageGetMySensitiveDataProcedures,
+  usePage: useGetMySensitiveDataProcedures,
+};
+
 export async function getServerPageGetLegatorUsers(
   options: Omit<
     Apollo.QueryOptions<Types.GetLegatorUsersQueryVariables>,

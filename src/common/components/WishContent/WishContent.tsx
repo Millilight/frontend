@@ -79,25 +79,14 @@ export default function WishContent(props: { wish: Wish }) {
             {editionMode ? (
               <div>
                 <Button
-                  sx={{
-                    bgcolor: '#03546D',
-                    width: '170px',
-                    borderRadius: '25px',
-                  }}
+                  className="yellow-button"
                   variant="contained"
                   type="submit"
                 >
                   {translate('common.button.save')}
                 </Button>
                 <Button
-                  sx={{
-                    bgcolor: '#ffffff',
-                    borderColor: '#03546D',
-                    width: '130px',
-                    borderRadius: '25px',
-                    color: '#03546D',
-                    ml: '10px',
-                  }}
+                  className="yellow-button-outlined"
                   variant="outlined"
                   onClick={handleCancel}
                 >
@@ -106,14 +95,8 @@ export default function WishContent(props: { wish: Wish }) {
               </div>
             ) : (
               <Button
-                sx={{
-                  bgcolor: '#ffffff',
-                  borderColor: '#03546D',
-                  width: '170px',
-                  borderRadius: '25px',
-                  color: '#03546D',
-                }}
-                variant="outlined"
+                className="yellow-button"
+                variant="contained"
                 onClick={() => setEditionMode(true)}
               >
                 {translate('common.button.edit')}
@@ -154,25 +137,14 @@ export default function WishContent(props: { wish: Wish }) {
             {editionMode ? (
               <div>
                 <Button
-                  sx={{
-                    bgcolor: '#03546D',
-                    width: '170px',
-                    borderRadius: '25px',
-                  }}
+                  className="yellow-button"
                   variant="contained"
                   type="submit"
                 >
                   {translate('common.button.save')}
                 </Button>
                 <Button
-                  sx={{
-                    bgcolor: '#ffffff',
-                    borderColor: '#03546D',
-                    width: '130px',
-                    borderRadius: '25px',
-                    color: '#03546D',
-                    ml: '10px',
-                  }}
+                  className="yellow-button-outlined"
                   variant="outlined"
                   onClick={handleCancel}
                 >
@@ -181,14 +153,8 @@ export default function WishContent(props: { wish: Wish }) {
               </div>
             ) : (
               <Button
-                sx={{
-                  bgcolor: '#ffffff',
-                  borderColor: '#03546D',
-                  width: '170px',
-                  borderRadius: '25px',
-                  color: '#03546D',
-                }}
-                variant="outlined"
+                className="yellow-button"
+                variant="contained"
                 onClick={() => setEditionMode(true)}
               >
                 {translate('common.button.edit')}

@@ -8,11 +8,11 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React from 'react';
-import WishContent from '@/components/WishContent/WishContent';
-import styles from './Wishes.module.css';
+import PaperworkProcedureContent from '../PaperworkProcedureContent/PaperworkProcedureContent';
+import styles from './PaperworkProcedures.module.css';
 
-export default function Wishes(props: {
-  wishes: Wish[];
+export default function PaperworkProcedures(props: {
+  items: PaperworkProcedure[];
   helpCallback: (
     title: JSX.Element,
     image: string,
@@ -22,12 +22,12 @@ export default function Wishes(props: {
   return (
     <div className="content-container">
       <Stack spacing={2} justifyContent="center" alignItems="center">
-        {props.wishes
-          ? props.wishes.map((wish: Wish) => (
+        {props.items
+          ? props.items.map((item: PaperworkProcedure) => (
               <Box
-                key={wish.wishId}
+                key={item.itemId}
                 onClick={() =>
-                  props.helpCallback(wish.title, wish.image, wish.help)
+                  props.helpCallback(item.title, item.image, item.help)
                 }
                 sx={{
                   width: '90%',
@@ -44,10 +44,12 @@ export default function Wishes(props: {
                       paddingY: '10px',
                     }}
                   >
-                    <Typography>{wish.title}</Typography>
+                    <Typography>{item.title}</Typography>
                   </AccordionSummary>
                   <AccordionDetails className={styles.accordion}>
-                    <WishContent wish={wish}></WishContent>
+                    <PaperworkProcedureContent
+                      item={item}
+                    ></PaperworkProcedureContent>
                   </AccordionDetails>
                 </Accordion>
               </Box>

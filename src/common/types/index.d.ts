@@ -8,6 +8,66 @@ declare interface Wish {
   image: string;
 }
 
+declare interface PaperworkProcedureRow {
+  __typename?: string;
+}
+
+declare interface BankProduct extends PaperworkProcedureRow {
+  type: string;
+  company: string;
+  localization: string;
+}
+
+declare interface InsuranceProduct extends PaperworkProcedureRow {
+  type: string;
+  company: string;
+  localization: string;
+}
+
+declare interface Vehicle extends PaperworkProcedureRow {
+  type: string;
+  registration_number: string;
+}
+
+declare interface RealEstate extends PaperworkProcedureRow {
+  type: string;
+  localization: string;
+}
+
+declare interface ConsumerCredit extends PaperworkProcedureRow {
+  company: string;
+  contract_number: string;
+}
+
+declare interface InternetAccountToBeDeleted extends PaperworkProcedureRow {
+  site: string;
+  username: string;
+}
+
+declare interface PaperworkProcedure {
+  itemId: string;
+  title: JSX.Element;
+  help: JSX.Element;
+  image: string;
+  emptyRow:
+    | PaperworkProcedureRow
+    | BankProduct
+    | InsuranceProduct
+    | Vehicle
+    | RealEstate
+    | ConsumerCredit
+    | InternetAccountToBeDeleted;
+  rows?:
+    | PaperworkProcedureRow[]
+    | BankProduct[]
+    | InsuranceProduct[]
+    | Vehicle[]
+    | RealEstate[]
+    | ConsumerCredit[]
+    | InternetAccountToBeDeleted[]
+    | null;
+}
+
 declare interface User {
   first_name: string;
   last_name: string;
@@ -40,4 +100,13 @@ declare interface UrgentDataWishes {
   ornament?: string | null;
   text?: string | null;
   other?: string | null;
+}
+
+declare interface SensitiveDataProcedures {
+  bank_products?: BankProduct[] | null;
+  insurance_products?: InsuranceProduct[] | null;
+  vehicles?: Vehicle[] | null;
+  properties?: RealEstate[] | null;
+  consumer_credits?: ConsumerCredit[] | null;
+  internet_accoutns_to_be_deleted?: InternetAccountToBeDeleted[] | null;
 }
