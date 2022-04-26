@@ -191,7 +191,7 @@ export default function Paperwork() {
     }
   }
 
-  //Load ceremonial wishes
+  //Load procedures
   const { data, loading, error } = useGetMySensitiveDataProceduresQuery();
 
   if (loading) {
@@ -251,7 +251,12 @@ export default function Paperwork() {
       <>
         <Button
           className={styles.download_button}
-          onClick={() => getMySensitiveDataProceduresLazyQuery()}
+          onClick={() => {
+            amplitude.getInstance().logEvent('Personal pdf export', {
+              category: 'paperwork_procedures',
+            });
+            getMySensitiveDataProceduresLazyQuery();
+          }}
           sx={{
             bgcolor: 'var(--yellow)',
             '&:hover': {
