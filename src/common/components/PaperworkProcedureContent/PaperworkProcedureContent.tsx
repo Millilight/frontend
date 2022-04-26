@@ -83,11 +83,8 @@ export default function PaperorkItemContent(props: {
     >
       {rows
         ? rows.map((row: PaperworkProcedureRow) => (
-            <>
-              <div
-                className={styles.horizontal_container}
-                key={'row' + rows.indexOf(row)}
-              >
+            <div key={'row' + rows.indexOf(row)}>
+              <div className={styles.horizontal_container}>
                 {Object.entries(row).map(([key, value]) => (
                   <TextField
                     key={key}
@@ -121,7 +118,7 @@ export default function PaperorkItemContent(props: {
                 ) : null}
               </div>
               <Divider />
-            </>
+            </div>
           ))
         : null}
       {editionMode ? (

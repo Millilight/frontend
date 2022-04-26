@@ -73,6 +73,74 @@ export const ssrGetLegatorUrgentDataWishes = {
   withPage: withPageGetLegatorUrgentDataWishes,
   usePage: useGetLegatorUrgentDataWishes,
 };
+export async function getServerPageGetLegatorSensitiveDataProcedures(
+  options: Omit<
+    Apollo.QueryOptions<Types.GetLegatorSensitiveDataProceduresQueryVariables>,
+    'query'
+  >,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data =
+    await apolloClient.query<Types.GetLegatorSensitiveDataProceduresQuery>({
+      ...options,
+      query: Operations.GetLegatorSensitiveDataProceduresDocument,
+    });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useGetLegatorSensitiveDataProcedures = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<
+    Types.GetLegatorSensitiveDataProceduresQuery,
+    Types.GetLegatorSensitiveDataProceduresQueryVariables
+  >
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(
+    Operations.GetLegatorSensitiveDataProceduresDocument,
+    options
+  );
+};
+export type PageGetLegatorSensitiveDataProceduresComp = React.FC<{
+  data?: Types.GetLegatorSensitiveDataProceduresQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetLegatorSensitiveDataProcedures =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<
+      Types.GetLegatorSensitiveDataProceduresQuery,
+      Types.GetLegatorSensitiveDataProceduresQueryVariables
+    >
+  ) =>
+  (WrappedComponent: PageGetLegatorSensitiveDataProceduresComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(
+      Operations.GetLegatorSensitiveDataProceduresDocument,
+      options
+    );
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetLegatorSensitiveDataProcedures = {
+  getServerPage: getServerPageGetLegatorSensitiveDataProcedures,
+  withPage: withPageGetLegatorSensitiveDataProcedures,
+  usePage: useGetLegatorSensitiveDataProcedures,
+};
 
 export async function getServerPageGetMyUrgentDataWishes(
   options: Omit<

@@ -35,6 +35,7 @@ export default function LegatorsSafe() {
         last_name: l.user_details.lastname,
         state: l.state,
         urgent_data_unlocked: l.urgent_data_unlocked,
+        sensitive_data_unlocked: l.sensitive_data_unlocked,
       });
     });
   }
@@ -72,20 +73,30 @@ export default function LegatorsSafe() {
             <DoneAllIcon className={styles.icon} />{' '}
             {translate('legators_safe.help.2')}
           </p>
-          <b>
-            <p>{translate('legators_safe.help.3')}</p>
-          </b>
+
+          <p>{translate('legators_safe.help.3')}</p>
+
           <p className={styles.yellow}>
             <KeyIcon className={styles.icon} />
             {translate('legators_safe.help.4')}
           </p>
-          <p>{translate('legators_safe.help.5')}</p>
+          <p>{translate('legators_safe.help.5a')}</p>
+          <ul>
+            <li>
+              <b>{translate('legators_safe.help.5b')}</b>
+              {translate('legators_safe.help.5c')}
+            </li>
+
+            <li>
+              <b>{translate('legators_safe.help.5d')}</b>
+              {translate('legators_safe.help.5e')}
+            </li>
+          </ul>
           <p className={styles.yellow}>
             <MenuBookIcon className={styles.icon} />
             {translate('legators_safe.help.6')}
           </p>
           <p>{translate('legators_safe.help.7')}</p>
-          <p>{translate('legators_safe.help.8')}</p>
         </div>
       </div>
     </div>
