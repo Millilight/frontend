@@ -78,6 +78,8 @@ declare interface Legator extends User {
   state: string;
   urgent_data_unlocked: boolean;
   urgent_data?: { wishes: Wish[] };
+  sensitive_data_unlocked: boolean;
+  sensitive_data?: { procedures: PaperworkProcedure[] };
 }
 
 declare interface MyAccountField {
@@ -103,6 +105,7 @@ declare interface UrgentDataWishes {
 }
 
 declare interface SensitiveDataProcedures {
+  __typename?: string | null;
   bank_products?: BankProduct[] | null;
   insurance_products?: InsuranceProduct[] | null;
   vehicles?: Vehicle[] | null;

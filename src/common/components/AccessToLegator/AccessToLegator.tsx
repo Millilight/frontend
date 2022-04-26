@@ -9,13 +9,18 @@ import {
 
 import { useState } from 'react';
 import translate from '@/utils/translate';
-import { dowloadLegatorWishes } from '@/utils/pdf';
+import {
+  dowloadLegatorPaperworkProcedures,
+  dowloadLegatorWishes,
+} from '@/utils/pdf';
 import styles from './AccessToLegator.module.css';
 import {
   ConfirmSecurityCodeMutation,
+  GetLegatorSensitiveDataProceduresQuery,
   GetLegatorUrgentDataWishesQuery,
   UnlockUrgentDataMutation,
   useConfirmSecurityCodeMutation,
+  useGetLegatorSensitiveDataProceduresLazyQuery,
   useGetLegatorUrgentDataWishesLazyQuery,
   useUnlockUrgentDataMutation,
 } from 'generated/graphql';
@@ -23,6 +28,8 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import KeyIcon from '@mui/icons-material/Key';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Router from 'next/router';
+
 import amplitude from 'amplitude-js';
 
 export default function AccessToLegator(props: { legator: Legator }) {
@@ -101,7 +108,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
     );
   }
 
-  /*******  Unlock the safe ********* */
+  /*******  Unlock the safe (urgent data)********* */
   // Warning before accessing safe
   const [dialogOpen, setDialogOpen] = useState(false);
   const theme = useTheme();
@@ -123,16 +130,13 @@ export default function AccessToLegator(props: { legator: Legator }) {
     setDialogOpen(false);
   }
 
-  function displayUnlockButton() {
+  function displayUnlockUrgentButton() {
     if (dataUnlock && !loadingUnlock && !errorUnlock) {
       const response:
         | UnlockUrgentDataMutation['unlockUrgentData']['success']
         | undefined = dataUnlock?.unlockUrgentData.success;
       if (response === true) {
-        setLegator({
-          ...legator,
-          urgent_data_unlocked: true,
-        });
+        Router.reload();
       }
     }
 
@@ -152,14 +156,14 @@ export default function AccessToLegator(props: { legator: Legator }) {
           variant="outlined"
         >
           <KeyIcon className={styles.icon} />
-          {translate('legators_safe.button.unlock')}
+          {translate('legators_safe.button.unlock_urgent')}
         </Button>
       </>
     );
   }
 
   // Conditional display of the warning before unlocking the legator's safe
-  function displayWarning() {
+  function displayWarningUrgent() {
     const button = (
       <div className={styles.horizontal_container}>
         <Button
@@ -189,7 +193,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
         >
           {loadingUnlock
             ? translate('common.button.loading')
-            : translate('legators_safe.button.unlock')}
+            : translate('legators_safe.button.unlock_urgent')}
         </Button>
       </div>
     );
@@ -262,7 +266,12 @@ export default function AccessToLegator(props: { legator: Legator }) {
       <>
         <Button
           onClick={() => getUrgentData()}
-          className="yellow-button"
+          sx={{
+            bgcolor: 'var(--yellow)',
+            '&:hover': {
+              bgcolor: 'var(--dark-blue)',
+            },
+          }}
           variant="contained"
         >
           {' '}
@@ -273,8 +282,137 @@ export default function AccessToLegator(props: { legator: Legator }) {
     );
   }
 
+  /*******  Unlock the safe (sensitive data)********* */
+  // Warning before accessing safe
+  const [dialogOpenSensitive, setDialogOpenSensitive] = useState(false);
+
+  function displayUnlockSensitiveButton() {
+    return (
+      <>
+        <Button
+          onClick={() => setDialogOpenSensitive(true)}
+          sx={{
+            color: 'var(--yellow)',
+            border: '1px solid var(--yellow)',
+            '&:hover': {
+              bgcolor: 'var(--dark-blue)',
+              color: 'var(--white)',
+              border: '1px solid var(--white)',
+            },
+          }}
+          variant="outlined"
+        >
+          <KeyIcon className={styles.icon} />
+          {translate('legators_safe.button.unlock_sensitive')}
+        </Button>
+      </>
+    );
+  }
+
+  // Conditional display of the warning before unlocking the legator's safe
+  function displayWarningSensitive() {
+    const button = (
+      <div className={styles.horizontal_container}>
+        <Button
+          variant="contained"
+          sx={{
+            bgcolor: 'var(--yellow)',
+            '&:hover': {
+              bgcolor: 'var(--dark-blue)',
+            },
+          }}
+          onClick={() => setDialogOpenSensitive(false)}
+        >
+          {translate('legators_safe.button.ok')}
+        </Button>
+      </div>
+    );
+
+    return (
+      <Dialog
+        fullScreen={fullScreen}
+        open={dialogOpenSensitive}
+        onClose={() => setDialogOpenSensitive(false)}
+      >
+        <div className={styles.dialog}>
+          <Typography variant="h5">
+            {translate('legators_safe.warning2.title')}
+          </Typography>
+          <Typography variant="body1">
+            {translate('legators_safe.warning2.description1', {
+              first_name: legator.first_name,
+              last_name: legator.last_name,
+            })}
+            <b>{translate('legators_safe.warning2.description2')}</b>
+            <br />
+            <br />
+            {translate('legators_safe.warning2.description3')}
+          </Typography>
+          <div>{button}</div>
+        </div>
+      </Dialog>
+    );
+  }
+
+  /*******  Access the content (sensitive data) the safe ********* */
+  // Query
+  const [
+    getSensitiveDataQuery,
+    {
+      data: dataGetSensitive,
+      loading: loadingGetSensitive,
+      error: errorGetSensitive,
+    },
+  ] = useGetLegatorSensitiveDataProceduresLazyQuery();
+
+  function getSensitiveData() {
+    getSensitiveDataQuery();
+  }
+
+  function displayGetSensitiveDataButton() {
+    if (dataGetSensitive && !loadingGetSensitive) {
+      const response:
+        | GetLegatorSensitiveDataProceduresQuery['user']['legators']
+        | undefined = dataGetSensitive?.user.legators;
+      if (response) {
+        // Find the right legator by id
+        const retrievedLegator = response.find((l) => {
+          return l._id === legator._id;
+        });
+
+        // Extract procedures
+        let data: SensitiveDataProcedures = {};
+        if (retrievedLegator?.sensitive_data?.procedures) {
+          data = { ...retrievedLegator?.sensitive_data?.procedures };
+          delete data.__typename;
+          // Make PDF
+          dowloadLegatorPaperworkProcedures(data, legator);
+        }
+      }
+    }
+
+    return (
+      <>
+        <Button
+          onClick={() => getSensitiveData()}
+          sx={{
+            bgcolor: 'var(--yellow)',
+            '&:hover': {
+              bgcolor: 'var(--dark-blue)',
+            },
+          }}
+          variant="contained"
+        >
+          {' '}
+          <MenuBookIcon className={styles.icon} />
+          {translate('legators_safe.button.access_sensitive')}
+        </Button>
+      </>
+    );
+  }
+
   /*******  MAIN RETURN ********* */
-  return legator.state === 'VALIDATED' && !legator.urgent_data_unlocked ? (
+  return legator.state === 'VALIDATED' ? (
     <div className={styles.rounded_container}>
       {/** Already validated but not unlocked*/}
       <div className={styles.horizontal_container}>
@@ -288,29 +426,30 @@ export default function AccessToLegator(props: { legator: Legator }) {
           <DoneAllIcon />
         </div>
       </div>
-      <div className={styles.horizontal_container_right}>
-        {displayUnlockButton()}
-      </div>
-      {displayWarning()}
-    </div>
-  ) : legator.state === 'VALIDATED' && legator.urgent_data_unlocked ? (
-    <div className={styles.rounded_container}>
-      {' '}
-      {/** Already validated and unlocked*/}
-      <div className={styles.horizontal_container}>
-        <Typography variant="h5">
-          {props.legator.first_name} {props.legator.last_name}
-        </Typography>
-        <div className={styles.status_icon_valid}>
-          <span className={styles.status_text}>
-            {translate('legators_safe.status.allowed')}
-          </span>
-          <DoneAllIcon />
+      {legator.urgent_data_unlocked ? (
+        <div className={styles.horizontal_container_right}>
+          {displayGetUrgentDataButton()}
         </div>
-      </div>
-      <div className={styles.horizontal_container_right}>
-        {displayGetUrgentDataButton()}
-      </div>
+      ) : (
+        <>
+          <div className={styles.horizontal_container_right}>
+            {displayUnlockUrgentButton()}
+          </div>
+          {displayWarningUrgent()}
+        </>
+      )}
+      {legator.sensitive_data_unlocked ? (
+        <div className={styles.horizontal_container_right}>
+          {displayGetSensitiveDataButton()}
+        </div>
+      ) : (
+        <>
+          <div className={styles.horizontal_container_right}>
+            {displayUnlockSensitiveButton()}
+          </div>
+          {displayWarningSensitive()}
+        </>
+      )}
     </div>
   ) : (
     <div className={styles.rounded_container}>

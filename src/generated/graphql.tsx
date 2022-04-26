@@ -434,6 +434,59 @@ export type GetLegatorUrgentDataWishesQuery = {
   };
 };
 
+export type GetLegatorSensitiveDataProceduresQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetLegatorSensitiveDataProceduresQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    legators: Array<{
+      __typename?: 'Legator';
+      _id: string;
+      sensitive_data?: {
+        __typename?: 'SensitiveData';
+        procedures: {
+          __typename?: 'Procedures';
+          bank_products: Array<{
+            __typename?: 'BankProduct';
+            type: string;
+            company: string;
+            localization: string;
+          }>;
+          insurance_products: Array<{
+            __typename?: 'InsuranceProduct';
+            type: string;
+            company: string;
+            localization: string;
+          }>;
+          vehicles: Array<{
+            __typename?: 'Vehicle';
+            type: string;
+            registration_number: string;
+          }>;
+          properties: Array<{
+            __typename?: 'RealEstate';
+            type: string;
+            localization: string;
+          }>;
+          consumer_credits: Array<{
+            __typename?: 'ConsumerCredit';
+            company: string;
+            contract_number: string;
+          }>;
+          internet_accounts_to_be_deleted: Array<{
+            __typename?: 'InternetAccountToBeDeleted';
+            site: string;
+            username: string;
+          }>;
+        };
+      } | null;
+    }>;
+  };
+};
+
 export type AskResetPasswordUserMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -502,6 +555,7 @@ export type GetLegatorUsersDetailsQuery = {
       _id: string;
       state: StateTrust;
       urgent_data_unlocked: boolean;
+      sensitive_data_unlocked: boolean;
       user_details: {
         __typename?: 'UserDetails';
         firstname: string;
@@ -1002,6 +1056,95 @@ export type GetLegatorUrgentDataWishesQueryResult = Apollo.QueryResult<
   GetLegatorUrgentDataWishesQuery,
   GetLegatorUrgentDataWishesQueryVariables
 >;
+export const GetLegatorSensitiveDataProceduresDocument = gql`
+  query getLegatorSensitiveDataProcedures {
+    user {
+      legators {
+        _id
+        sensitive_data {
+          procedures {
+            bank_products {
+              type
+              company
+              localization
+            }
+            insurance_products {
+              type
+              company
+              localization
+            }
+            vehicles {
+              type
+              registration_number
+            }
+            properties {
+              type
+              localization
+            }
+            consumer_credits {
+              company
+              contract_number
+            }
+            internet_accounts_to_be_deleted {
+              site
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetLegatorSensitiveDataProceduresQuery__
+ *
+ * To run a query within a React component, call `useGetLegatorSensitiveDataProceduresQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLegatorSensitiveDataProceduresQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLegatorSensitiveDataProceduresQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetLegatorSensitiveDataProceduresQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetLegatorSensitiveDataProceduresQuery,
+    GetLegatorSensitiveDataProceduresQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetLegatorSensitiveDataProceduresQuery,
+    GetLegatorSensitiveDataProceduresQueryVariables
+  >(GetLegatorSensitiveDataProceduresDocument, options);
+}
+export function useGetLegatorSensitiveDataProceduresLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetLegatorSensitiveDataProceduresQuery,
+    GetLegatorSensitiveDataProceduresQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetLegatorSensitiveDataProceduresQuery,
+    GetLegatorSensitiveDataProceduresQueryVariables
+  >(GetLegatorSensitiveDataProceduresDocument, options);
+}
+export type GetLegatorSensitiveDataProceduresQueryHookResult = ReturnType<
+  typeof useGetLegatorSensitiveDataProceduresQuery
+>;
+export type GetLegatorSensitiveDataProceduresLazyQueryHookResult = ReturnType<
+  typeof useGetLegatorSensitiveDataProceduresLazyQuery
+>;
+export type GetLegatorSensitiveDataProceduresQueryResult = Apollo.QueryResult<
+  GetLegatorSensitiveDataProceduresQuery,
+  GetLegatorSensitiveDataProceduresQueryVariables
+>;
 export const AskResetPasswordUserDocument = gql`
   mutation askResetPasswordUser($email: String!) {
     askResetPasswordUser(ask_reset_password_user_input: { email: $email }) {
@@ -1189,6 +1332,7 @@ export const GetLegatorUsersDetailsDocument = gql`
         }
         state
         urgent_data_unlocked
+        sensitive_data_unlocked
       }
     }
   }

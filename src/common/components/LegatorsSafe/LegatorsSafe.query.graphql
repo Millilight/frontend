@@ -8,6 +8,7 @@ query getLegatorUsersDetails {
       }
       state
       urgent_data_unlocked
+      sensitive_data_unlocked
     }
   }
 }

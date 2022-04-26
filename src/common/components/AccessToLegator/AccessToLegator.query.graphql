@@ -20,3 +20,41 @@ query getLegatorUrgentDataWishes {
     }
   }
 }
+
+query getLegatorSensitiveDataProcedures {
+  user {
+    legators {
+      _id
+      sensitive_data {
+        procedures {
+          bank_products {
+            type
+            company
+            localization
+          }
+          insurance_products {
+            type
+            company
+            localization
+          }
+          vehicles {
+            type
+            registration_number
+          }
+          properties {
+            type
+            localization
+          }
+          consumer_credits {
+            company
+            contract_number
+          }
+          internet_accounts_to_be_deleted {
+            site
+            username
+          }
+        }
+      }
+    }
+  }
+}
