@@ -31,16 +31,17 @@ export default function Paperwork() {
       <Box
         component="img"
         sx={{
-          width: '40%',
-          marginX: '30%',
+          width: '20%',
+          marginX: '40%',
         }}
         alt="..."
-        src="/yoga_woman.png"
+        src="/house.png"
       />
-      <p>Démarches administratives</p>
+      <h2>{translate('paperwork.title')}</h2>
       <div>
-        <h3>blable</h3>
-        <p>Aide</p>
+        <p>{translate('paperwork.help.1')}</p>
+        <p>{translate('paperwork.help.2')}</p>
+        <p>{translate('paperwork.help.3')}</p>
       </div>
     </div>
   );
@@ -73,11 +74,16 @@ export default function Paperwork() {
       title: translate('paperwork.bank_products.title'),
       help: (
         <div>
-          <h3>Aide</h3>
-          <p>Aide</p>
+          <h3>{translate('paperwork.bank_products.help.1')}</h3>
+          <p>{translate('paperwork.bank_products.help.2')}</p>
+          <p>
+            {translate('paperwork.bank_products.help.3')}
+            <b>{translate('paperwork.bank_products.help.3b')}</b>
+          </p>
+          <p>{translate('paperwork.bank_products.help.4')}</p>
         </div>
       ),
-      image: '/bird.png',
+      image: '/bank.png',
       emptyRow: { type: '', company: '', localization: '' },
       rows: [{ type: '', company: '', localization: '' }],
     },
@@ -86,11 +92,12 @@ export default function Paperwork() {
       title: translate('paperwork.insurance_products.title'),
       help: (
         <div>
-          <h3>Aide</h3>
-          <p>Aide</p>
+          <p>{translate('paperwork.insurance_products.help.1')}</p>
+          <h3>{translate('paperwork.insurance_products.help.2')}</h3>
+          <p>{translate('paperwork.insurance_products.help.3')}</p>
         </div>
       ),
-      image: '/bird.png',
+      image: '/insurance.png',
       emptyRow: { type: '', company: '', localization: '' },
       rows: [{ type: '', company: '', localization: '' }],
     },
@@ -99,11 +106,12 @@ export default function Paperwork() {
       title: translate('paperwork.vehicles.title'),
       help: (
         <div>
-          <h3>Aide</h3>
-          <p>Aide</p>
+          <p>{translate('paperwork.vehicles.help.1')}</p>
+          <h3>{translate('paperwork.vehicles.help.2')}</h3>
+          <p>{translate('paperwork.vehicles.help.3')}</p>
         </div>
       ),
-      image: '/bird.png',
+      image: '/car.png',
       emptyRow: { type: '', registration_number: '' },
       rows: [{ type: '', registration_number: '' }],
     },
@@ -112,11 +120,12 @@ export default function Paperwork() {
       title: translate('paperwork.properties.title'),
       help: (
         <div>
-          <h3>Aide</h3>
-          <p>Aide</p>
+          <p>{translate('paperwork.properties.help.1')}</p>
+          <h3>{translate('paperwork.properties.help.2')}</h3>
+          <p>{translate('paperwork.properties.help.3')}</p>
         </div>
       ),
-      image: '/bird.png',
+      image: '/flat.png',
       emptyRow: { type: '', localization: '' },
       rows: [{ type: '', localization: '' }],
     },
@@ -125,11 +134,12 @@ export default function Paperwork() {
       title: translate('paperwork.consumer_credits.title'),
       help: (
         <div>
-          <h3>Aide</h3>
-          <p>Aide</p>
+          <p>{translate('paperwork.consumer_credits.help.1')}</p>
+          <h3>{translate('paperwork.consumer_credits.help.2')}</h3>
+          <p>{translate('paperwork.consumer_credits.help.3')}</p>
         </div>
       ),
-      image: '/bird.png',
+      image: '/cashback.png',
       emptyRow: { company: '', contract_number: '' },
       rows: [{ company: '', contract_number: '' }],
     },
@@ -138,11 +148,10 @@ export default function Paperwork() {
       title: translate('paperwork.internet_accounts_to_be_deleted.title'),
       help: (
         <div>
-          <h3>Aide</h3>
-          <p>Aide</p>
+          <p>{translate('paperwork.internet_accounts_to_be_deleted.help.1')}</p>
         </div>
       ),
-      image: '/bird.png',
+      image: '/internet.png',
       emptyRow: { site: '', username: '' },
       rows: [{ site: '', username: '' }],
     },
