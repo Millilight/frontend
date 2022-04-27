@@ -203,7 +203,7 @@
   "addheirs.validated": "Votre proche de confiance a validé son lien avec vous. Il peut désormais accéder à vos informations s'il le juge nécessaire.",
   "addheirs.status.waiting": "En attente",
   "addheirs.status.validated": "Validé",
-  "addheirs.advice.sendcode": "Transmettez ce code de façon orale à votre proche, il devra le renseigner pour valider votre lien.",
+  "addheirs.advice.sendcode": "Transmettez ce code à votre proche, il devra le renseigner pour valider votre lien.",
   "addheirs.advice.validated": "Votre proche de confiance est validé et peut accéder à vos informations en cas de nécessité",
   "addheirs.addheirs.text": "Ajouter un proche",
   "addheirs.button.invite": "Inviter à devenir votre personne de confiance",

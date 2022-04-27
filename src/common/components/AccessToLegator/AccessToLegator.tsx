@@ -481,7 +481,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
             id="code"
             type="code"
             variant="standard"
-            placeholder="123456"
+            placeholder="1aBCDe34"
             value={code}
             onChange={(e) => {
               setCode(e.target.value), sethasUpdatedAfterError(true);
