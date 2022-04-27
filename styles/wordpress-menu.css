@@ -1,6 +1,7 @@
 /*CSS HEADER */
 
 .site-header {
+  z-index: 20;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
