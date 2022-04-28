@@ -15,19 +15,7 @@ const wishTitles: { [key: string]: string } = {
   other: 'Autres informations laissées:',
 };
 
-const procedureTitles: { [key: string]: string } = {
-  bank_products: "Comptes bancaires (type, banque, localisation de l'agence):",
-  insurance_products:
-    "Assurances (type, assurance, localisation de l' agence ou numéro de contrat):",
-  vehicles: "Véhicules (modèle, numéro d'immatriculation):",
-  consumer_credits:
-    'Crédits à la consommation (entreprise, numéro de contrat):',
-  properties: 'Biens immobiliers (type, lieu):',
-  internet_accounts_to_be_deleted:
-    "Comptes internet à fermer (nom du site, nom d'utilisateur):",
-};
-
-const proceduresContent = {
+const proceduresContent: { [key: string]: { [key2: string]: string } } = {
   intro: {
     i0: 'Informations administratives',
     i1: 'Les démarches administratives liées à la perte d’un proche peuvent être lourdes et chronophages, un moment où l’on voudrait ne pas avoir à se soucier de cela. ',
@@ -260,7 +248,19 @@ export function dowloadLegatorPaperworkProcedures(
     offset += ((lines.length + 0.5) * verticalSpace) / 72;
   }
 
-  function displayProcedure(key, value) {
+  function displayProcedure(
+    key: string,
+    value:
+      | Vehicle[]
+      | InternetAccountToBeDeleted[]
+      | RealEstate[]
+      | ConsumerCredit[]
+      | BankProduct[]
+      | InsuranceProduct[]
+      | string[]
+      | null
+      | undefined
+  ) {
     // Title
     const title = '• ' + proceduresContent[key].title + '\n';
     writeText(title, 14, 14, 7, 0.75, false);
@@ -275,7 +275,7 @@ export function dowloadLegatorPaperworkProcedures(
         legator.first_name +
         proceduresContent[key].legatorContent2 +
         '\n\n';
-      value.map((row: string) => {
+      value.map((row) => {
         let rowContent = '- ';
         for (const [id, field] of Object.entries(row)) {
           if (id !== '__typename') {
