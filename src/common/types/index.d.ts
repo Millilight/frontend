@@ -111,5 +111,5 @@ declare interface SensitiveDataProcedures {
   vehicles?: Vehicle[] | null;
   properties?: RealEstate[] | null;
   consumer_credits?: ConsumerCredit[] | null;
-  internet_accoutns_to_be_deleted?: InternetAccountToBeDeleted[] | null;
+  internet_accounts_to_be_deleted?: InternetAccountToBeDeleted[] | null;
 }

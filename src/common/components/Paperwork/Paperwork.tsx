@@ -9,7 +9,7 @@ import {
 import translate from '@/utils/translate';
 import styles from './Paperwork.module.css';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import { dowloadMyPaperworkProcedures } from '@/utils/pdf';
+import { dowloadLegatorPaperworkProcedures } from '@/utils/pdf';
 import amplitude from 'amplitude-js';
 
 export default function Paperwork() {
@@ -43,6 +43,7 @@ export default function Paperwork() {
         <p>{translate('paperwork.help.1')}</p>
         <p>{translate('paperwork.help.2')}</p>
         <p>{translate('paperwork.help.3')}</p>
+        <p>{translate('paperwork.help.4')}</p>
       </div>
     </div>
   );
@@ -203,6 +204,18 @@ export default function Paperwork() {
   const savedProcedures:
     | GetMySensitiveDataProceduresQuery['user']['sensitive_data']['procedures']
     | undefined = data?.user.sensitive_data.procedures;
+
+  const firstname:
+    | GetMySensitiveDataProceduresQuery['user']['firstname']
+    | undefined = data?.user.firstname;
+  const lastname:
+    | GetMySensitiveDataProceduresQuery['user']['lastname']
+    | undefined = data?.user.lastname;
+  const user: User = {
+    first_name: firstname ? firstname : '',
+    last_name: lastname ? lastname : '',
+  };
+
   if (!savedProcedures) {
     console.error(savedProcedures);
     return null;
@@ -224,7 +237,7 @@ export default function Paperwork() {
           delete response?.procedures.__typename;
           data = { ...response?.procedures };
           // Make PDF
-          dowloadMyPaperworkProcedures(data);
+          dowloadLegatorPaperworkProcedures(data, user, true);
           setShouldDownload(false);
         }
       }

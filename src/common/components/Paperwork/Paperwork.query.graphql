@@ -30,5 +30,7 @@ query getMySensitiveDataProcedures {
         }
       }
     }
+    firstname
+    lastname
   }
 }

@@ -602,6 +602,8 @@ export type GetMySensitiveDataProceduresQuery = {
   __typename?: 'Query';
   user: {
     __typename?: 'User';
+    firstname: string;
+    lastname: string;
     sensitive_data: {
       __typename?: 'SensitiveData';
       procedures: {
@@ -1546,6 +1548,8 @@ export const GetMySensitiveDataProceduresDocument = gql`
           }
         }
       }
+      firstname
+      lastname
     }
   }
 `;
