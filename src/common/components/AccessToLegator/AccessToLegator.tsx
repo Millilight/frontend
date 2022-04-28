@@ -386,7 +386,7 @@ export default function AccessToLegator(props: { legator: Legator }) {
           data = { ...retrievedLegator?.sensitive_data?.procedures };
           delete data.__typename;
           // Make PDF
-          dowloadLegatorPaperworkProcedures(data, legator);
+          dowloadLegatorPaperworkProcedures(data, legator, false);
         }
       }
     }
