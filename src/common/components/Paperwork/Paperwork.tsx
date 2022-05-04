@@ -90,6 +90,22 @@ export default function Paperwork() {
       rows: [{ type: '', company: '', localization: '' }],
     },
     {
+      itemId: 'life_insurances',
+      title: translate('paperwork.life_insurances.title'),
+      help: (
+        <div>
+          <h3>{translate('paperwork.life_insurances.help.1')}</h3>
+          <p>{translate('paperwork.life_insurances.help.2')}</p>
+          <h3>{translate('paperwork.life_insurances.help.3')}</h3>
+          <p>{translate('paperwork.life_insurances.help.4')}</p>
+          <p>{translate('paperwork.life_insurances.help.4b')}</p>
+        </div>
+      ),
+      image: '/life-insurance.png',
+      emptyRow: { company: '', contract_number: '' },
+      rows: [{ company: '', contract_number: '' }],
+    },
+    {
       itemId: 'insurance_products',
       title: translate('paperwork.insurance_products.title'),
       help: (

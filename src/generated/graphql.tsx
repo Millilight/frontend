@@ -136,6 +136,17 @@ export type Legator = {
   user_details: UserDetails;
 };
 
+export type LifeInsurance = {
+  __typename?: 'LifeInsurance';
+  company: Scalars['String'];
+  contract_number: Scalars['String'];
+};
+
+export type LifeInsuranceInput = {
+  company: Scalars['String'];
+  contract_number: Scalars['String'];
+};
+
 export type LoginResponse = {
   __typename?: 'LoginResponse';
   access_token: Scalars['String'];
@@ -222,6 +233,7 @@ export type Procedures = {
   consumer_credits: Array<ConsumerCredit>;
   insurance_products: Array<InsuranceProduct>;
   internet_accounts_to_be_deleted: Array<InternetAccountToBeDeleted>;
+  life_insurances: Array<LifeInsurance>;
   properties: Array<RealEstate>;
   vehicles: Array<Vehicle>;
 };
@@ -275,6 +287,7 @@ export type UpdateProceduresInput = {
   internet_accounts_to_be_deleted?: InputMaybe<
     Array<InternetAccountToBeDeletedInput>
   >;
+  life_insurances?: InputMaybe<Array<LifeInsuranceInput>>;
   properties?: InputMaybe<Array<RealEstateInput>>;
   vehicles?: InputMaybe<Array<VehicleInput>>;
 };
@@ -455,6 +468,11 @@ export type GetLegatorSensitiveDataProceduresQuery = {
             company: string;
             localization: string;
           }>;
+          life_insurances: Array<{
+            __typename?: 'LifeInsurance';
+            company: string;
+            contract_number: string;
+          }>;
           insurance_products: Array<{
             __typename?: 'InsuranceProduct';
             type: string;
@@ -614,6 +632,11 @@ export type GetMySensitiveDataProceduresQuery = {
           company: string;
           localization: string;
         }>;
+        life_insurances: Array<{
+          __typename?: 'LifeInsurance';
+          company: string;
+          contract_number: string;
+        }>;
         insurance_products: Array<{
           __typename?: 'InsuranceProduct';
           type: string;
@@ -647,6 +670,7 @@ export type GetMySensitiveDataProceduresQuery = {
 
 export type UpdateProceduresMutationVariables = Exact<{
   bank_products?: InputMaybe<Array<BankProductInput> | BankProductInput>;
+  life_insurances?: InputMaybe<Array<LifeInsuranceInput> | LifeInsuranceInput>;
   insurance_products?: InputMaybe<
     Array<InsuranceProductInput> | InsuranceProductInput
   >;
@@ -669,6 +693,11 @@ export type UpdateProceduresMutation = {
       type: string;
       company: string;
       localization: string;
+    }>;
+    life_insurances: Array<{
+      __typename?: 'LifeInsurance';
+      company: string;
+      contract_number: string;
     }>;
     insurance_products: Array<{
       __typename?: 'InsuranceProduct';
@@ -1069,6 +1098,10 @@ export const GetLegatorSensitiveDataProceduresDocument = gql`
               type
               company
               localization
+            }
+            life_insurances {
+              company
+              contract_number
             }
             insurance_products {
               type
@@ -1525,6 +1558,10 @@ export const GetMySensitiveDataProceduresDocument = gql`
             company
             localization
           }
+          life_insurances {
+            company
+            contract_number
+          }
           insurance_products {
             type
             company
@@ -1606,6 +1643,7 @@ export type GetMySensitiveDataProceduresQueryResult = Apollo.QueryResult<
 export const UpdateProceduresDocument = gql`
   mutation updateProcedures(
     $bank_products: [BankProductInput!]
+    $life_insurances: [LifeInsuranceInput!]
     $insurance_products: [InsuranceProductInput!]
     $vehicles: [VehicleInput!]
     $properties: [RealEstateInput!]
@@ -1615,6 +1653,7 @@ export const UpdateProceduresDocument = gql`
     updateProcedures(
       update_procedures_input: {
         bank_products: $bank_products
+        life_insurances: $life_insurances
         insurance_products: $insurance_products
         vehicles: $vehicles
         properties: $properties
@@ -1626,6 +1665,10 @@ export const UpdateProceduresDocument = gql`
         type
         company
         localization
+      }
+      life_insurances {
+        company
+        contract_number
       }
       insurance_products {
         type
@@ -1670,6 +1713,7 @@ export type UpdateProceduresMutationFn = Apollo.MutationFunction<
  * const [updateProceduresMutation, { data, loading, error }] = useUpdateProceduresMutation({
  *   variables: {
  *      bank_products: // value for 'bank_products'
+ *      life_insurances: // value for 'life_insurances'
  *      insurance_products: // value for 'insurance_products'
  *      vehicles: // value for 'vehicles'
  *      properties: // value for 'properties'

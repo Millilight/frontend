@@ -7,6 +7,10 @@ query getMySensitiveDataProcedures {
           company
           localization
         }
+        life_insurances {
+          company
+          contract_number
+        }
         insurance_products {
           type
           company

@@ -107,6 +107,16 @@ type Legator {
   user_details: UserDetails!
 }
 
+type LifeInsurance {
+  company: String!
+  contract_number: String!
+}
+
+input LifeInsuranceInput {
+  company: String!
+  contract_number: String!
+}
+
 type LoginResponse {
   access_token: String!
   user: User!
@@ -146,6 +156,7 @@ type Procedures {
   consumer_credits: [ConsumerCredit!]!
   insurance_products: [InsuranceProduct!]!
   internet_accounts_to_be_deleted: [InternetAccountToBeDeleted!]!
+  life_insurances: [LifeInsurance!]!
   properties: [RealEstate!]!
   vehicles: [Vehicle!]!
 }
@@ -193,6 +204,7 @@ input UpdateProceduresInput {
   consumer_credits: [ConsumerCreditInput!]
   insurance_products: [InsuranceProductInput!]
   internet_accounts_to_be_deleted: [InternetAccountToBeDeletedInput!]
+  life_insurances: [LifeInsuranceInput!]
   properties: [RealEstateInput!]
   vehicles: [VehicleInput!]
 }
