@@ -18,6 +18,11 @@ declare interface BankProduct extends PaperworkProcedureRow {
   localization: string;
 }
 
+declare interface LifeInsurance extends PaperworkProcedureRow {
+  company: string;
+  contract_number: string;
+}
+
 declare interface InsuranceProduct extends PaperworkProcedureRow {
   type: string;
   company: string;
@@ -52,6 +57,7 @@ declare interface PaperworkProcedure {
   emptyRow:
     | PaperworkProcedureRow
     | BankProduct
+    | LifeInsurance
     | InsuranceProduct
     | Vehicle
     | RealEstate
@@ -60,6 +66,7 @@ declare interface PaperworkProcedure {
   rows?:
     | PaperworkProcedureRow[]
     | BankProduct[]
+    | LifeInsurance[]
     | InsuranceProduct[]
     | Vehicle[]
     | RealEstate[]
@@ -107,6 +114,7 @@ declare interface UrgentDataWishes {
 declare interface SensitiveDataProcedures {
   __typename?: string | null;
   bank_products?: BankProduct[] | null;
+  life_insurances?: LifeInsurance[] | null;
   insurance_products?: InsuranceProduct[] | null;
   vehicles?: Vehicle[] | null;
   properties?: RealEstate[] | null;

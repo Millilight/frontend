@@ -1,5 +1,6 @@
 mutation updateProcedures(
   $bank_products: [BankProductInput!]
+  $life_insurances: [LifeInsuranceInput!]
   $insurance_products: [InsuranceProductInput!]
   $vehicles: [VehicleInput!]
   $properties: [RealEstateInput!]
@@ -9,6 +10,7 @@ mutation updateProcedures(
   updateProcedures(
     update_procedures_input: {
       bank_products: $bank_products
+      life_insurances: $life_insurances
       insurance_products: $insurance_products
       vehicles: $vehicles
       properties: $properties
@@ -20,6 +22,10 @@ mutation updateProcedures(
       type
       company
       localization
+    }
+    life_insurances {
+      company
+      contract_number
     }
     insurance_products {
       type

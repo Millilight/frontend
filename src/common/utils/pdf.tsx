@@ -36,6 +36,15 @@ const proceduresContent: { [key: string]: { [key2: string]: string } } = {
     help2:
       'Vous devez contacter chacune des banques pour les informer du décès. Pour la majorité des banques, il est nécessaire de contacter l’agence en particulier où votre proche possédait ses comptes. \nSi vous ne connaissez les comptes en banque de votre proche, ou que vous voulez vous assurer de ne pas en oublier, vous pouvez interroger le fichier national FICOBA. Attention, pour effectuer cette demande vous devez être héritier, et la démarche se fait par courrier. \nPlus tard, les comptes pourront être débloqués et clôturés par les héritiers au moment du règlement de la succession.\n',
   },
+  life_insurances: {
+    title: 'Assurances vie',
+    legatorContent1: "Voici la liste d'assurances vie laissée par ",
+    legatorContent2: " (organisme d'assurance, numéro de contrat) :",
+    help1:
+      "Si votre proche vous avait désigné·e comme bénéficiaire d'un contrat d'assurance vie, vous pouvez contacter l'assureur pour demander le versement du capital. Des justificatifs vous seront demandés, notamment un acte de décès, un justificatif de votre qualité de bénéficiaire, ou encore un RIB pour le versement.",
+    help2:
+      'En cas de doute, vous pouvez également vous renseigner auprès de l’Agira pour savoir si vous êtes bénéficiaire d’un contrat d’assurance vie. Elle disposera de 15 jours pour contacter les assurances, qui elles même reviendront ensuite vers vous pour vous demander les documents nécessaires.\n',
+  },
   insurance_products: {
     title: "Contrats d'assurance",
     legatorContent1: 'Voici la liste des contrats d’assurance laissée par ',
@@ -255,6 +264,7 @@ export function dowloadLegatorPaperworkProcedures(
       | InternetAccountToBeDeleted[]
       | RealEstate[]
       | ConsumerCredit[]
+      | LifeInsurance[]
       | BankProduct[]
       | InsuranceProduct[]
       | string[]
@@ -299,7 +309,7 @@ export function dowloadLegatorPaperworkProcedures(
 
   if (legatorPOV) {
     writeText(
-      'Voici le document qui seront transmis à vos proches de confiance pour les aider dans les démarches administratives' +
+      'Voici le document qui sera transmis à vos tiers de confiance pour les aider dans les démarches administratives' +
         ':\n',
       11,
       14,
@@ -350,6 +360,7 @@ export function dowloadLegatorPaperworkProcedures(
   // Display all procedures
   doc.setTextColor(0);
   displayProcedure('bank_products', procedures['bank_products']);
+  displayProcedure('life_insurances', procedures['life_insurances']);
   displayProcedure('insurance_products', procedures['insurance_products']);
   displayProcedure('vehicles', procedures['vehicles']);
   displayProcedure(
