@@ -111,7 +111,7 @@ export default function MenuDrawer(props: { selectedPage: string }) {
             px: 2.5,
             pl: 3,
             mt: 2,
-            backgroundColor: 'null',
+            backgroundColor: props.selectedPage === 'home' ? '#0b374c' : 'null',
           }}
           onClick={() => {
             router.push(home_url);
