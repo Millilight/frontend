@@ -161,7 +161,7 @@ export function dowloadMyWishes(wishes: UrgentDataWishes) {
 
   // Title
   const text =
-    'Voici les volontés cérémoniales que vous souhaitez transmettre à vos personnes de confiance ' +
+    'Voici les volontés cérémoniales que vous souhaitez transmettre à vos tiers de confiance ' +
     ':\n';
   let lines = doc.setFontSize(16).splitTextToSize(text, 7);
   doc.setTextColor(3, 77, 110);
